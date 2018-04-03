@@ -50,12 +50,7 @@ function test(){
 
 function autoIncrUser(){
 	var l = getUsersList()
-	if (l==undefined){
-		return 0;
-	} else {
-		console.log(l);
-		return l.length+1
-	}
+	return l+1;
 }
 
 
@@ -77,7 +72,7 @@ function getUsersList(){
 	var sql="SELECT * FROM User";
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
-		return result;
+		return result.length;
 	});
 }
 
