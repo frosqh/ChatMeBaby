@@ -9,7 +9,6 @@ body {
     font-variant-ligatures:common-ligatures;
     -moz-osx-font-smoothing:grayscale;
     -webkit-font-smoothing:antialiased;
-    overflow: hidden;
 }
 
 /* ScrollBar*/
@@ -39,10 +38,9 @@ body {
 .header {
     padding: 30px;
     text-align: center;
-    background: white; /* For browsers that do not support gradients */
-    background: linear-gradient(-90deg, #FF69B4, #4BCFCA); /* Standard syntax (must be last) */
-    font-family: chatMeBaby;
-    font-size: 20px;
+    /*background: white; For browsers that do not support gradients
+    background: linear-gradient(-90deg, #FF69B4, #4BCFCA);  Standard syntax (must be last) */
+    background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);
 }
 
 .header h1 {
@@ -200,6 +198,11 @@ form button {
         float: none;
         width: 100%;
     }
+}
+
+#LogoTransparent {
+  height: 180px;
+  width: auto;
 }
 
 @font-face{
