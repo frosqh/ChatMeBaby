@@ -70,18 +70,16 @@ function User(UserName, Mail, Password){
 	con.query(sql, function(err,result){
 		if (err) throw err;
 		if (result == undefined){
-			console.log("WTF><");
 			UserID=  0;
 		} else {
 			UserID = result.info.numRows;
 		}
 		var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
 		con.query(sql, function(err, result) {
-		if (err) throw err;
-		console.log(result.info.insertId);
-		return result.info.insertId;
+			if (err) throw err;
+			return result.info.insertId;
+		});
 	});
-	})
 }
 
 // API User
@@ -183,7 +181,6 @@ function Preferences(UserID){
 	con.query(sql, function(err,result){
 		if (err) throw err;
 		if (result == undefined){
-			console.log("WTF><");
 			PrefID=  0;
 		} else {
 			PrefID = result.info.numRows;
@@ -217,10 +214,6 @@ function setTheme(PrefID,Theme){
 	});
 }
 
-function setThemeOf(UserId, Theme){
-	PrefID = getPrefFrom(UserId);
-	setTheme(PrefID,Theme);
-}
 
 function setDisplay(PrefID, display){
 	var sql="UPDATE Preferences SET Display="+display+"WHERE PrefID="+PrefID;
@@ -229,20 +222,23 @@ function setDisplay(PrefID, display){
 	});
 }
 
-function setDisplayOf(UserID, display){
-	PrefID = getPrefFrom(UserID);
-	setDisplay(PrefID, display);
-}
-
 // Création Channel
 function Channel(Name){
-	ChannelID = autoIncrChan();
-	var sql="INSERT INTO Channel (ChannelID, Name, CreationDate) VALUES ("+ChannelID+",'"+Name+"','"+getDate()+"')";
-	con.query(sql, function(err, result){
+	var sql="SELECT * FROM Channel";
+	con.query(sql, function(err,result){
 		if (err) throw err;
+		if (result == undefined){
+			ChannelID=  0;
+		} else {
+			ChannelID = result.info.numRows;
+		}
+		var sql="INSERT INTO Channel (ChannelID, Name, CreationDate) VALUES ("+ChannelID+",'"+Name+"','"+getDate()+"')";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			Settings(result.info.insertId);
+			return result.info.insertId;
+		});
 	});
-	Settings(result.insertId);
-	return result.insertId;
 }
 
 // API Channel
@@ -267,7 +263,7 @@ function setChannelDesc(channelID, desc){
 	});
 }
 
-function getChannelID(name){
+function getChannelID(name){ //A changer !
 	var sql="SELECT ChannelID FROM Channel WHERE Name='"+name+"'";
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
@@ -281,16 +277,24 @@ function getChannelID(name){
 
 // Création Settings
 function Settings(channelID){
-	settingsID = autoIncrSet();
-	var sql="INSERT INTO Settings (SettingsID,ChannelID) VALUES ("+settingsID+","+channelID+")";
-	con.query(sql, function(err, result){
+	var sql="SELECT * FROM Settings";
+	con.query(sql, function(err,result){
 		if (err) throw err;
+		if (result == undefined){
+			settingsID=  0;
+		} else {
+			settingsID = result.info.numRows;
+		}
+		var sql="INSERT INTO Settings (SettingsID,ChannelID) VALUES ("+settingsID+","+channelID+")";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
 	});
-	return result.insertId;
 }
 
 //API Settings
-function getSettFrom(channelID){
+function getSettFrom(channelID){ //A changer !
 	var sql="SELECT SettingID FROM Settings WHERE ChannelID="+channelID;
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
@@ -309,17 +313,56 @@ function setSetting1(SettingId, setting1){
 	});
 }
 
-function setSetting1Of(ChannelId, setting1){
-	settingId = getSetFrom(channelID);
-	setSetting1(settingId,setting1);
-}
-
 //Création Message
 function Message(UserId, ChannelId, Text){
-	messageId = autoIncrMsg();
-	var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+","+Text+",CURRENT_TIMESTAMP)";
+	var sql="SELECT * FROM Message";
+	con.query(sql, function(err,result){
+		if (err) throw err;
+		if (result == undefined){
+			messageId  = 0;
+		} else {
+			messageId = result.info.numRows;
+		}
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+","+Text+",CURRENT_TIMESTAMP)";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
+	});
+}
+
+//API Message
+function setPJ(MessageID, PJ){
+	var sql="UPDATE Message SET PJ='"+PJ+"'WHERE MessageID="+MessageID;
 	con.query(sql, function(err, result){
 		if (err) throw err;
 	});
-	return result.insertId;
 }
+
+//Création UserByChannel
+function UserByChannel(UserID, ChannelID, Power){
+	var sql="SELECT * FROM UserByChannel";
+	con.query(sql, function(err, result){
+		if (err) throw err;
+		if (result == undefined){
+			UbCId = 0;
+		} else {
+			UbCId = result.info.numRows;
+		}
+		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+")";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		})
+	})
+}
+
+//API UserByChannel
+function setTitle(UbCId,Title){
+	var sql="UPDATE UserByChannel SET Title='"+Title+"' WHERE ID="+UbCId;
+	con.query(sql, function(err, result){
+		if (err) throw err;
+	});
+}
+
+//Suite API
