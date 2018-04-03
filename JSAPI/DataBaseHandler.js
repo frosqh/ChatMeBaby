@@ -43,12 +43,12 @@ function init(){
 
 function test(){
 	i = User("frosqh", "frosqh@gmail.com","pass");
-	setTimeout(fuction(){
-		j = User("Cha'", "neko@gmail.com", "word");
+	setTimeout(function(){
+		j = User("Cha", "neko@gmail.com", "word");
 		c = Channel("Inu");
 		m = Message(i,c,"Plop ^^");
 		n = Message(j,c,"Hey ^^");
-		o = Message(i,c,"Épis de maïs");
+		k = Message(i,c,"Sans accent :p");
 	},1000);
 }
 
@@ -310,9 +310,13 @@ function Message(UserId, ChannelId, Text){
 		if (result == undefined){
 			messageId  = 0;
 		} else {
+			
 			messageId = result.info.numRows;
 		}
-		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+","+Text+",NOW())";
+		console.log("Channel "+ChannelId);
+		console.log("Pignouf "+UserId);
+		console.log(Text);
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW())";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;
