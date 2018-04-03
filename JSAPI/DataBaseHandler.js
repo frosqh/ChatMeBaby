@@ -42,9 +42,12 @@ function init(){
 }
 
 function test(){
-	console.log("------------------------------");
-	autoIncrUser()
-	
+	i = User("frosqh", "frosqh@gmail.com","pass");
+	j = User("Cha'", "neko@gmail.com", "word");
+	c = Channel("Inu");
+	m = Message(i,c,"Plop ^^");
+	n = Message(j,c,"Hey ^^");
+	o = Message(i,c,"Épis de maïs");
 }
 
 
