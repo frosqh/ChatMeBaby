@@ -1,4 +1,5 @@
 var Client = require('mariasql');
+var result = {};
 const fs = require('fs');
 const helper= require('./Helper');
 
@@ -24,9 +25,9 @@ function init(){
 				if (err) throw err;
 				v = data.split(";");
 				for (var w in v.slice(0,v.length-1)){
-						console.log(v[w]);
+
 					con.query(v[w]+";", function(err, result) {
-						console.log(v[w]);
+
 						if (err) throw err;
 					});
 				}
@@ -41,22 +42,26 @@ function init(){
 }
 
 function test(){
-	User("Roger","mail@example.com","password");
-	console.log(getUserId("Roger"));
-	console.log(autoIncrUser());
+	console.log("------------------------------");
+	autoIncrUser()
+	
 }
 
 
 //AutoIncr
 
 function autoIncrUser(){
-	var sql="SELECT COUNT(*) FROM User";
-	con.query(sql, function(err, result, fields){
+	var sql="SELECT * FROM User";
+	con.query(sql, function(err,result){
 		if (err) throw err;
 		if (result == undefined){
+			console.log("WTF><");
 			return 0;
+		} else {
+		console.log("Dans autoIncr : ");
+		console.log(result.info.numRows);
+		return result.info.numRows;
 		}
-		return result[0].COUNT;
 	})
 }
 
@@ -68,6 +73,8 @@ function User(UserName, Mail, Password){
 	var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
 	con.query(sql, function(err, result) {
 		if (err) throw err;
+		console.log("Insert");
+		console.log(result);
 		return result.insertId;
 		//Preferences(result.insertId);
 	});
