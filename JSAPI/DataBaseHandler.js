@@ -43,11 +43,13 @@ function init(){
 
 function test(){
 	i = User("frosqh", "frosqh@gmail.com","pass");
-	j = User("Cha'", "neko@gmail.com", "word");
-	c = Channel("Inu");
-	m = Message(i,c,"Plop ^^");
-	n = Message(j,c,"Hey ^^");
-	o = Message(i,c,"Épis de maïs");
+	setTimeout(fuction(){
+		j = User("Cha'", "neko@gmail.com", "word");
+		c = Channel("Inu");
+		m = Message(i,c,"Plop ^^");
+		n = Message(j,c,"Hey ^^");
+		o = Message(i,c,"Épis de maïs");
+	},1000);
 }
 
 // Création User
@@ -219,7 +221,7 @@ function Channel(Name){
 		} else {
 			ChannelID = result.info.numRows;
 		}
-		var sql="INSERT INTO Channel (ChannelID, Name, CreationDate) VALUES ("+ChannelID+",'"+Name+"','"+getDate()+"')";
+		var sql="INSERT INTO Channel (ChannelID, Name, CreationDate) VALUES ("+ChannelID+",'"+Name+"',NOW())";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			Settings(result.info.insertId);
@@ -310,7 +312,7 @@ function Message(UserId, ChannelId, Text){
 		} else {
 			messageId = result.info.numRows;
 		}
-		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+","+Text+",CURRENT_TIMESTAMP)";
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+","+Text+",NOW())";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;
