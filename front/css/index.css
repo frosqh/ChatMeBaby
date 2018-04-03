@@ -1,0 +1,208 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f1f1f1;
+    margin: 0px;
+    font-family:"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+    font-variant-ligatures:common-ligatures;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing:antialiased;
+    overflow: hidden;
+}
+
+/* ScrollBar*/
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-button {
+    width: 8px;
+    height:5px;
+}
+::-webkit-scrollbar-track {
+    background:#eee;
+    border: thin solid lightgray;
+    box-shadow: 0px 0px 3px #dfdfdf inset;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb {
+    background:#999;
+    border: thin solid gray;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background:#7d7d7d;
+}
+
+/* Header/Blog Title */
+.header {
+    padding: 30px;
+    text-align: center;
+    background: white; /* For browsers that do not support gradients */
+    background: linear-gradient(-90deg, #FF69B4, #4BCFCA); /* Standard syntax (must be last) */
+    font-family: chatMeBaby;
+    font-size: 20px;
+}
+
+.header h1 {
+    font-size: 50px;
+}
+
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+/* Style the topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.topnav div{
+  float: left;
+  display: block;
+  height: 15%;
+  padding: 1px 16px;
+  background-color: #666699;
+  color: white;
+
+}
+
+.topnav p{
+  margin: 10px 5px 10px;
+}
+
+/* Change color on hover */
+.topnav a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #666699;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Right column */
+.rightcolumn {
+    float: right;
+    width: 88%;
+}
+
+.content{
+  width: 87%;
+  height: 90%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  bottom: 45px;
+  right:0;
+}
+
+/* Left column */
+.client_channel_list_container {
+    float: left;
+    width: 12%;
+    height: 1500px;
+    background-color: #666699;
+    padding-left: 20px;
+
+}
+
+.client_channel_list_container h2{
+  color:white;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input[type=text] {
+    width: 90%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    outline: none;
+    height: auto;
+}
+
+form{
+  position: fixed;
+  bottom: 0;
+  width: 85%;
+
+}
+
+form div{
+  background-color: white;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+
+form button {
+  width: 9%;
+  height: 45px;
+  background: #666699;
+  border: none;
+  padding: 10px;
+  color: #f2f2f2;
+  position: fixed;
+    bottom: 0;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
+}
+
+@font-face{
+    font-family : "chatMeBaby";
+    src : url('Spring In My Step.ttf');
+}
