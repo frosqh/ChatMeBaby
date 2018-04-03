@@ -5,6 +5,7 @@ const helper= require('./Helper');
 var con = new Client({
 	host: 'localhost',
 	user: 'root',
+	password: '1234',
 
 });
 var c=0;
