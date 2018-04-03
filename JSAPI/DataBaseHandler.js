@@ -50,22 +50,6 @@ function test(){
 	o = Message(i,c,"Épis de maïs");
 }
 
-
-//AutoIncr
-
-function autoIncrUser(){
-	var sql="SELECT * FROM User";
-	con.query(sql, function(err,result){
-		if (err) throw err;
-		if (result == undefined){
-			return 0;
-		} else {
-		return result.info.numRows;
-		}
-	})
-}
-
-
 // Création User
 
 function User(UserName, Mail, Password){
