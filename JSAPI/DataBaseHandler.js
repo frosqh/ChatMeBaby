@@ -1,63 +1,94 @@
 var Client = require('mariasql');
 const fs = require('fs');
+const helper= require('./Helper');
 
 var con = new Client({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '1234',
+	host: '127.0.0.1',
+	user: 'root',
+	password: '1234',
 });
+var c=0;
 
 init();
 
 //Init DataBase (first Launch)
 
 function init(){
-	con.query("CREATE DATABASE ChatMeDB", function(err,result){
+	con.query("CREATE DATABASE IF NOT EXISTS ChatMeDB", function(err,result){
 		if (err) throw err;
-	});
-	con.query("USE ChatMeDB", function(err) {
-		if (err) throw err;
+		con.query("USE ChatMeDB", function(err) {
+			if (err) throw err;
 		//console.log("Succeed!");
-	});
-	fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
-		if (err) throw err;
-		v = data.split(";");
-		for (var w in v.slice(0,v.length-1)){
-			console.log("---------------");
-			console.log(v[w]+";");
-			con.query(v[w]+";", function(err, result) {
+			fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
 				if (err) throw err;
+				v = data.split(";");
+				for (var w in v.slice(0,v.length-1)){
+					console.log(w);
+					con.query(v[w]+";", function(err, result) {
+						if (err) throw err;
+					});
+				}
+				test();
 			});
-		}
-
+		});
 	});
+	
+	
+
 
 }
+
+function test(){
+	console.log(helper.getDate())
+	User("frosko5","frosqh@gmail.com","2134");
+}
+
+
+//AutoIncr
+
+function autoIncrUser(){
+	var l = getUsersList()
+	if (l==undefined){
+		return 0;
+	} else {
+		console.log(l);
+		return l.length+1
+	}
+}
+
 
 // Création User
 
 function User(UserName, Mail, Password){
 	UserID = autoIncrUser();
-	var sql="INSERT INTO User (UserID,UserName,Mail,Password) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+Password+"')";
+	var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
 	con.query(sql, function(err, result) {
 		if (err) throw err;
+		return result.insertId;
+		//Preferences(result.insertId);
 	});
-	Preferences(result.insertId);
-	return result.insertId;
 }
 
 // API User
 
-function getUserId(username){
-	var sql="SELECT UserID FROM USER WHERE Username='"+username+"'";
+function getUsersList(){
+	var sql="SELECT * FROM User";
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
+		return result;
 	});
-	if (result.length > 0){
-		return result[0].UserID;
-	} else {
-		throw ("Not any "+username);
-	}
+}
+
+function getUserId(username){
+	var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
+	con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.length > 0){
+			return result[0].UserID;
+		} else {
+			throw ("Not any "+username);
+		}
+	});
 }
 
 function setConnected(UserID, connected){
