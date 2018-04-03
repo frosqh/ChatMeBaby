@@ -55,11 +55,8 @@ function autoIncrUser(){
 	con.query(sql, function(err,result){
 		if (err) throw err;
 		if (result == undefined){
-			console.log("WTF><");
 			return 0;
 		} else {
-		console.log("Dans autoIncr : ");
-		console.log(result.info.numRows);
 		return result.info.numRows;
 		}
 	})
@@ -69,15 +66,22 @@ function autoIncrUser(){
 // Création User
 
 function User(UserName, Mail, Password){
-	UserID = autoIncrUser();
-	var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
-	con.query(sql, function(err, result) {
+	var sql="SELECT * FROM User";
+	con.query(sql, function(err,result){
 		if (err) throw err;
-		console.log("Insert");
-		console.log(result);
-		return result.insertId;
-		//Preferences(result.insertId);
+		if (result == undefined){
+			console.log("WTF><");
+			UserID=  0;
+		} else {
+			UserID = result.info.numRows;
+		}
+		var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
+		con.query(sql, function(err, result) {
+		if (err) throw err;
+		console.log(result.info.insertId);
+		return result.info.insertId;
 	});
+	})
 }
 
 // API User
@@ -90,7 +94,7 @@ function getUsersList(){
 	});
 }
 
-function getUserId(username){
+function getUserId(username){ //À modifier, l'async fout le bordel monstre ><
 	var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
@@ -175,16 +179,26 @@ function setSkype(UserID, skype){
 
 // Création Preferences
 function Preferences(UserID){
-	PrefID = autoIncrPref();
-	var sql="INSERT INTO Preferences (PrefID, UserID, Theme, Display) VALUES ("+PrefID+","+UserID+",0,0)";
-	con.query(sql, function(err, result){
+	var sql="SELECT * FROM Preferences";
+	con.query(sql, function(err,result){
 		if (err) throw err;
+		if (result == undefined){
+			console.log("WTF><");
+			PrefID=  0;
+		} else {
+			PrefID = result.info.numRows;
+		}
+		var sql="INSERT INTO Preferences (PrefID, UserID, Theme, Display) VALUES ("+PrefID+","+UserID+",0,0)";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
 	});
-	return result.insertId;
+
 }
 
 // API Preferences
-function getPrefFrom(UserID){
+function getPrefFrom(UserID){ //idem, il faut le bouger ^^'
 	var sql="SELECT PrefID FROM Preferences WHERE UserID="+UserID;
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
