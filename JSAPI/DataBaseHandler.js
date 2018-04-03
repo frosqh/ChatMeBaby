@@ -49,8 +49,11 @@ function test(){
 //AutoIncr
 
 function autoIncrUser(){
-	var l = getUsersList()
-	return l+1;
+	var sql="SELECT COUNT(*) FROM User";
+	con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		return result[0].COUNT;
+	})
 }
 
 
