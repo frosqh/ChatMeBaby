@@ -1,6 +1,6 @@
 # Chat Me Baby : La nouvelle application de chat hot près de chez vous
 ## Mardi 04/03/18
-- Login
+- Login - Done (manque liaison DB + cookie)
 - API pour ajouter par exemple Google Calendar
 - Smiley et réactions aux messages
 - Mettre dans la base de données
