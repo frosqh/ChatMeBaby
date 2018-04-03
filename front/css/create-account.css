@@ -12,13 +12,6 @@
     src: local('Pacifico'), url('http://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
 }
 
-/*@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Roboto'), url('https://fonts.googleapis.com/css?family=Roboto') format('truetype');
-}*/
-
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
@@ -27,6 +20,11 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+body {
+  height: 100%;
+  background: linear-gradient(0.25turn, #0951c4, #95b4e5, #0951c4);
+}
+/*
 .center-wrap {
 	position: absolute;
 	top: calc(50% - 100px);
@@ -86,7 +84,7 @@
 	/* box-shadow: 0 0 5px rgba(255,245,245,0.8); */
 	/* background-image: url('http://cuinine.com/img/codepen/savvy.jpg'); */
 }
-
+/*
 .button:hover a {
 	color: #141414;
 }
@@ -99,7 +97,7 @@
 
 .button:hover .shift {
 	padding-left: 5px;
-}
+}*/
 
 
 /* STYLE FOR INPUT */
@@ -122,6 +120,7 @@ input[type=text], select {
 }
 
 input[type=text]:focus {
+		width: 100%;
 		border-bottom: 2px solid #1a75f4;
     transition: 0.4s;
 }
@@ -195,12 +194,14 @@ input[type=tel]:focus {
 }
 
 input:invalid {
+		width: 100%;
 		border: none;
 		border-bottom: 2px solid #ff3838;
 		box-shadow: none;
 }
 
 input:required:valid {
+		width: 100%;
 		border: none;
 		border-bottom: 2px solid green;
 }
