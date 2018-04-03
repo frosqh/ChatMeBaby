@@ -1,0 +1,12 @@
+{
+  "name": "ChatMeBaby",
+  "version": "0.0.1",
+  "description": "Chat app like slack using socket.io",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
