@@ -53,6 +53,9 @@ function autoIncrUser(){
 	var sql="SELECT COUNT(*) FROM User";
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
+		if (result == undefined){
+			return 0;
+		}
 		return result[0].COUNT;
 	})
 }
