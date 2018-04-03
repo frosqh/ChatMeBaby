@@ -3,9 +3,9 @@ const fs = require('fs');
 const helper= require('./Helper');
 
 var con = new Client({
-	host: '127.0.0.1',
+	host: 'localhost',
 	user: 'root',
-	password: '1234',
+
 });
 var c=0;
 
