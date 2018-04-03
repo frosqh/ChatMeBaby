@@ -5,7 +5,7 @@ const helper= require('./Helper');
 var con = new Client({
 	host: 'localhost',
 	user: 'root',
-	password: '1234',
+
 });
 var c=0;
 
@@ -23,8 +23,9 @@ function init(){
 				if (err) throw err;
 				v = data.split(";");
 				for (var w in v.slice(0,v.length-1)){
-					console.log(w);
+						console.log(v[w]);
 					con.query(v[w]+";", function(err, result) {
+						console.log(v[w]);
 						if (err) throw err;
 					});
 				}
