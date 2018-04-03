@@ -38,13 +38,24 @@ body {
 .header {
     padding: 30px;
     text-align: center;
-    /*background: white; For browsers that do not support gradients
-    background: linear-gradient(-90deg, #FF69B4, #4BCFCA);  Standard syntax (must be last) */
     background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);
 }
 
-.header h1 {
-    font-size: 50px;
+.connectedUser{
+  position: absolute;
+  height: auto;
+  width: auto;
+  color: #ffffff;
+  top: 10px;
+  right: 16px;
+  background: #003366;
+}
+
+#userText{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin-left: 2%;
+    margin right: 2%;
 }
 
 /* Style the top navigation bar */
