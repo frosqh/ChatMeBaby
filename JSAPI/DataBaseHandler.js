@@ -41,8 +41,9 @@ function init(){
 }
 
 function test(){
-	console.log(helper.getDate())
-	User("frosko5","frosqh@gmail.com","2134");
+	User("Roger","mail@example.com","password");
+	console.log(getUserId("Roger"));
+	console.log(autoIncrUser());
 }
 
 
