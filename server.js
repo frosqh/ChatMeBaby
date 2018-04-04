@@ -57,7 +57,7 @@ app.get('/home', function(req, res){
 
 app.post('/create-account', function(req, res){
 	processPost(req, res, function(){
-		db.User(req.post.username,req.post.mail,req.post.password);
+		db.User(req.post.username,req.post.email,req.post.password);
 		res.render('create-account.ejs')
 	})
 })
