@@ -76,7 +76,7 @@ app.get('/login', function(req, res){
 		res.redirect("/");
 		return;
 	}
-	res.render('login.ejs');
+	res.render('login.ejs', {wrong: undefined});
 })
 
 app.post('/login', function(req, res){
@@ -101,7 +101,7 @@ app.post('/login', function(req, res){
 				}
 			} else {
 				console.log("Wrong username !");
-				res.render('login.ejs', {wrong: "User", pass: pass, user: user});
+				res.render('login.ejs', {wrong: "User", pass: "pass", user: user});
 			}
 		});
 	})

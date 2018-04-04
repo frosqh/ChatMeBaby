@@ -25,7 +25,7 @@
 
       <tr>
         <td height=75px style="padding: 0 15px 0 15px;">
-          <input type="text" name="user" id="user" title="Enter your username or your email." placeholder="Username/Email" value="<%if (wrong) { user } %>" required/>
+          <input type="text" name="user" id="user" title="Enter your username or your email." placeholder="Username/Email" value="<%if (wrong!=undefined) { user } %>" required/>
         </td>
       </tr>
       <tr>
@@ -60,7 +60,7 @@
   </form>
   </div>
   </div>
-  <% if (notif) {%> <script> alert("<%= notif %>");</script> <% }%>
+
   <% if (wrong) {%> 
     <script>
       <% if (wrong=="User") {%>
