@@ -97,7 +97,7 @@ app.get('/', function(req, res) {
 		userf = "Anonymous";
 		req.session.user=userf;
 	}
-	res.render('index.ejs', {user: userf});
+	res.render('home.ejs', {user: userf});
 });
 
 
@@ -151,7 +151,7 @@ app.get('/create-account', function(req, res){
 })
 
 app.get('/home', function(req, res){
-	res.render('home.ejs');
+	res.render('index.ejs');
 })
 
 app.post('/create-account', function(req, res){
