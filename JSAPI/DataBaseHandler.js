@@ -54,10 +54,10 @@ module.exports = {
 			} else {
 				UserID = result.info.numRows;
 			}
-			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
-				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signingup ! \n You should confirm your address <a href='"+generateConfirm(result.insertId)+"'> here </a>");
+				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(result.insertId,UserName)+"'> here </a>");
 			});
 		});
 	},
@@ -153,6 +153,23 @@ function setSkype(UserID, skype){
 	var sql="UPDATE User SET Skype ='"+skype+"' WHERE UserID ="+UserID;
 	con.query(sql, function(err, result){
 		if (err) throw err;
+	});
+}
+
+function setConfirmed(UserID, confirmed){
+	var sql = "UPDATE User SET Confirmed="+confirmed+" WHERE UserID ="+UserID;
+	con.query(sql, function(err, result){
+		if (err) throw err;
+	})
+}
+
+//Création Confirmation
+
+function Confirmation(UserName, UserID){
+	var sql = 'INSERT INTO Confirmation (ID, UserID) VALUES ('+UserName+","+UserID+")";
+	con.query(sql, function(err, result){
+		if (err) throw err;
+		return result.info.insertId;
 	});
 }
 
@@ -382,6 +399,8 @@ function sendMail(addr, subject, body) {
 	});
 }
 
-generateConfirm(insertId){
-	return "https://google.com";
+function generateConfirm(UserId, UserName){
+	user = helper.hashFnv32a(UserName);
+	Confirmation(UserId, user);
+	return "193.54.15.211/confirm/"+user;
 }

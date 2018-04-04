@@ -137,7 +137,7 @@ app.post('/create-account', function(req, res){
 						req.session.user=req.post.username;
 						res.redirect("/");
 					} else {
-						render("create-account.ejs", {notif: "This mail is alreay used. Perhaps should you try login"});
+						render("create-account.ejs", {notif: "This mail is alreay used. Perhaps should you try to login"});
 					}
 				})
 				
@@ -157,6 +157,18 @@ app.get('/logout', function(req, res){
 app.get('/user/:id', function(req, res){
 	res.send("Profil de l'utilisateur : "+req.params.id);
 })
+
+app.get('/confirm/:id', function(req,res){
+	var sql = "SELECT * FROM Confirmation WHERE ID='"+req.params.id+"'";
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			db.setConfirmed(result[0].UserID,1);
+		} else {
+			res.redirect("/404");
+		}
+	});
+});
 
 app.use(function(req, res, next){
     res.setHeader('Content-Type', 'text/plain');
