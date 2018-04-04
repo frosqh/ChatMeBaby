@@ -179,16 +179,25 @@ app.post('/create-account', function(req, res){
 								if (err) throw err;
 								if (result.info.numRows != 0){
 									if (req.post.firstname){
-										db.setFirstName(result[0].UserID, firstName);
+										db.setFirstName(result[0].UserID, req.post.firstname);
 									}
 									if (req.post.lastname){
-										db.setLastName(result[0].UserID, lastname);
+										db.setLastName(result[0].UserID, req.post.lastname);
 									}
 									if (req.post.gender){
+										if (req.post.gender=='male'){
+											db.setGender(result[0].UserID, 0);
+										}
+										if (req.post.gender=='female'){
+											db.setGender(result[0].UserID, 1);
+										}
+										if (req.post.gender=='notsure'){
+											db.setGender(result[0].UserID, 2);
+										}
 										console.log(req.post.gender);
 									}
 									if (req.post.birthdate){
-										console.log(birthdate);
+										db.setBirthDate(result[0].UserID,req.post.birthdate);
 									}
 									if (req.post.phonenumber){
 										db.setPhoneNumber(result[0].UserID, req.post.phonenumber);
@@ -230,10 +239,10 @@ app.get('/user/:id', function(req, res){
 
 app.get('/confirm/:id', function(req,res){
 	var sql = "SELECT * FROM Confirmation WHERE ID='"+req.params.id+"'";
-	console.log(sql);
+	//console.log(sql);
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
-		console.log(result);
+		//console.log(result);
 		if (result.info.numRows != 0){
 			db.setConfirmed(result[0].UserID,1);
 			res.redirect("/");
@@ -266,12 +275,10 @@ app.get('/profile/', function(req,res){
 				res.redirect("/");
 			} else {
 				var descr = result[0].Description;
-				res.render('profile.ejs', {desc: descr})
+				res.render('profile.ejs', {desc: descr});
+				return;
 			}
 		})
- }
-
-	res.render('profile.ejs');
 });
 
 

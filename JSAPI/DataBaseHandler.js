@@ -123,7 +123,7 @@ module.exports = {
 			if (err) throw err;
 		});
 	},
-	setSkype:function(UserID, skype){
+	setCity:function(UserID, skype){
 		var sql="UPDATE User SET City ='"+skype+"' WHERE UserID ="+UserID;
 		con.query(sql, function(err, result){
 			if (err) throw err;
