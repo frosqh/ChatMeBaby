@@ -86,6 +86,48 @@ module.exports = {
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		});
+	},
+	setBirthDate:function(UserID, birthDate){
+		var sql="UPDATE User SET BirthDate ='"+birthDate+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	},
+	connect:function(UserID){
+		setConnected(UserID,1);
+	},
+	disconnect:function(UserID){
+		setConnected(UserID,0);
+	},
+	setAvatar:function(UserID, avatarURI){
+		var sql="UPDATE User SET AvatarURI ='"+avatarURI+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err,result){
+			if (err) throw err;
+		});
+	},
+	setStatus:function(UserID, status){
+		var sql = "UPDATE User SET Status ="+status+" WHERE UserID ="+UserID;
+		con.query(sql, function(err, resut){
+			if (err) throw err;
+		});
+	},
+	setDescription:function(UserID, desc){
+		var sql="UPDATE User SET Description ='"+desc+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	},
+	setPhoneNumber:function(UserID, phoneNumbe){
+		var sql="UPDATE User SET PhoneNumber ="+phoneNumbe+" WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	},
+	setSkype:function(UserID, skype){
+		var sql="UPDATE User SET City ='"+skype+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
 	}
 }
 // API User
@@ -109,57 +151,15 @@ function setConnected(UserID, connected){
 	});
 }
 
-function connect(UserID){
-	setConnected(UserID,1);
-}
-
-function disconnect(UserID){
-	setConnected(UserID,0);
-}
 
 
 
-function setBirthDate(UserID, birthDate){
-	var sql="UPDATE User SET BirthDate ='"+birthDate+"' WHERE UserID ="+UserID;
-	con.query(sql, function(err, result){
-		if (err) throw err;
-	});
-}
 
-function setAvatar(UserID, avatarURI){
-	var sql="UPDATE User SET AvatarURI ='"+avatarURI+"' WHERE UserID ="+UserID;
-	con.query(sql, function(err,result){
-		if (err) throw err;
-	});
-}
 
-function setStatus(UserID, status){
-	var sql = "UPDATE User SET Status ="+status+" WHERE UserID ="+UserID;
-	con.query(sql, function(err, resut){
-		if (err) throw err;
-	});
-}
 
-function setDescription(UserID, desc){
-	var sql="UPDATE User SET Description ='"+desc+"' WHERE UserID ="+UserID;
-	con.query(sql, function(err, result){
-		if (err) throw err;
-	});
-}
 
-function setPhoneNumber(UserID, phoneNumbe){
-	var sql="UPDATE User SET PhoneNumber ="+phoneNumbe+" WHERE UserID ="+UserID;
-	con.query(sql, function(err, result){
-		if (err) throw err;
-	});
-}
 
-function setSkype(UserID, skype){
-	var sql="UPDATE User SET Skype ='"+skype+"' WHERE UserID ="+UserID;
-	con.query(sql, function(err, result){
-		if (err) throw err;
-	});
-}
+
 
 //Création Confirmation
 
