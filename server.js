@@ -3,9 +3,12 @@ var querystring = require('querystring');
 var http = require('http');
 var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 var app = express();
 app.use(cookieParser());
+app.use(session({secret: "ChatMeCharoy"}));
+
 
 function processPost(request, response, callback) {
     var queryData = "";
@@ -38,10 +41,11 @@ db.init();
 
 app.get('/', function(req, res) {
 	console.log(req.cookies)
-	if (req.cookies == undefined || req.cookies.user == undefined){
-		userf = 'Unconnected !';
+	if (req.session.username){
+		userf = req.session.username;
 	} else {
-		userf = req.cookies.user
+		userf = "Anonymous";
+		req.session.username=userf;
 	}
 	console.log("COUCOU !");
 	res.render('index.ejs', {user: userf});
@@ -66,8 +70,7 @@ app.get('/home', function(req, res){
 app.post('/create-account', function(req, res){
 	processPost(req, res, function(){
 		db.User(req.post.username,req.post.email,req.post.password);
-		res.cookie('user',req.post.username);
-		console.log(req.post.username);
+		req.session.user=req.post.username;
 		res.redirect("/");
 	})
 })
