@@ -35,10 +35,6 @@ function init(){
 			});
 		});
 	});
-	
-	
-
-
 }
 
 function test(){
@@ -55,6 +51,13 @@ function test(){
 // Création User
 
 function User(UserName, Mail, Password){
+	var i = undefined;
+	function wait(){
+		if (i == undefined){
+			setTimeout(wait,500)
+		}
+		return i;
+	}
 	var sql="SELECT * FROM User";
 	con.query(sql, function(err,result){
 		if (err) throw err;
@@ -65,9 +68,10 @@ function User(UserName, Mail, Password){
 		}
 		var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
 		con.query(sql, function(err, result) {
-			if (err) throw err;
-			return result.info.insertId;
+			if (err) throw err;*
+			i = result.info.insertId;
 		});
+		return wait()
 	});
 }
 
