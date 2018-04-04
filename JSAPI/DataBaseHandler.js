@@ -367,7 +367,7 @@ function test(){
 
 function sendMail(addr, subject, body) {
 	var mailOptions = {
-		from='chatmebaby2k18@gmail.com',
+		from: 'chatmebaby2k18@gmail.com',
 		to: addr,
 		sujbect: subject,
 		text: body

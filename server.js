@@ -125,11 +125,11 @@ app.post('/create-account', function(req, res){
 		return;
 	}
 	processPost(req, res, function(){
-		var sql = "SELECT UserID FROM User WHERE UserName ="+UserName;
+		var sql = "SELECT UserID FROM User WHERE UserName ='"+req.post.username+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows == 0){
-				var sql = "SELECT UserID FROM User WHERE Mail ="+Mail;
+				var sql = "SELECT UserID FROM User WHERE Mail ='"+req.post.email+"'";
 				db.con.query(sql, function(err, result, fields){
 					if (err) throw err;
 					if (result.info.numRows == 0){
