@@ -49,7 +49,9 @@ function checkAllValidate() {
 
         document.getElementById("myForm").submit();
     } else {
-      alert ("WROOOONG");
+      alert ("Passwords don't match.");
     }
+  } else {
+    alert("Emails don't match.")
   }
 }
