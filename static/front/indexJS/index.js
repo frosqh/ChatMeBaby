@@ -22,30 +22,27 @@ Proin ac semper libero. Vestibulum eget sollicitudin lorem. Integer nibh lorem, 
 
 
 var indexPageHtml = `
-<div class='coucou'>
+<div class='home'>
   <h1>Super</h1>
 </div>`;
 
-function setCookie(sName, sValue) {
-		var today = new Date(), expires = new Date();
-		expires.setTime(today.getTime() + (365*24*60*60*1000));
-		document.cookie = sName + "=" + sValue + ";expires=" + expires.toGMTString();
-}
 
 $(function(){
-  var name  = "user";
-  var value = "getUser";
-  setCookie(name, value);
 
-  $(".settingsPage").on("click",function(){
-    $(".coucou").remove();
+  $("#settingico").on("click",function(){
+    $(".home").remove();
     $(".setting").remove();
     $(".content").append(settingPageHtml);
   })
   $(".indexPage").on("click",function(){
     $(".setting").remove();
-    $(".coucou").remove();
+    $(".home").remove();
     $(".content").append(indexPageHtml);
   })
 
+  $('buttonContact').on('click',function(){
+    $('index.html').animate({
+        scrollTop : 0                       // Scroll to top of body
+    }, 500);
+  });
 });
