@@ -66,7 +66,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/channels', function(req,res) {
-	res.render('channels.ejs');
+	res.render('channel.ejs');
 })
 
 app.get('/login', function(req, res){

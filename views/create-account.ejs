@@ -5,13 +5,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>ChatMeBaby - Create an account</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="../front/css/create-account.css">
-  <link rel="stylesheet" type="text/css" href="../front/css/button.css">
-  <script src="front/JS/create-account.js"></script>
+  <link rel="stylesheet" type="text/css" href="front/css/create-account.css">
+  <link rel="stylesheet" type="text/css" href="front/css/button.css">
+  <script src="JS/create-account.js"></script>
 </head>
 
 <body style="margin: 0; padding: 0; background-color: #f9f9f7;">
-<form method="post">
+<form id="myForm" method="post">
 
  <table border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
@@ -210,11 +210,9 @@
 
    <tr>
      <td align="center" style="padding: 10px 0 100px 0;">
-      <button type="submit">
-       <!-- <a href=# class=button onclick="checkAllValidate()"> -->
-       <span style="font-size: 36px;">Sign up !</span>
-       <!-- </a> -->
-     </button>
+       <a href=# class=button onclick="checkAllValidate()">
+         <span style="font-size: 36px;">Sign up !</span>
+       </a>
         <!--<div class="mask">
           <a>
            <div id="next" class="button" style="cursor: pointer;" onclick="checkAllValidate()">
