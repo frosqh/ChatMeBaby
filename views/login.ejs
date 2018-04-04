@@ -9,7 +9,7 @@
 </head>
 
 <body style="margin: 0; padding: 0;">
-	<% if (notif) {%> <script> alert("<%= notif %>");</script> <% }%>
+	
 	
 	<div id="tableContainer-1">
   <div id="tableContainer-2">
@@ -23,7 +23,7 @@
 
       <tr>
         <td height=75px style="padding: 0 15px 0 15px;">
-          <input type="text" name="user" id="user" title="Enter your username or your email." placeholder="Username/Email" required/>
+          <input type="text" name="user" id="user" title="Enter your username or your email." placeholder="Username/Email" required/> <%if (notif) {%> Wrong !<%}%>
         </td>
       </tr>
       <tr>
@@ -58,6 +58,7 @@
   </form>
   </div>
   </div>
+  <% if (notif) {%> <script> alert("<%= notif %>");</script> <% }%>
 </body>
 
 </html>
