@@ -76,7 +76,7 @@ app.get('/login', function(req, res){
 		res.redirect("/");
 		return;
 	}
-	res.render('login.ejs', {notif: undefined});
+	res.render('login.ejs');
 })
 
 app.post('/login', function(req, res){
@@ -97,11 +97,11 @@ app.post('/login', function(req, res){
 					res.redirect('/');
 				} else {
 					console.log("Wrong password !");
-					res.render('login.ejs',{notif: "Wrong password !"});
+					res.render('login.ejs',{wrong: "Pass", pass: pass, user: user});
 				}
 			} else {
 				console.log("Wrong username !");
-				res.render('login.ejs', {notif: "Wrong username !"});
+				res.render('login.ejs', {wrong: "User", pass: pass, user: user});
 			}
 		});
 	})

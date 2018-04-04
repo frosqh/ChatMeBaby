@@ -6,6 +6,8 @@
   <title>ChatMeBaby - Log in</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" type="text/css" href="front/css/login.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body style="margin: 0; padding: 0;">
@@ -23,12 +25,12 @@
 
       <tr>
         <td height=75px style="padding: 0 15px 0 15px;">
-          <input type="text" name="user" id="user" title="Enter your username or your email." placeholder="Username/Email" required/> <%if (notif) {%> Wrong !<%}%>
+          <input type="text" name="user" id="user" title="Enter your username or your email." placeholder="Username/Email" value="<%if (wrong) { user } %>" required/>
         </td>
       </tr>
       <tr>
         <td height=65px style="padding: 0 15px 0 15px;">
-          <input type="password" name="password" id="password" title="Enter your password." placeholder="Password" required/>
+          <input type="password" name="password" id="password" title="Enter your password." placeholder="Password" value="<%if (wrong) { pass } %>" required/>
         </td>
       </tr>
 
@@ -59,6 +61,15 @@
   </div>
   </div>
   <% if (notif) {%> <script> alert("<%= notif %>");</script> <% }%>
+  <% if (wrong) {%> 
+    <script>
+      <% if (wrong=="User") {%>
+        $("#user").effect("shake");
+      <%} else if (wrong=="Pass") {%>
+        $("#password").effect("shake");
+      <%}%>
+    </script>
+  <% } %>
 </body>
 
 </html>
