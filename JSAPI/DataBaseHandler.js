@@ -12,6 +12,10 @@ var con = new Client({
 //Init DataBase (first Launch)
 
 module.exports = {
+	Client,
+	fs,
+	helper,
+	con,
 	init:function(){
 		con.query("CREATE DATABASE IF NOT EXISTS ChatMeDB", function(err,result){
 			if (err) throw err;
@@ -22,9 +26,7 @@ module.exports = {
 					if (err) throw err;
 					v = data.split(";");
 					for (var w in v.slice(0,v.length-1)){
-
 						con.query(v[w]+";", function(err, result) {
-
 							if (err) throw err;
 						});
 					}
