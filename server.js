@@ -166,6 +166,7 @@ app.get('/confirm/:id', function(req,res){
 		console.log(result);
 		if (result.info.numRows != 0){
 			db.setConfirmed(result[0].UserID,1);
+			res.redirect("/");
 		} else {
 			res.redirect("/404");
 		}
