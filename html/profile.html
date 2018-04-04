@@ -9,9 +9,42 @@
   <link rel="stylesheet" type="text/css" href="../front/css/button.css">
   <link rel="stylesheet" type="text/css" href="../front/css/radiobutton.css">
   <script src="../JSAPI/profile.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../front/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link rel="icon" href="../Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
 <body style="margin: 0; padding: 0;">
+
+  <div class="header">
+    <a href="home.html"><img id='LogoTransparent' src="../Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+    <div class="connectedUser">
+      <table id="userText" border="0">
+        <td>User</td>
+        <td id="settingico"><a><img src="../Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
+      </table>
+    </div>
+  </div>
+
+  <div class="topnav">
+    <a href="home.html">Home</a>
+    <a href="channel.html">MyChatRooms</a>
+    <a href="#">MyChatFriends</a>
+    <a href="#">Surprise Me!</a>
+    <div class="searchbarbutton">
+      <form id="searchForm" method="post">
+        <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+        <input class="searchbutton" type="submit" value=""></input>
+      </form>
+    </div>
+  </div>
+
 <form id="myForm" method="post">
 
  <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -141,7 +174,7 @@
                      <label for="nom">Phone number</label><br>
                    </td></tr>
 
-                   <tr><td style="padding: 4px 0 169px 5px;">
+                   <tr><td style="padding: 4px 0 157px 5px;">
                      <input class="input" type="tel" name="phonenumber" id="phonenumber" placeholder="Your phone number.."/>
                    </td></tr>
                  </table></td>
