@@ -231,15 +231,27 @@ app.get('/profile/', function(req,res){
 		return;
 	}
 	var sql = "SELECT * FROM User WHERE UserName ='"+req.session.user+"'";
-	db.con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result.info.numRows == 0){
-			res.redirect("/");
-		} else {
-			var descr = result[0].Description;
-			res.render('profile.ejs', {desc: descr})
-		}
-	}
+
+
+
+
+
+
+
+
+
+
+
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows == 0){
+				res.redirect("/");
+			} else {
+				var descr = result[0].Description;
+				res.render('profile.ejs', {desc: descr})
+			}
+		})
+ }
 
 	res.render('profile.ejs');
 });
