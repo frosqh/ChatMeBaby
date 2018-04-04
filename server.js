@@ -154,4 +154,13 @@ app.get('/logout', function(req, res){
 	res.redirect("/");
 })
 
+app.get('/user/:id', function(req, res){
+	res.send("Profil de l'utilisateur : "+req.params.id);
+})
+
+app.use(function(req, res, next){
+    res.setHeader('Content-Type', 'text/plain');
+    res.status(404).send('Page introuvable !');
+});
+
 app.listen(8080,"localhost");
