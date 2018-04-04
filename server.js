@@ -1,4 +1,6 @@
 var express = require('express');
+var app = express();
+app.use(express.static(__dirname + '/static'));
 var querystring = require('querystring');
 var http = require('http');
 var server = http.createServer(express);
@@ -8,12 +10,16 @@ var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
+
+
 var socket = io.listen(server);
 
-var app = express();
+
+db.init()
+
 app.use(cookieParser());
 app.use(session({
-	secret: "ChateCharoy",
+	secret: "ChatMeCharoy",
 	resave : true,
 	saveUninitialized: true
 }));
@@ -82,10 +88,6 @@ function disconnect(req){
 function login(username, password){
 	
 }
-
-app.use(express.static(__dirname + '/static'));
-
-db.init();
 
 app.get('/', function(req, res) {
 	if (req.session.user){
