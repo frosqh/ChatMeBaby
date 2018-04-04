@@ -1,9 +1,14 @@
 var express = require('express');
 var querystring = require('querystring');
 var http = require('http');
+var server = http.createServer(express);
+var io = require('socket.io').list(server);
+var ent = require('ent');
 var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+
+var socket = io.listen(server);
 
 var app = express();
 app.use(cookieParser());
@@ -12,6 +17,35 @@ app.use(session({
 	resave : true,
 	saveUninitialized: true
 }));
+
+var users={};
+
+io.sockets.on('connection', function(socket) {
+	var me=false;
+	for (var k in users){
+		socket.emit('nouveau_client', users[k]);
+	}
+
+	socket.on('login', function(err){
+		me=user;
+		m.username=ent.encore(me.username);
+		me.id="id"+ent.encode(user.username);
+		users[me.id]=me;
+		io.socket.emit('nouveau_client', me);
+	});
+	socket.on('message', function(message){
+		message.content=ent.encode(message.content);
+		io.sockets.emit('msg',message);
+	});
+
+	socket.on('disconnect', function(){
+		if(!me){
+			return false;
+		}
+		delete users[me.id];
+		io.sockets.emit('deconnexion_client',me);
+	})
+})
 
 
 function processPost(request, response, callback) {
@@ -63,12 +97,10 @@ app.get('/', function(req, res) {
 	res.render('index.ejs', {user: userf});
 });
 
+
+
 app.get('/channels', function(req,res) {
-	if (!req.session.user || req.session.user=='Anonymous'){
-		res.redirect("/login");
-		return;
-	}
-	res.render('channel.ejs');
+	res.render('chan.ejs');
 })
 
 app.get('/login', function(req, res){
