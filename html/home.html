@@ -5,6 +5,14 @@
 <meta charset="utf-8">
 	<title>Chat Me Baby - Home</title>
 
+	<link rel="stylesheet" type="text/css" href="../front/css/index.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+	<link rel="icon" href="../Logo/LogoTrans.png" type="image/png" sizes="16x16">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="../front/css/home.css">
 <link rel="stylesheet" type="text/css" href="../front/css/button.css">
 
@@ -17,15 +25,29 @@
 </head>
 
 <body>
+	<div class="header">
+	  <a href="../index.html"><img id='LogoTransparent' src="../Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+	  <div class="connectedUser">
+	    <table id="userText" border="0">
+	      <td>User</td>
+	      <td id="settingico"><a><img src="../Logo/Icones/settings.png"/></a></td>
+	      <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
+	    </table>
+	  </div>
+	</div>
 
-	<!--Start Slide 1-->
-
-	<ul class="navigation" style="font-family: 'Roboto'; z-index: 5;" width=200px>
-		<li data-slide="1">What is it ?</li>
-		<li data-slide="2">For who ?</li>
-		<li data-slide="3">10+ users !</li>
-		<li data-slide="4">Tutorial</li>
-	</ul>
+	<div class="topnav">
+	  <a class="indexPage ">Home</a>
+	  <a href="html/channel.html">MyChatRooms</a>
+	  <a href="#">MyChatFriends</a>
+	  <a href="#">Surprise Me!</a>
+	  <div class="searchbarbutton">
+	    <form method="post">
+	      <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+	      <input class="searchbutton" type="submit" value=""></input>
+	    </form>
+	  </div>
+	</div>
 
 	<div class="slide" id="slide1" data-slide="1" data-stellar-background-ratio="0.5">
 
@@ -134,6 +156,29 @@
 	</div>
 
 	<!--End Slide 4-->
+	<footer>
+	  <table class="tableFooter" border="0" align="center">
+	    <tr align="right">
+	      <td class="backTop" colspan="3">
+	        <a href="#">Back to top &#9650;</a>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td class="contact" width="10%"><button class="buttonContact">Contact Us!</button></td>
+	      <td class="copyright" width="90%">
+	        Copyright © 2018 - <span class="chatmebaby">Chat Me Baby </span>- Hynes Monchicourt Raimondi Roudaut
+	      </td>
+	      <td>
+	        <table>
+	          <td class="linkedin" width="3%"><img src="../Logo/Icones/linkedin-box.png"/></td>
+	          <td class="facebook" width="3%"><img src="../Logo/Icones/facebook-box.png"/></td>
+	          <td class="twitter" width="3%"><a><img src="../Logo/Icones/twitter-box.png"/></a></td>
+	        </table>
+	      </td>
 
+
+	    </tr>
+	  </table>
+	</footer>
 </body>
 </html>
