@@ -57,7 +57,7 @@ module.exports = {
 			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
-				sendMail(Mail,"Hey", "Thx <3");
+				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signingup ! \n You should confirm your address <a href='"+generateConfirm(result.insertId)+"'> here </a>");
 			});
 		});
 	},
@@ -369,8 +369,8 @@ function sendMail(addr, subject, body) {
 	var mailOptions = {
 		from: 'chatmebaby2k18@gmail.com',
 		to: addr,
-		sujbect: subject,
-		text: body
+		subject: subject,
+		html: body
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
@@ -380,4 +380,8 @@ function sendMail(addr, subject, body) {
 			console.log('Email sent: '+info.response);
 		}
 	});
+}
+
+generateConfirm(insertId){
+	return "https://google.com";
 }
