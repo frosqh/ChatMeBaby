@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f1f1f1;
+    margin: 0px;
+    font-family:"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+    font-variant-ligatures:common-ligatures;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing:antialiased;
+}
+
+/* ScrollBar*/
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-button {
+    width: 8px;
+    height:5px;
+}
+::-webkit-scrollbar-track {
+    background:#eee;
+    border: thin solid lightgray;
+    box-shadow: 0px 0px 3px #dfdfdf inset;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb {
+    background:#999;
+    border: thin solid gray;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background:#7d7d7d;
+}
+
+/* Header/Blog Title */
+.header {
+    padding: 30px;
+    text-align: center;
+    background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);
+}
+
+.connectedUser{
+  position: absolute;
+  height: auto;
+  width: auto;
+  color: #ffffff;
+  top: 8px;
+  right: 16px;
+  background: #003366;
+}
+
+#user{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    margin-left: 2%;
+    margin right: 2%;
+}
+
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+/* Style the topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.topnav div{
+  float: left;
+  display: block;
+  height: 15%;
+  padding: 1px 16px;
+  background-color: #666699;
+  color: white;
+
+}
+
+.topnav p{
+  margin: 10px 5px 10px;
+}
+
+/* Change color on hover */
+.topnav a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #666699;
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+}
+#LogoTransparent {
+  height: 180px;
+  width: auto;
+}
+
+@font-face{
+    font-family : "chatMeBaby";
+    src : url('../font/Spring In My Step.ttf');
+}

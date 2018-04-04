@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS Channel (
   ChannelID INT NOT NULL,
   Name VARCHAR(75) NOT NULL,
   CreationDate DATETIME NOT NULL,
+  Logo VARCHAR(200) NULL,
   PRIMARY KEY (
     ChannelID
   )
