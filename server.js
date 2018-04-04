@@ -86,8 +86,15 @@ function disconnect(req){
 	req.session.user=undefined;
 }
 
-function login(username, password){
-	
+function getAge(birthdate){
+	var today = new Date();
+	var t = birthdate.split('-');
+	var age = today.getFullYear() - t[0];
+	var m = today.getMonth()-t[1];
+	if (m<0 || (m===0 && today.getDate<t[2])){
+		age--;
+	}
+	return age;
 }
 
 app.get('/', function(req, res) {
@@ -257,24 +264,15 @@ app.get('/profile/', function(req,res){
 		return;
 	}
 	var sql = "SELECT * FROM User WHERE UserName ='"+req.session.user+"'";
-
-
-
-
-
-
-
-
-
-
-
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
 		if (result.info.numRows == 0){
 			res.redirect("/");
 		} else {
 			var descr = result[0].Description;
-			res.render('profile.ejs', {desc: descr});
+			var gend = result[0].Gender;
+			var ag = getAge(result[0].birthDate)
+			res.render('profile.ejs', {desc: descr, gender: gend, age:ag, });
 			return;
 		}
 	})
