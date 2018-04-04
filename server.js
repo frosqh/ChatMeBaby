@@ -208,13 +208,13 @@ app.get('/confirm/:id', function(req,res){
 	});
 });
 
-app.get('/profile/', function(requ,res){
+app.get('/profile/', function(req,res){
 	if (!req.session.user || req.session.user=="Anonymous"){
 		res.redirect("/login");
 		return;
 	}
 	res.render('profile.ejs');
-}
+});
 
 
 
