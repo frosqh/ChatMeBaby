@@ -15,30 +15,30 @@ app.use(session({
 
 
 function processPost(request, response, callback) {
-    var queryData = "";
-    if(typeof callback !== 'function') return null;
+	var queryData = "";
+	if(typeof callback !== 'function') return null;
 
-    if(request.method == 'POST') {
-        request.on('data', function(data) {
-            queryData += data;
-            if(queryData.length > 1e6) {
-                queryData = "";
-		console.log("Problem ? :p");
-                response.writeHead(413, {'Content-Type': 'text/plain'}).end();
-                request.connection.destroy();
-            }
-        });
+	if(request.method == 'POST') {
+		request.on('data', function(data) {
+			queryData += data;
+			if(queryData.length > 1e6) {
+				queryData = "";
+				console.log("Problem ? :p");
+				response.writeHead(413, {'Content-Type': 'text/plain'}).end();
+				request.connection.destroy();
+			}
+		});
 
-        request.on('end', function() {
-            request.post = querystring.parse(queryData);
-            callback();
-        });
+		request.on('end', function() {
+			request.post = querystring.parse(queryData);
+			callback();
+		});
 
-    } else {
-	console.log("Problem ! ><");
-        response.writeHead(405, {'Content-Type': 'text/plain'});
-        response.end();
-    }
+	} else {
+		console.log("Problem ! ><");
+		response.writeHead(405, {'Content-Type': 'text/plain'});
+		response.end();
+	}
 }
 
 function disconnect(req){
@@ -89,21 +89,21 @@ app.post('/login', function(req, res){
 		pass = req.post.password;		
 		var sql="SELECT Password FROM User WHERE UserName='"+user+"'";
 		db.con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result.length > 0){
-			p = result[0].Password;
-			if (db.helper.hashFnv32a(pass,true)==p){
-				req.session.user = user;
-				res.redirect('/');
+			if (err) throw err;
+			if (result.length > 0){
+				p = result[0].Password;
+				if (db.helper.hashFnv32a(pass,true)==p){
+					req.session.user = user;
+					res.redirect('/');
+				} else {
+					console.log("Wrong password !");
+					res.render('login.ejs',{notif: "Wrong password !"});
+				}
 			} else {
-				console.log("Wrong password !");
-				res.render('login.ejs',{notif: "Wrong password !"});
+				console.log("Wrong username !");
+				res.render('login.ejs', {notif: "Wrong username !"});
 			}
-		} else {
-			console.log("Wrong username !");
-			res.render('login.ejs', {notif: "Wrong username !"});
-		}
-	});
+		});
 	})
 })
 
@@ -112,7 +112,7 @@ app.get('/create-account', function(req, res){
 		res.redirect("/");
 		return;
 	}
-	res.render('create-account.ejs');
+	res.render('create-account.ejs', {notif: undefined});
 })
 
 app.get('/home', function(req, res){
@@ -125,9 +125,27 @@ app.post('/create-account', function(req, res){
 		return;
 	}
 	processPost(req, res, function(){
-		db.User(req.post.username,req.post.email,req.post.password);
-		req.session.user=req.post.username;
-		res.redirect("/");
+		var sql = "SELECT UserID FROM User WHERE UserName ="+UserName;
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows == 0){
+				var sql = "SELECT UserID FROM User WHERE Mail ="+Mail;
+				db.con.query(sql, function(err, result, fields){
+					if (err) throw err;
+					if (result.info.numRows == 0){
+						db.User(req.post.username,req.post.email,req.post.password);
+						req.session.user=req.post.username;
+						res.redirect("/");
+					} else {
+						render("create-account.ejs", {notif: "This mail is alreay used. Perhaps should you try login"});
+					}
+				})
+				
+			} else {
+				res.render("create-account.ejs",{notif: "This username is already taken"});
+			}
+		})
+
 	})
 })
 
