@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="../front/css/chat.css">
+
   <link rel="stylesheet" type="text/css" href="../front/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link rel="icon" href="../Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
-<body>
+<body id="body">
+
+  <div class="header" style="background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);">
+    <a href="home.html"><img id='LogoTransparent' src="../Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+    <div class="connectedUser">
+      <table id="userText" border="0">
+        <td>User</td>
+        <td id="settingico"><a><img src="../Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
+      </table>
+    </div>
+  </div>
+
+  <div class="topnav">
+    <a href="home.html">Home</a>
+    <a class="indexPage" href="channel.html">MyChatRooms</a>
+    <a href="#">MyChatFriends</a>
+    <a href="#">Surprise Me!</a>
+    <div class="searchbarbutton">
+      <form id="searchForm" method="post">
+        <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+        <input class="searchbutton" type="submit" value=""></input>
+      </form>
+    </div>
+  </div>
 
 <div class="row">
   <div class="client_channel_list_container">
     <div class="sidebar">
+      <a href="home.html"><img src="../Logo/LogoWithNameTrans.png" style="height:70px; width:auto; padding-left: 25px; padding-top:5px;"/></a>
       <div class="workingLab_sidebar">
-        <h2 class="workingLab">Working Lab</h2>
         <div class="menu_user">
           <div class="disponible"></div>
           <p class="username">UserName</p>
@@ -52,7 +84,7 @@
 
 
   <div class="rightcolumn">
-    <div class="topnav">
+    <div class="topnavchat">
       <div>
         <p><b>#channelName</b></p>
       </div>
@@ -62,14 +94,16 @@
 
       </section>
     </div>
-    <form action="" class="formulaire_chat">
+    <form class="form" action="" class="formulaire_chat">
       <div>
-        <input id="m" autocomplete="off" type="text"/>
-        <input type="submit" id="envoi_message" value="Envoyer" />
-
+        <input id="m" autocomplete="off" type="text" class="input_text"/>
+        <input type="submit" id="envoi_message">
+        </input>
       </div>
     </form>
+
   </div>
+
 </div>
 
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>

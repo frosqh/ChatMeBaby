@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="front/css/chat.css">
+  <title>Chat</title>
+</head>
+<body>
+
+<div class="row">
+  <div class="client_channel_list_container">
+    <div class="sidebar">
+      <div class="workingLab_sidebar">
+        <h2 class="workingLab">Working Lab</h2>
+        <div class="menu_user">
+          <div class="disponible"></div>
+          <p class="username">UserName</p>
+        </div>
+      </div>
+      <div class="channel_sidebar">
+        <p class="channelTitle">Channels</p>
+        <p class="channel active_channel">General</p>
+        <p class="channel">Random</p>
+      </div>
+      <div class="privateMessage_sidebar">
+        <p class="PrivateMessageTitle">Private Message</p>
+        <div class="user">
+          <div class="disponible"></div>
+          <p class="username">Tanguy</p>
+        </div>
+        <div class="user">
+          <div class="absent"></div>
+          <p class="username">Jeremy</p>
+        </div>
+        <div class="user">
+          <div class="absent"></div>
+          <p class="username">Baptiste</p>
+        </div>
+        <div class="user">
+          <div class="absent"></div>
+          <p class="username">Gautier</p>
+        </div>
+      </div>
+      <div class="addPeople_sidebar">
+        <p class="addPeople">Add people</p>
+      </div>
+      <div class="baby_sidebar">
+        <p class="babyTitle">Chat new babies</p>
+        <p class="baby">New Baby</p>
+        <p class="baby">Random baby</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="rightcolumn">
+    <div class="topnav">
+      <div class="channelName">
+        <p><b>#channelName</b></p>
+      </div>
+    </div>
+    <div class = content>
+      <section id="zone_chat">
+      </section>
+    </div>
+    <form  method="post" id="formulaire_chat">
+      <div>
+        <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus autocomplete="off"/>
+        <input type="submit" id="envoi_message" value="Envoyer" />
+
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/channel.js"></script>
+<script>
+
+    var user = '<%=user%>'
+    // Connexion � socket.io
+    var socket = io.connect();
+    var lastMsg=false;
+    $('.channelName p b').html($('.active_channel').text());
+    // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
+
+    socket.emit('login', {
+      username: user
+    });
+    $('.menu_user .username').text(user);
+
+    // Quand un nouveau client se connecte, on affiche l'information
+    socket.on('nouveau_client', function(user) {
+        $('#zone_chat').append('<p><em>' + user.username + ' a rejoint le Chat !</em></p>');
+        $('.privateMessage_sidebar').append('<div class="user" id="'+user.id+'"><div class="disponible"></div><p class="username">'+user.username+'</p></div>');
+    })
+
+    // Quand un nouveau client se deconnecte, on affiche l'information
+    socket.on('deconnexion_client',function(user){
+      $('#zone_chat').append('<p><em>' + user.username + ' a quitté le Chat !</em></p>');
+      $('#'+user.id).remove();
+    })
+
+    // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
+    $('#formulaire_chat').submit(function (e) {
+        e.preventDefault();
+        date= new Date();
+        if($('#message').val()!=''){
+          socket.emit('message', {
+            content :$('#message').val(),
+            user    :user,
+            hour    :date.getHours(),
+            minute  :date.getMinutes()
+          }); // Transmet le message aux autres
+          $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+
+        }
+    });
+
+    // Quand on recoit un message, on l'insere dans la page
+    socket.on('msg', function(message) {
+      if(lastMsg != message.user){
+        $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
+        lastMsg = message.user;
+      } else {
+        $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
+        $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+      }
+        })
+
+
+</script>
+
+</body>
+</html>

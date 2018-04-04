@@ -22,30 +22,147 @@ Proin ac semper libero. Vestibulum eget sollicitudin lorem. Integer nibh lorem, 
 
 
 var indexPageHtml = `
-<div class='coucou'>
-  <h1>Super</h1>
-</div>`;
+<!--Start Slide 1-->
+<div class='home'>
 
-function setCookie(sName, sValue) {
-		var today = new Date(), expires = new Date();
-		expires.setTime(today.getTime() + (365*24*60*60*1000));
-		document.cookie = sName + "=" + sValue + ";expires=" + expires.toGMTString();
-}
+
+<div class="slide" id="slide1" data-slide="1" data-stellar-background-ratio="0.5">
+
+<div class="wrapper">
+
+  <img src="front/img/home/slide1/heart.png" width="13%" data-stellar-ratio="2" data-stellar-vertical-offset="-300" alt="">
+  <img src="front/img/home/slide1/heart.png" style="transform: scaleX(-1);" width="11%" data-stellar-ratio="1.5" data-stellar-vertical-offset="-300" alt="">
+  <img src="front/img/home/slide1/star.png" width="11%" data-stellar-ratio="0.95" data-stellar-vertical-offset="100" alt="">
+  <img src="front/img/home/slide1/conv.png" width="22%" data-stellar-ratio="1.4" data-stellar-vertical-offset="-100" alt="">
+  <img src="front/img/home/slide1/man1.png" width="11%" data-stellar-ratio="1.3" data-stellar-vertical-offset="-600" alt="">
+  <img src="front/img/home/slide1/woman1.png" width="13%" data-stellar-ratio="1.6" data-stellar-vertical-offset="-100" alt="">
+  <img src="front/img/home/slide1/star.png" style="transform: scaleX(-1);" width="13%" data-stellar-ratio="0.8" data-stellar-vertical-offset="100" alt="">
+  <img src="front/img/home/slide1/new.png" width="23%" data-stellar-ratio="1.6" data-stellar-vertical-offset="100" alt="">
+
+</div>
+
+  <span class="parallaxbg">What's Chat Me Baby ?</span>
+
+  <span class="description">
+    <p>A meeting site based on your personality where you can socialize with new people through 2+ users chat rooms !</p>
+    <p style="padding: 8px 0 0 0;">Get to know your future friends... or lover.</p>
+    <p style="font-size: 36px; font-family: 'Pacifico', 'Roboto', Arial, sans-serif; padding: 8px 0 0 0;">
+      Join the community now !
+    </p>
+  </span>
+
+  <span class="slideno">Welcome</span>
+
+  <a class="button-arrow" data-slide="2" title=""></a>
+
+</div>
+
+<!--End Slide 1-->
+
+<!--Start Slide 2-->
+
+<div class="slide" id="slide2" data-slide="2" data-stellar-background-ratio="0">
+
+  <span class="parallaxbg" data-stellar-ratio="0.8" data-stellar-vertical-offset="-150">For who ?</span>
+
+  <span class="description" data-stellar-ratio="0.75" data-stellar-vertical-offset="-100">
+    <p><a style="font-family: 'Pacifico', 'Roboto', Arial, sans-serif;">Chat Me Baby</a> is the most popular amongst youngsters and middle-aged single as well as web development teachers.</p>
+    <p style="padding: 8px 0 0 0;">Thanks to its innovative design and brilliant matching algorithm it will satisfy every user !</p>
+  </span>
+
+  <span class="slideno" style="font-size: 70px;">Made for you</span>
+
+  <a class="button-arrow" data-slide="3" title=""></a>
+
+</div>
+
+<!--End Slide 2-->
+
+<!--Start Slide 3-->
+
+<div class="slide" id="slide3" data-slide="3" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="50">
+
+  <div class="wrapper">
+<!--
+    <img src="front/img/home/slide3/kilt.png" data-stellar-ratio="2.4" data-stellar-vertical-offset="-102" alt="">
+    <img src="front/img/home/slide3/scotland.png" data-stellar-ratio="1" data-stellar-vertical-offset="-53" alt="">
+    <img src="front/img/home/slide3/loch.png" data-stellar-ratio="2.5" data-stellar-vertical-offset="-50" alt="">
+    <img src="front/img/home/slide3/tutshub.png" data-stellar-ratio="0.8" data-stellar-vertical-offset="-180" alt="">
+    <img src="front/img/home/slide3/rockable.png" data-stellar-ratio="1.2" data-stellar-vertical-offset="-230" alt="">
+-->
+  </div>
+
+  <span class="description" data-stellar-ratio="1.4">
+    <p style="font-weight: bold;">
+      ALREADY MORE THAN 10 USERS
+    </p>
+  </span>
+  <span class="description" data-stellar-ratio="1.27">
+    <p style="font-size: 65px; font-family: 'Pacifico', 'Roboto', Arial, sans-serif; padding: 9% 0 0 0;">
+      What are you waiting for ?!
+    </p>
+  </span>
+
+
+  <a href="login.html" class=button style="position: absolute; top: 60%; left: 36%;" data-stellar-ratio="1.1">
+    <span style="font-size: 36px;">Log in !</span>
+  </a>
+
+  <a href="create-account.html" class=button style="position: absolute; top: 60%; right: 36%;" data-stellar-ratio="1.1">
+    <span style="font-size: 36px;">Sign up !</span>
+  </a>
+
+  <span class="slideno" style="font-size: 80px;">Register now</span>
+
+  <a class="button-arrow" data-slide="4" title=""></a>
+
+</div>
+
+<!--End Slide 3-->
+
+<!--Start Slide 4-->
+
+<div class="slide" id="slide4" data-slide="4" data-stellar-background-ratio="0">
+
+  <span class="parallaxbg">How to use it ?</span>
+
+  <span class="slideno" style="font-size: 70px; font-family: 'Pacifico', 'Roboto', Arial, sans-serif">
+    Chat Me Baby
+  </span>
+
+</div>
+</div>
+`;
+
 
 $(function(){
-  var name  = "user";
-  var value = "getUser";
-  setCookie(name, value);
 
-  $(".settingsPage").on("click",function(){
-    $(".coucou").remove();
+  $("#settingico").on("click",function(){
+    $(".home").remove();
     $(".setting").remove();
     $(".content").append(settingPageHtml);
   })
   $(".indexPage").on("click",function(){
     $(".setting").remove();
-    $(".coucou").remove();
+    $(".home").remove();
     $(".content").append(indexPageHtml);
   })
+
+  $('buttonContact').on('click',function(){
+    $('index.html').animate({
+        scrollTop : 0                       // Scroll to top of body
+    }, 500);
+  });
+
+  $('.facebook').on("click",function(){
+    window.open('https://www.facebook.com/Chat-Me-Baby-130671114443167/', '_blank');
+    });
+  $('.twitter').on("click",function(){
+    window.open('https://twitter.com/JeremyHynes4', '_blank');
+    });
+  $('.linkedin').on("click",function(){
+    window.open('http://www.linkedin.com/in/jeremy-hynes-6bab77146', '_blank');
+    });
+
 
 });

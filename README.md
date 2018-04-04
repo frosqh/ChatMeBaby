@@ -3,7 +3,7 @@
 
 ### <u>Méthode de déploiement ainsi que l'adresse de déploiement</u>
 Utilisation de Nginx sur une VM Katsumi qui n'est pas encore open. On va bientot demander à M.Bouthier d'ouvrir publiquement Katsumi.
-L'adresse IP Locale est 193.54.15.211 (connexion avec le VPN ou sur les ordinateurs de l'école.) 
+L'adresse IP Locale est 193.54.15.211 (connexion avec le VPN ou sur les ordinateurs de l'école.)
 
 ## Mardi 04/03/18
 - [X] Login - Done (manque liaison DB + cookie)

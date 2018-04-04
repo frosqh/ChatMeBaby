@@ -2,44 +2,71 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
+	<meta charset="utf-8">
 	<title>Chat Me Baby - Home</title>
 
-<link rel="stylesheet" type="text/css" href="front/css/home.css">
+	<link rel="stylesheet" type="text/css" href="front/css/index.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+	<link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="JS/js.js"></script>
-<script type="text/javascript" src="JS/jquery.stellar.min.js"></script>
-<script type="text/javascript" src="JS/waypoints.min.js"></script>
-<script type="text/javascript" src="JS/jquery.easing.1.3.js"></script>
+	<link rel="stylesheet" type="text/css" href="front/css/home.css">
+	<link rel="stylesheet" type="text/css" href="front/css/button.css">
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="JS/js.js"></script>
+	<script type="text/javascript" src="JS/jquery.stellar.min.js"></script>
+	<script type="text/javascript" src="JS/waypoints.min.js"></script>
+	<script type="text/javascript" src="JS/jquery.easing.1.3.js"></script>
 
 </head>
 
 <body>
+	<div class="header">
+		<a href="/"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+		<div class="connectedUser">
+			<% if (user!='Anonymous') {%>
+			<table id="userText" border="0">
+				<td><%=user%></td>
+				<td id="settingico"><a href="/profile"><img src="Logo/Icones/settings.png"/></a></td>
+				<td class="settingsPage" id="signoutico"><a href='/logout'><img src="Logo/Icones/signOut.png"/></a></td>
+			</table>
+			<%} else {%>
+			<a href='/login' style='text-decoration: none'> Log in !</a>
+			<% } %>
+		</div>
+	</div>
 
-	<!--Start Slide 1-->
-
-	<ul class="navigation" style="font-family: 'Roboto';" width=200px>
-		<li data-slide="1">What is it ?</li>
-		<li data-slide="2">For who ?</li>
-		<li data-slide="3">10+ users !</li>
-		<li data-slide="4">Tutorial</li>
-	</ul>
+	<div class="topnav">
+		<a class="indexPage ">Home</a>
+		<a href="/channels">MyChatRooms</a>
+		<a href="#">MyChatFriends</a>
+		<a href="#">Surprise Me!</a>
+		<div class="searchbarbutton">
+			<form method="post">
+				<input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+				<input class="searchbutton" type="submit" value=""></input>
+			</form>
+		</div>
+	</div>
 
 	<div class="slide" id="slide1" data-slide="1" data-stellar-background-ratio="0.5">
 
-	<div class="wrapper">
+		<div class="wrapper">
 
-    <img src="front/img/home/slide1/heart.png" width="13%" data-stellar-ratio="2" data-stellar-vertical-offset="-300" alt="">
-    <img src="front/img/home/slide1/heart.png" style="transform: scaleX(-1);" width="11%" data-stellar-ratio="1.5" data-stellar-vertical-offset="-300" alt="">
-		<img src="front/img/home/slide1/star.png" width="11%" data-stellar-ratio="0.95" data-stellar-vertical-offset="100" alt="">
-		<img src="front/img/home/slide1/conv.png" width="22%" data-stellar-ratio="1.4" data-stellar-vertical-offset="-100" alt="">
-		<img src="front/img/home/slide1/man1.png" width="11%" data-stellar-ratio="1.3" data-stellar-vertical-offset="-600" alt="">
-		<img src="front/img/home/slide1/woman1.png" width="13%" data-stellar-ratio="1.6" data-stellar-vertical-offset="-100" alt="">
-		<img src="front/img/home/slide1/star.png" style="transform: scaleX(-1);" width="13%" data-stellar-ratio="0.8" data-stellar-vertical-offset="100" alt="">
-		<img src="front/img/home/slide1/new.png" width="23%" data-stellar-ratio="1.6" data-stellar-vertical-offset="100" alt="">
+			<img src="front/img/home/slide1/heart.png" width="13%" data-stellar-ratio="2" data-stellar-vertical-offset="-300" alt="">
+			<img src="front/img/home/slide1/heart.png" style="transform: scaleX(-1);" width="11%" data-stellar-ratio="1.5" data-stellar-vertical-offset="-300" alt="">
+			<img src="front/img/home/slide1/star.png" width="11%" data-stellar-ratio="0.95" data-stellar-vertical-offset="100" alt="">
+			<img src="front/img/home/slide1/conv.png" width="22%" data-stellar-ratio="1.4" data-stellar-vertical-offset="-100" alt="">
+			<img src="front/img/home/slide1/man1.png" width="11%" data-stellar-ratio="1.3" data-stellar-vertical-offset="-600" alt="">
+			<img src="front/img/home/slide1/woman1.png" width="13%" data-stellar-ratio="1.6" data-stellar-vertical-offset="-100" alt="">
+			<img src="front/img/home/slide1/star.png" style="transform: scaleX(-1);" width="13%" data-stellar-ratio="0.8" data-stellar-vertical-offset="100" alt="">
+			<img src="front/img/home/slide1/new.png" width="23%" data-stellar-ratio="1.6" data-stellar-vertical-offset="100" alt="">
 
-	</div>
+		</div>
 
 		<span class="parallaxbg">What's Chat Me Baby ?</span>
 
@@ -53,7 +80,7 @@
 
 		<span class="slideno">Welcome</span>
 
-		<a class="button" data-slide="2" title=""></a>
+		<a class="button-arrow" data-slide="2" title=""></a>
 
 	</div>
 
@@ -63,11 +90,16 @@
 
 	<div class="slide" id="slide2" data-slide="2" data-stellar-background-ratio="0">
 
-		<span class="slideno">Slide 2</span>
+		<span class="parallaxbg" data-stellar-ratio="0.8" data-stellar-vertical-offset="-150">For who ?</span>
 
-		<span class="parallaxbg">For who ?</span>
+		<span class="description" data-stellar-ratio="0.75" data-stellar-vertical-offset="-100">
+			<p><a style="font-family: 'Pacifico', 'Roboto', Arial, sans-serif;">Chat Me Baby</a> is the most popular amongst youngsters and middle-aged single as well as web development teachers.</p>
+			<p style="padding: 8px 0 0 0;">Thanks to its innovative design and brilliant matching algorithm it will satisfy every user !</p>
+		</span>
 
-		<a class="button" data-slide="3" title=""></a>
+		<span class="slideno" style="font-size: 70px;">Made for you</span>
+
+		<a class="button-arrow" data-slide="3" title=""></a>
 
 	</div>
 
@@ -75,37 +107,82 @@
 
 	<!--Start Slide 3-->
 
-	<div class="slide" id="slide3" data-slide="3" data-stellar-background-ratio="0.5">
+	<div class="slide" id="slide3" data-slide="3" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="50">
 
 		<div class="wrapper">
-
-			<img src="front/img/home/slide3/kilt.png" data-stellar-ratio="2.4" data-stellar-vertical-offset="-102" alt="">
-			<img src="front/img/home/slide3/scotland.png" data-stellar-ratio="1" data-stellar-vertical-offset="-53" alt="">
-			<img src="front/img/home/slide3/loch.png" data-stellar-ratio="2.5" data-stellar-vertical-offset="-50" alt="">
-			<img src="front/img/home/slide3/tutshub.png" data-stellar-ratio="0.8" data-stellar-vertical-offset="-180" alt="">
-			<img src="front/img/home/slide3/rockable.png" data-stellar-ratio="1.2" data-stellar-vertical-offset="-230" alt="">
-
-		</div>
-
-		<span class="slideno">Slide 3</span>
-
-		<a class="button" data-slide="4" title=""></a>
-
+<!--
+			<img src="../front/img/home/slide3/kilt.png" data-stellar-ratio="2.4" data-stellar-vertical-offset="-102" alt="">
+			<img src="../front/img/home/slide3/scotland.png" data-stellar-ratio="1" data-stellar-vertical-offset="-53" alt="">
+			<img src="../front/img/home/slide3/loch.png" data-stellar-ratio="2.5" data-stellar-vertical-offset="-50" alt="">
+			<img src="../front/img/home/slide3/tutshub.png" data-stellar-ratio="0.8" data-stellar-vertical-offset="-180" alt="">
+			<img src="../front/img/home/slide3/rockable.png" data-stellar-ratio="1.2" data-stellar-vertical-offset="-230" alt="">
+		-->
 	</div>
 
-	<!--End Slide 3-->
+	<span class="description" data-stellar-ratio="1.4">
+		<p style="font-weight: bold;">
+			ALREADY MORE THAN 10 USERS
+		</p>
+	</span>
+	<span class="description" data-stellar-ratio="1.27">
+		<p style="font-size: 65px; font-family: 'Pacifico', 'Roboto', Arial, sans-serif; padding: 9% 0 0 0;">
+			What are you waiting for ?!
+		</p>
+	</span>
 
-	<!--Start Slide 4-->
 
-	<div class="slide" id="slide4" data-slide="4" data-stellar-background-ratio="0">
+	<a href="login" class=button style="position: absolute; top: 60%; left: 36%;" data-stellar-ratio="1.1">
+		<span style="font-size: 36px;">Log in !</span>
+	</a>
 
-		<span class="slideno">Slide 4</span>
+	<a href="/create-account" class=button style="position: absolute; top: 60%; right: 36%;" data-stellar-ratio="1.1">
+		<span style="font-size: 36px;">Sign up !</span>
+	</a>
 
-		<span class="parallaxbg">How to use it ?</span>
+	<span class="slideno" style="font-size: 80px;">Register now</span>
 
-	</div>
+	<a class="button-arrow" data-slide="4" title=""></a>
 
-	<!--End Slide 4-->
+</div>
 
+<!--End Slide 3-->
+
+<!--Start Slide 4-->
+
+<div class="slide" id="slide4" data-slide="4" data-stellar-background-ratio="0">
+
+	<span class="parallaxbg">How to use it ?</span>
+
+	<span class="slideno" style="font-size: 70px; font-family: 'Pacifico', 'Roboto', Arial, sans-serif">
+		Chat Me Baby
+	</span>
+
+</div>
+
+<!--End Slide 4-->
+<footer>
+	<table class="tableFooter" border="0" align="center">
+		<tr align="right">
+			<td class="backTop" colspan="3">
+				<a href="#">Back to top &#9650;</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="contact" width="10%"><button class="buttonContact">Contact Us!</button></td>
+			<td class="copyright" width="90%">
+				Copyright © 2018 - <span class="chatmebaby">Chat Me Baby </span>- Hynes Monchicourt Raimondi Roudaut
+			</td>
+			<td>
+				<table>
+					<td class="linkedin" width="3%"><img src="Logo/Icones/linkedin-box.png"/></td>
+					<td class="facebook" width="3%"><img src="Logo/Icones/facebook-box.png"/></td>
+					<td class="twitter" width="3%"><a><img src="Logo/Icones/twitter-box.png"/></a></td>
+				</table>
+			</td>
+
+
+		</tr>
+	</table>
+</footer>
 </body>
 </html>

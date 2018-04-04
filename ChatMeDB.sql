@@ -8,11 +8,12 @@ CREATE TABLE IF NOT EXISTS User (
   FirstName VARCHAR(50) NULL,
   LastName VARCHAR(50) NULL,
   BirthDate DATE NULL,
-  AvatarURI VARCHAR(200) NULL,
+  AvatarURI VARCHAR(200) NULL, 
   Status INT NULL,
   Description TEXT NULL,
   PhoneNumber VARCHAR(12) NULL,
-  Skype VARCHAR(50) NULL,
+  City VARCHAR(100) NULL,
+  Gender INT NULL,
   PRIMARY KEY (
     UserID
   )

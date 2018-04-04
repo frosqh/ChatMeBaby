@@ -2,6 +2,15 @@ var Client = require('mariasql');
 var result = {};
 const fs = require('fs');
 const helper= require('./Helper');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'chatmebaby2k18@gmail.com',
+		pass: 'chatmecharoy'
+	}
+});
 
 var con = new Client({
 	host: 'localhost',
@@ -22,17 +31,17 @@ module.exports = {
 			con.query("USE ChatMeDB", function(err) {
 				if (err) throw err;
 			//console.log("Succeed!");
-				fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
-					if (err) throw err;
-					v = data.split(";");
-					for (var w in v.slice(0,v.length-1)){
-						con.query(v[w]+";", function(err, result) {
-							if (err) throw err;
-						});
-					}
-					
-				});
+			fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
+				if (err) throw err;
+				v = data.split(";");
+				for (var w in v.slice(0,v.length-1)){
+					con.query(v[w]+";", function(err, result) {
+						if (err) throw err;
+					});
+				}
+
 			});
+		});
 		});
 	},
 	// Création User
@@ -45,9 +54,10 @@ module.exports = {
 			} else {
 				UserID = result.info.numRows;
 			}
-			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
+				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
 			});
 		});
 	},
@@ -59,20 +69,25 @@ module.exports = {
 			return result.length;
 		});
 	},
-
+	setConfirmed:function(UserID, confirmed){
+		var sql = "UPDATE User SET Confirmed="+confirmed+" WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		})
+	}, 
 }
 // API User
 
 function getUserId(username){ //À modifier, l'async fout le bordel monstre ><
-	var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result.length > 0){
-			return result[0].UserID;
-		} else {
-			throw ("Not any "+username);
-		}
-	});
+var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
+con.query(sql, function(err, result, fields){
+	if (err) throw err;
+	if (result.length > 0){
+		return result[0].UserID;
+	} else {
+		throw ("Not any "+username);
+	}
+});
 }
 
 function setConnected(UserID, connected){
@@ -146,6 +161,20 @@ function setSkype(UserID, skype){
 	});
 }
 
+//Création Confirmation
+
+function Confirmation(UserName, UserID){
+	console.log("Entrée dans Confirmation");
+	console.log("UserName" + UserName);
+	console.log(UserID);
+	var sql = 'INSERT INTO Confirmation (ID, UserID) VALUES (\''+UserName+"',"+UserID+")";
+	console.log(sql);
+	con.query(sql, function(err, result){
+		if (err) throw err;
+		return result.info.insertId;
+	});
+}
+
 // Création Preferences
 function Preferences(UserID){
 	var sql="SELECT * FROM Preferences";
@@ -167,15 +196,15 @@ function Preferences(UserID){
 
 // API Preferences
 function getPrefFrom(UserID){ //idem, il faut le bouger ^^'
-	var sql="SELECT PrefID FROM Preferences WHERE UserID="+UserID;
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-	});
-	if (result.length > 0){
-		return result[0].PrefID;
-	} else {
-		throw ("Not any "+UserID);
-	}
+var sql="SELECT PrefID FROM Preferences WHERE UserID="+UserID;
+con.query(sql, function(err, result, fields){
+	if (err) throw err;
+});
+if (result.length > 0){
+	return result[0].PrefID;
+} else {
+	throw ("Not any "+UserID);
+}
 }
 
 function setTheme(PrefID,Theme){
@@ -355,3 +384,28 @@ function test(){
 	},1000);
 }
 
+function sendMail(addr, subject, body) {
+	var mailOptions = {
+		from: 'chatmebaby2k18@gmail.com',
+		to: addr,
+		subject: subject,
+		html: body
+	};
+
+	transporter.sendMail(mailOptions, function(error, info){
+		if (error){
+			console.log(error);
+		} else {
+			console.log('Email sent: '+info.response);
+		}
+	});
+}
+
+function generateConfirm(UserId, UserName){
+	console.log(UserName);
+	console.log(UserId);
+	user = helper.hashFnv32a(UserName,true);
+	console.log("Avant le call à Confirmation !");
+	Confirmation(user, UserId);
+	return "193.54.15.211/confirm/"+user;
+}

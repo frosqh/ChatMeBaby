@@ -4,11 +4,13 @@ var app = require('express')(),
     io = require('socket.io').listen(server),
     ent = require('ent'), // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
     fs = require('fs');
+//server.listen(80,"http://193.54.12.211");
+var socket = io.listen(server);
 
 // Chargement de la page index.html
 app.get('/', function (req, res) {
   app.use(express.static(__dirname+'/public'));
-  res.sendFile(__dirname + '\\index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 var users= {};

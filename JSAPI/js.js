@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
     slide = $('.slide');
     button = $('.button-arrow');
     mywindow = $(window);
-    htmlbody = $('html,body');
+    htmlbody = $('html, .home');
 
 
     //Setup waypoints plugin

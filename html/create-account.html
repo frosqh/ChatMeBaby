@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" type="text/css" href="../front/css/create-account.css">
   <link rel="stylesheet" type="text/css" href="../front/css/button.css">
+  <link rel="stylesheet" type="text/css" href="../front/css/radiobutton.css">
   <script src="../JSAPI/create-account.js"></script>
 </head>
 
@@ -133,6 +134,22 @@
 
              <tr>
               <td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                <label for="nom">Gender</label><br>
+              </td>
+             </tr>
+
+             <tr><td style="padding: 8px 0 5px 5px;">
+               <input type="radio" name="gender" id="male" />
+               <label class="label" for="male">Male</label>
+               <input type="radio" name="gender" id="female" />
+               <label class="label" for="female">Female</label>
+               <input type="radio" name="gender" id="notsure" checked/>
+               <label class="label" for="notsure">Not sure</label>
+               <!--<input type="text" name="gender" id="gender" title="Is this your gender ?" placeholder="Your gender.."/>
+             --></td></tr>
+
+             <tr>
+              <td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
                 <label for="nom">Birth date</label><br>
               </td>
              </tr>
@@ -156,14 +173,27 @@
              </tr>
 
              <tr>
-              <td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
-                <label for="nom">Skype</label><br>
+              <td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 0 5px;">
+                <label for="nom">City</label><br>
               </td>
              </tr>
 
              <tr>
               <td style="padding: 0 0 5px 5px;">
-                <input type="text" name="skype" id="skype" placeholder="Your Skype account.."/>
+                <input type="text" name="city" id="city" placeholder="Your city.."/>
+              </td>
+             </tr>
+
+             <tr>
+              <td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                <label for="nom">Description</label><br>
+              </td>
+             </tr>
+
+             <tr>
+              <td style="padding: 0 0 5px 5px;">
+                <textarea form="myForm" name="description" placeholder="Your description..">
+                </textarea>
               </td>
              </tr>
 
