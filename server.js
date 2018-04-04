@@ -258,7 +258,7 @@ app.get('/confirm/:id', function(req,res){
 	});
 });
 
-app.get('/profile/', function(req,res){
+app.get('/profile', function(req,res){
 	if (!req.session.user || req.session.user=="Anonymous"){
 		res.redirect("/login");
 		return;
@@ -271,8 +271,9 @@ app.get('/profile/', function(req,res){
 		} else {
 			var descr = result[0].Description;
 			var gend = result[0].Gender;
-			var ag = getAge(result[0].birthDate)
-			res.render('profile.ejs', {desc: descr, gender: gend, age:ag, });
+			var ag = getAge(result[0].BirthDate);
+			var use = result[0].UserName
+			res.render('profile.ejs', {user: use, desc: descr, gender: gend, age:ag, });
 			return;
 		}
 	})

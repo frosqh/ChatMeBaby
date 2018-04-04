@@ -118,7 +118,9 @@ module.exports = {
 		});
 	},
 	setGender:function(UserID, gender){
-		var sql="UPDATE User SET Gender ="+gender+"WHERE UserID ="+UserID;
+		
+		var sql="UPDATE User SET Gender ="+gender+" WHERE UserID ="+UserID;
+		console.log(sql);
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		});

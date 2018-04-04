@@ -15,7 +15,7 @@
 	
 	<div id="tableContainer-1">
   <div id="tableContainer-2">
-    <form method="post">
+    <form method="post" id="myForm">
     <table id="myTable" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td>
@@ -42,7 +42,7 @@
 
       <tr>
         <td align="center">
-       <a class=button onclick=submit> 
+       <a class=button onclick="document.getElementById('myForm').submit()"> 
        <span style="font-size: 36px;">Chat now !</span>
        </a>
      </button>

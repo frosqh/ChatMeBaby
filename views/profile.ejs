@@ -30,16 +30,15 @@
                         <img id="myPicture" src="front/img/profile-picture.png" width="120px" alt="Picture">
                       </td>
                       <td>
-                        <p id="username" class="username"<% user %> </p>
-                        <p id="gender-age" class="gender-age"><% if (gender==0) {%> Male <% } else { if (gender==1) {%> Female <%} else {%> Not strictly defined <% }} %> - <=% age %></p>
+			      <p id="username" class="username"><%= user %> </p>
+			<p id="gender-age" class="gender-age"><% if (gender==0) {%> Male <% } else { if (gender==1) {%> Female <%} else {%> Not strictly defined <% }} %> - <%= age %></p>
                       </td>
                     </tr>
                   </table>
                 </td>
                 <td width="50%">
                   <blockquote id="description" class="description">
-                    <%= desc %>
-                  </q>
+                    <%= desc %>                  
                 </td>
               </tr>
             </table>
