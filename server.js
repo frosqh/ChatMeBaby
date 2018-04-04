@@ -36,11 +36,13 @@ app.use(express.static(__dirname + '/static'));
 db.init();
 
 app.get('/', function(req, res) {
-	if (req.cookies['user'] == undefined){
-		req.cookies['user'] == 'Unconnected !';
+	if (req.cookies['user'] == undefined || req.cookies == undefined){
+		userf = 'Unconnected !';
+	} else {
+		userf = req.cookies['user']
 	}
 	console.log("COUCOU !");
-	res.render('index.ejs', {user: req.cookies['user']});
+	res.render('index.ejs', {user: userf});
 });
 
 app.get('/channels', function(req,res) {
