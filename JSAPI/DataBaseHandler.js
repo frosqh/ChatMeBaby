@@ -1,6 +1,16 @@
 var Client = require('mariasql');
+var result = {};
 const fs = require('fs');
 const helper= require('./Helper');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'chatmebaby2k18@gmail.com',
+		pass: 'chatmecharoy'
+	}
+});
 
 var con = new Client({
 	host: 'localhost',
@@ -8,91 +18,76 @@ var con = new Client({
 	password: '1234',
 
 });
-var c=0;
-
-init();
-
 //Init DataBase (first Launch)
 
-function init(){
-	con.query("CREATE DATABASE IF NOT EXISTS ChatMeDB", function(err,result){
-		if (err) throw err;
-		con.query("USE ChatMeDB", function(err) {
+module.exports = {
+	Client,
+	fs,
+	helper,
+	con,
+	init:function(){
+		con.query("CREATE DATABASE IF NOT EXISTS ChatMeDB", function(err,result){
 			if (err) throw err;
-		//console.log("Succeed!");
+			con.query("USE ChatMeDB", function(err) {
+				if (err) throw err;
+			//console.log("Succeed!");
 			fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
 				if (err) throw err;
 				v = data.split(";");
 				for (var w in v.slice(0,v.length-1)){
-						console.log(v[w]);
 					con.query(v[w]+";", function(err, result) {
-						console.log(v[w]);
 						if (err) throw err;
 					});
 				}
-				test();
+
 			});
 		});
-	});
-	
-	
-
-
+		});
+	},
+	// Création User
+	User:function(UserName, Mail, Password){
+		var sql="SELECT * FROM User";
+		con.query(sql, function(err,result){
+			if (err) throw err;
+			if (result == undefined){
+				UserID=  0;
+			} else {
+				UserID = result.info.numRows;
+			}
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
+			con.query(sql, function(err, result) {
+				if (err) throw err;
+				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
+			});
+		});
+	},
+	//API User
+	getUsersList:function(){
+		var sql="SELECT * FROM User";
+		con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			return result.length;
+		});
+	},
+	setConfirmed:function(UserID, confirmed){
+		var sql = "UPDATE User SET Confirmed="+confirmed+" WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		})
+	}, 
 }
-
-function test(){
-	User("Roger","mail@example.com","password");
-	console.log(getUserId("Roger"));
-	console.log(autoIncrUser());
-}
-
-
-//AutoIncr
-
-function autoIncrUser(){
-	var sql="SELECT COUNT(*) FROM User";
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result == undefined){
-			return 0;
-		}
-		return result[0].COUNT;
-	})
-}
-
-
-// Création User
-
-function User(UserName, Mail, Password){
-	UserID = autoIncrUser();
-	var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
-	con.query(sql, function(err, result) {
-		if (err) throw err;
-		return result.insertId;
-		//Preferences(result.insertId);
-	});
-}
-
 // API User
 
-function getUsersList(){
-	var sql="SELECT * FROM User";
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		return result.length;
-	});
-}
-
-function getUserId(username){
-	var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result.length > 0){
-			return result[0].UserID;
-		} else {
-			throw ("Not any "+username);
-		}
-	});
+function getUserId(username){ //À modifier, l'async fout le bordel monstre ><
+var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
+con.query(sql, function(err, result, fields){
+	if (err) throw err;
+	if (result.length > 0){
+		return result[0].UserID;
+	} else {
+		throw ("Not any "+username);
+	}
+});
 }
 
 function setConnected(UserID, connected){
@@ -166,27 +161,50 @@ function setSkype(UserID, skype){
 	});
 }
 
-// Création Preferences
-function Preferences(UserID){
-	PrefID = autoIncrPref();
-	var sql="INSERT INTO Preferences (PrefID, UserID, Theme, Display) VALUES ("+PrefID+","+UserID+",0,0)";
+//Création Confirmation
+
+function Confirmation(UserName, UserID){
+	console.log("Entrée dans Confirmation");
+	console.log("UserName" + UserName);
+	console.log(UserID);
+	var sql = 'INSERT INTO Confirmation (ID, UserID) VALUES (\''+UserName+"',"+UserID+")";
+	console.log(sql);
 	con.query(sql, function(err, result){
 		if (err) throw err;
+		return result.info.insertId;
 	});
-	return result.insertId;
+}
+
+// Création Preferences
+function Preferences(UserID){
+	var sql="SELECT * FROM Preferences";
+	con.query(sql, function(err,result){
+		if (err) throw err;
+		if (result == undefined){
+			PrefID=  0;
+		} else {
+			PrefID = result.info.numRows;
+		}
+		var sql="INSERT INTO Preferences (PrefID, UserID, Theme, Display) VALUES ("+PrefID+","+UserID+",0,0)";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
+	});
+
 }
 
 // API Preferences
-function getPrefFrom(UserID){
-	var sql="SELECT PrefID FROM Preferences WHERE UserID="+UserID;
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-	});
-	if (result.length > 0){
-		return result[0].PrefID;
-	} else {
-		throw ("Not any "+UserID);
-	}
+function getPrefFrom(UserID){ //idem, il faut le bouger ^^'
+var sql="SELECT PrefID FROM Preferences WHERE UserID="+UserID;
+con.query(sql, function(err, result, fields){
+	if (err) throw err;
+});
+if (result.length > 0){
+	return result[0].PrefID;
+} else {
+	throw ("Not any "+UserID);
+}
 }
 
 function setTheme(PrefID,Theme){
@@ -196,10 +214,6 @@ function setTheme(PrefID,Theme){
 	});
 }
 
-function setThemeOf(UserId, Theme){
-	PrefID = getPrefFrom(UserId);
-	setTheme(PrefID,Theme);
-}
 
 function setDisplay(PrefID, display){
 	var sql="UPDATE Preferences SET Display="+display+"WHERE PrefID="+PrefID;
@@ -208,20 +222,23 @@ function setDisplay(PrefID, display){
 	});
 }
 
-function setDisplayOf(UserID, display){
-	PrefID = getPrefFrom(UserID);
-	setDisplay(PrefID, display);
-}
-
 // Création Channel
 function Channel(Name){
-	ChannelID = autoIncrChan();
-	var sql="INSERT INTO Channel (ChannelID, Name, CreationDate) VALUES ("+ChannelID+",'"+Name+"','"+getDate()+"')";
-	con.query(sql, function(err, result){
+	var sql="SELECT * FROM Channel";
+	con.query(sql, function(err,result){
 		if (err) throw err;
+		if (result == undefined){
+			ChannelID=  0;
+		} else {
+			ChannelID = result.info.numRows;
+		}
+		var sql="INSERT INTO Channel (ChannelID, Name, CreationDate) VALUES ("+ChannelID+",'"+Name+"',NOW())";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			Settings(result.info.insertId);
+			return result.info.insertId;
+		});
 	});
-	Settings(result.insertId);
-	return result.insertId;
 }
 
 // API Channel
@@ -246,7 +263,7 @@ function setChannelDesc(channelID, desc){
 	});
 }
 
-function getChannelID(name){
+function getChannelID(name){ //A changer !
 	var sql="SELECT ChannelID FROM Channel WHERE Name='"+name+"'";
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
@@ -260,16 +277,24 @@ function getChannelID(name){
 
 // Création Settings
 function Settings(channelID){
-	settingsID = autoIncrSet();
-	var sql="INSERT INTO Settings (SettingsID,ChannelID) VALUES ("+settingsID+","+channelID+")";
-	con.query(sql, function(err, result){
+	var sql="SELECT * FROM Settings";
+	con.query(sql, function(err,result){
 		if (err) throw err;
+		if (result == undefined){
+			settingsID=  0;
+		} else {
+			settingsID = result.info.numRows;
+		}
+		var sql="INSERT INTO Settings (SettingsID,ChannelID) VALUES ("+settingsID+","+channelID+")";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
 	});
-	return result.insertId;
 }
 
 //API Settings
-function getSettFrom(channelID){
+function getSettFrom(channelID){ //A changer !
 	var sql="SELECT SettingID FROM Settings WHERE ChannelID="+channelID;
 	con.query(sql, function(err, result, fields){
 		if (err) throw err;
@@ -288,17 +313,99 @@ function setSetting1(SettingId, setting1){
 	});
 }
 
-function setSetting1Of(ChannelId, setting1){
-	settingId = getSetFrom(channelID);
-	setSetting1(settingId,setting1);
-}
-
 //Création Message
 function Message(UserId, ChannelId, Text){
-	messageId = autoIncrMsg();
-	var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+","+Text+",CURRENT_TIMESTAMP)";
+	var sql="SELECT * FROM Message";
+	con.query(sql, function(err,result){
+		if (err) throw err;
+		if (result == undefined){
+			messageId  = 0;
+		} else {
+			
+			messageId = result.info.numRows;
+		}
+		console.log("Channel "+ChannelId);
+		console.log("Pignouf "+UserId);
+		console.log(Text);
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW())";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
+	});
+}
+
+//API Message
+function setPJ(MessageID, PJ){
+	var sql="UPDATE Message SET PJ='"+PJ+"'WHERE MessageID="+MessageID;
 	con.query(sql, function(err, result){
 		if (err) throw err;
 	});
-	return result.insertId;
+}
+
+//Création UserByChannel
+function UserByChannel(UserID, ChannelID, Power){
+	var sql="SELECT * FROM UserByChannel";
+	con.query(sql, function(err, result){
+		if (err) throw err;
+		if (result == undefined){
+			UbCId = 0;
+		} else {
+			UbCId = result.info.numRows;
+		}
+		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+")";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		})
+	})
+}
+
+//API UserByChannel
+function setTitle(UbCId,Title){
+	var sql="UPDATE UserByChannel SET Title='"+Title+"' WHERE ID="+UbCId;
+	con.query(sql, function(err, result){
+		if (err) throw err;
+	});
+}
+
+//Suite API
+
+
+
+function test(){
+	i = User("frosqh", "frosqh@gmail.com","pass");
+	setTimeout(function(){
+		j = User("Cha", "neko@gmail.com", "word");
+		c = Channel("Inu");
+		m = Message(i,c,"Plop ^^");
+		n = Message(j,c,"Hey ^^");
+		k = Message(i,c,"Sans accent :p");
+	},1000);
+}
+
+function sendMail(addr, subject, body) {
+	var mailOptions = {
+		from: 'chatmebaby2k18@gmail.com',
+		to: addr,
+		subject: subject,
+		html: body
+	};
+
+	transporter.sendMail(mailOptions, function(error, info){
+		if (error){
+			console.log(error);
+		} else {
+			console.log('Email sent: '+info.response);
+		}
+	});
+}
+
+function generateConfirm(UserId, UserName){
+	console.log(UserName);
+	console.log(UserId);
+	user = helper.hashFnv32a(UserName,true);
+	console.log("Avant le call à Confirmation !");
+	Confirmation(user, UserId);
+	return "193.54.15.211/confirm/"+user;
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="front/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="front/indexJS/index.js"></script>
+  <title>Welcome on Chat Me Baby !</title>
+</head>
+<body>
+
+<div class="header">
+  <img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" />
+  <div class="connectedUser">
+    <span id="userText">
+	    <span id="user"><%= user %></span> |<% if (user=='Anonymous') {%> <a href="login" style="text-decoration: none""> Connexion</a> <%} else {%> <a href="logout" style="text-decoration: none""> Déconnexion</a> <% } %>
+    </span>
+  </div>
+</div>
+
+<div class="topnav">
+  <a class="indexPage">Accueil</a>
+  <a href="channels">Salons</a>
+  <a class="settingsPage">Param&egrave;tres</a>
+</div>
+
+<div class="content" >
+  <div class='coucou'>
+    <h1>Super</h1>
+  </div>
+</div>
+
+
+<footer>
+  <table class="tableFooter" border="0" align="center">
+    <td class="contact"><button class="buttonContact">Contact Us!</button></td>
+    <td class="copyright" width="85%">
+    Copyright © 2018 - <span class="chatmebaby">Chat Me Baby </span>- Hynes Monchicourt Raimondi Roudaut
+    </td>
+    <td class="linkedin" width="3%"><img src="Logo/Icones/linkedin-box.png"/></td>
+    <td class="facebook" width="3%"><img src="Logo/Icones/facebook-box.png"/></td>
+    <td class="twitter" width="3%"><a><img src="Logo/Icones/twitter-box.png"/></a></td>
+  </table>
+</footer>
+
+</body>
+</html>

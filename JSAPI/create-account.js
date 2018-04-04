@@ -19,6 +19,8 @@ function checkAllValidate() {
   if (username.checkValidity() && email.checkValidity() &&
       password.checkValidity() && terms.checked) {
     alert("OK");
+    document.getElementById("myForm").submit();
+    window.location.href="../index.html";
   } else {
     if (!terms.checked) {
       alert("You must agree to the Terms of Service and Privacy Policy to sign up.");
