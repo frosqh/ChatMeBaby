@@ -179,10 +179,10 @@ app.post('/create-account', function(req, res){
 								if (err) throw err;
 								if (result.info.numRows != 0){
 									if (req.post.firstname){
-										setFirstName(result[0].UserID, firstName);
+										db.setFirstName(result[0].UserID, firstName);
 									}
 									if (req.post.lastname){
-										setLastName(result[0].UserID, lastname);
+										db.setLastName(result[0].UserID, lastname);
 									}
 									if (req.post.gender){
 										console.log(req.post.gender);
@@ -191,13 +191,13 @@ app.post('/create-account', function(req, res){
 										console.log(birthdate);
 									}
 									if (req.post.phonenumber){
-										setPhoneNumber(result[0].UserID, req.post.phonenumber);
+										db.setPhoneNumber(result[0].UserID, req.post.phonenumber);
 									}
 									if (req.post.city){
-										setCity(result[0].UserID, req.post.city);
+										db.setCity(result[0].UserID, req.post.city);
 									}
 									if (req.post.description){
-										setDescription(result[0].UserID, req.post.description);
+										db.setDescription(result[0].UserID, req.post.description);
 									}
 								} else {
 									console.log("WTF !");
