@@ -208,9 +208,20 @@ app.get('/confirm/:id', function(req,res){
 	});
 });
 
-//app.use(function(req, res, next){
-//    res.setHeader('Content-Type', 'text/plain');
-//    res.status(404).send('Page introuvable !');
-//});
+app.get('/profile/', function(requ,res){
+	if (!req.session.user || req.session.user=="Anonymous"){
+		res.redirect("/login");
+		return;
+	}
+	res.render('profile.ejs');
+}
+
+
+
+
+app.use(function(req, res, next){
+    res.setHeader('Content-Type', 'text/plain');
+    res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
+});
 
 //app.listen(8080,"localhost");
