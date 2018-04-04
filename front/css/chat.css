@@ -286,6 +286,44 @@ form button {
     bottom: 0;
 }
 
+/*Message*/
+.avatar{
+    float: left;
+}
+
+.sender-name .sender{
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 10px 0 18px;
+  float: left;
+}
+
+.sender-name .time{
+  float: none;
+  padding-top: 8px;
+}
+
+.message_content{
+  margin: 8px 0;
+}
+
+.message_content:hover{
+  background-color: rgb(0,0,0,0.05);
+}
+
+.time{
+  font-size: 8px;
+  color:grey;
+  float: left;
+  margin: 4px;
+  padding: 2px 0;
+}
+
+.message_body{
+margin: 0;
+padding-left: 50px;
+}
+
 /* Footer */
 .footer {
     padding: 20px;
