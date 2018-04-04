@@ -5,6 +5,7 @@ var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
 
 var app = express();
+app.use(cookieParser());
 
 function processPost(request, response, callback) {
     var queryData = "";
@@ -36,10 +37,11 @@ app.use(express.static(__dirname + '/static'));
 db.init();
 
 app.get('/', function(req, res) {
-	if (req.cookies['user'] == undefined || req.cookies == undefined){
+	console.log(req.cookies)
+	if (req.cookies == undefined || req.cookies.user == undefined){
 		userf = 'Unconnected !';
 	} else {
-		userf = req.cookies['user']
+		userf = req.cookies.user
 	}
 	console.log("COUCOU !");
 	res.render('index.ejs', {user: userf});
@@ -64,7 +66,8 @@ app.get('/home', function(req, res){
 app.post('/create-account', function(req, res){
 	processPost(req, res, function(){
 		db.User(req.post.username,req.post.email,req.post.password);
-		res.cookie('user',username);
+		res.cookie('user',req.post.username);
+		console.log(req.post.username);
 		res.redirect("/");
 	})
 })
