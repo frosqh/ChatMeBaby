@@ -16,8 +16,7 @@ function checkAllValidate() {
   var password = document.getElementById("confirm-password");
   var terms = document.getElementById("myonoffswitch");
 
-  if (username.checkValidity() && email.checkValidity() &&
-      password.checkValidity() && terms.checked) {
-    //alert("OK");
-    document.getElementById("myForm").submit();
+  if (username.checkValidity() && email.checkValidity() && password.checkValidity() && terms.checked) {
+    	document.getElementById("myForm").submit();
+	}
 }
