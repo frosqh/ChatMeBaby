@@ -2,6 +2,15 @@ var Client = require('mariasql');
 var result = {};
 const fs = require('fs');
 const helper= require('./Helper');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'chatmebaby2k18@gmail.com',
+		pass: 'chatmecharoy'
+	}
+});
 
 var con = new Client({
 	host: 'localhost',
@@ -357,9 +366,18 @@ function test(){
 }
 
 function sendMail(addr, subject, body) {
-    var link = "mailto:"+addr
-             + "&subject=" + escape(subject)
-             + "&body=" + escape(body)
-    ;
-    window.location.href = link;
+	var mailOptions = {
+		from='chatmebaby2k18@gmail.com',
+		to: addr,
+		sujbect: subject,
+		text: body
+	};
+
+	transporter.sendMail(mailOptions, function(error, info){
+		if (error){
+			console.log(error);
+		} else {
+			console.log('Email sent: '+info.response);
+		}
+	});
 }
