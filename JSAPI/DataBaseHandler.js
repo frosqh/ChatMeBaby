@@ -48,6 +48,7 @@ module.exports = {
 			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
+				sendMail(Mail,"Hey", "Thx <3");
 			});
 		});
 	},
@@ -355,3 +356,10 @@ function test(){
 	},1000);
 }
 
+function sendMail(addr, subject, body) {
+    var link = "mailto:"+addr
+             + "&subject=" + escape(subject)
+             + "&body=" + escape(body)
+    ;
+    window.location.href = link;
+}
