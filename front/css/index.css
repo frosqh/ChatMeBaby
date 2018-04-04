@@ -37,24 +37,38 @@ body {
 .header {
     padding: 30px;
     text-align: center;
-    background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);
+    /* background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4); */
 }
 
 .connectedUser{
   position: absolute;
-  height: auto;
-  width: auto;
   color: #ffffff;
+  border-radius: 4px;
   top: 8px;
   right: 16px;
   background: #003366;
 }
 
-#user{
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    margin-left: 2%;
-    margin right: 2%;
+#userText td{
+  padding-left: 5px;
+  padding-right: 5px;
+
+}
+
+#settingico a img{
+  height: 20px;
+  width: auto;
+  cursor: pointer;
+}
+#settingico{
+  border-left: 1px solid #cdd0d4;
+  border-right: 1px solid #cdd0d4;
+}
+
+#signoutico a img{
+  height: 20px;
+  width: auto;
+  cursor: pointer;
 }
 
 /* Style the top navigation bar */
@@ -77,20 +91,6 @@ body {
     text-decoration: none;
 }
 
-.topnav div{
-  float: left;
-  display: block;
-  height: 15%;
-  padding: 1px 16px;
-  background-color: #666699;
-  color: white;
-
-}
-
-.topnav p{
-  margin: 10px 5px 10px;
-}
-
 /* Change color on hover */
 .topnav a:hover:not(.active) {
     background-color: #111;
@@ -99,6 +99,34 @@ body {
 .active {
     background-color: #666699;
 }
+
+/* Search Bar */
+.searchbarbutton{
+  text-align: right;
+  padding: 10px;
+  margin-right: 60px;
+}
+
+.searchbar{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 17px;
+  color: #f2f2f2;
+  background-color: #333;
+  border:none;
+}
+::placeholder{
+  color: #b7b7b7;
+}
+
+.searchbutton{
+  background:url("../../Logo/Icones/search.png") no-repeat;
+  cursor:pointer;
+  width: 20px;
+  height: 20px;
+  border: none;
+}
+
+/* **************** */
 
 footer {
     color: #ffffff;
@@ -111,9 +139,10 @@ footer {
 }
 
 .tableFooter{
+  margin-right: 5px;
   text-align: center;
-
   border-color: #ffffff;
+  padding-bottom: 1%;
 }
 
 .contact, .copyright{
@@ -122,6 +151,26 @@ footer {
 
 .copyright{
   font-size: 12px;
+}
+
+.backTop > a{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 11px;
+  color: #ffffff;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.backTop > a:hover{
+  text-decoration: underline;
+}
+
+.backTop{
+  padding-bottom: 1%;
+  margin-right: 1%;
 }
 
 #LogoTransparent {
@@ -134,23 +183,28 @@ footer {
 }
 
 .buttonContact{
+  background: #000010;
+  color: #ffffff;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 14px;
   border-radius: 4px;
-  background-color: #000000;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 13px;
-  padding: 10px;
-  width: 100px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
+  padding: 11px;
+  border: 0px;
+}
+
+.buttonContact:hover{
+  background: #ffffff;
+  color: #000000;
+}
+
+.buttonContact, .facebook, .linkedin, .twitter{
   cursor: pointer;
 }
 
 
 
 body{
+  /* background-color: #4d82cc; */
     background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);
 }
 
