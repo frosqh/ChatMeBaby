@@ -35,6 +35,10 @@ function processPost(request, response, callback) {
     }
 }
 
+function disconnect(username){
+	req.session.username=undefined;
+}
+
 app.use(express.static(__dirname + '/static'));
 
 db.init();
@@ -73,6 +77,11 @@ app.post('/create-account', function(req, res){
 		req.session.user=req.post.username;
 		res.redirect("/");
 	})
+})
+
+app.get('/logout', function(req, res){
+	disconnect(req.session.username);
+	res.redirect("/");
 })
 
 app.listen(8080,"localhost");
