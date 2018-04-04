@@ -273,7 +273,13 @@ app.get('/profile', function(req,res){
 			var gend = result[0].Gender;
 			var ag = getAge(result[0].BirthDate);
 			var use = result[0].UserName
-			res.render('profile.ejs', {user: use, desc: descr, gender: gend, age:ag, });
+			var first = result[0].FirstName;
+			var last = result[0].LastName;
+			var t = result[0].BirthDate.split("-");
+			var birt = t[1]+"/"+t[2]+"/"+t[0];
+			var phone = result[0].PhoneNumber;
+			var cit = result[0].City;
+			res.render('profile.ejs', {city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, });
 			return;
 		}
 	})
