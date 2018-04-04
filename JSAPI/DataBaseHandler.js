@@ -31,17 +31,17 @@ module.exports = {
 			con.query("USE ChatMeDB", function(err) {
 				if (err) throw err;
 			//console.log("Succeed!");
-				fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
-					if (err) throw err;
-					v = data.split(";");
-					for (var w in v.slice(0,v.length-1)){
-						con.query(v[w]+";", function(err, result) {
-							if (err) throw err;
-						});
-					}
-					
-				});
+			fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
+				if (err) throw err;
+				v = data.split(";");
+				for (var w in v.slice(0,v.length-1)){
+					con.query(v[w]+";", function(err, result) {
+						if (err) throw err;
+					});
+				}
+
 			});
+		});
 		});
 	},
 	// Création User
@@ -69,19 +69,25 @@ module.exports = {
 			return result.length;
 		});
 	},
+	setConfirmed:function(UserID, confirmed){
+		var sql = "UPDATE User SET Confirmed="+confirmed+" WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		})
+	}, 
 }
 // API User
 
 function getUserId(username){ //À modifier, l'async fout le bordel monstre ><
-	var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result.length > 0){
-			return result[0].UserID;
-		} else {
-			throw ("Not any "+username);
-		}
-	});
+var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
+con.query(sql, function(err, result, fields){
+	if (err) throw err;
+	if (result.length > 0){
+		return result[0].UserID;
+	} else {
+		throw ("Not any "+username);
+	}
+});
 }
 
 function setConnected(UserID, connected){
@@ -155,13 +161,6 @@ function setSkype(UserID, skype){
 	});
 }
 
-function setConfirmed(UserID, confirmed){
-	var sql = "UPDATE User SET Confirmed="+confirmed+" WHERE UserID ="+UserID;
-	con.query(sql, function(err, result){
-		if (err) throw err;
-	})
-}
-
 //Création Confirmation
 
 function Confirmation(UserName, UserID){
@@ -197,15 +196,15 @@ function Preferences(UserID){
 
 // API Preferences
 function getPrefFrom(UserID){ //idem, il faut le bouger ^^'
-	var sql="SELECT PrefID FROM Preferences WHERE UserID="+UserID;
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-	});
-	if (result.length > 0){
-		return result[0].PrefID;
-	} else {
-		throw ("Not any "+UserID);
-	}
+var sql="SELECT PrefID FROM Preferences WHERE UserID="+UserID;
+con.query(sql, function(err, result, fields){
+	if (err) throw err;
+});
+if (result.length > 0){
+	return result[0].PrefID;
+} else {
+	throw ("Not any "+UserID);
+}
 }
 
 function setTheme(PrefID,Theme){
