@@ -86,8 +86,15 @@ function disconnect(req){
 	req.session.user=undefined;
 }
 
-function login(username, password){
-	
+function getAge(birthdate){
+	var today = new Date();
+	var t = birthdate.split('-');
+	var age = today.getFullYear() - t[0];
+	var m = today.getMonth()-t[1];
+	if (m<0 || (m===0 && today.getDate<t[2])){
+		age--;
+	}
+	return age;
 }
 
 app.get('/', function(req, res) {
@@ -174,7 +181,43 @@ app.post('/create-account', function(req, res){
 					if (result.info.numRows == 0){
 						db.User(req.post.username,req.post.email,req.post.password);
 						setTimeout(function(){
-							//Faire si dans la requête
+							var sql = "SELECT UserID FROM User WHERE UserName ='"+req.post.username+"'";
+							db.con.query(sql, function(err, result, fields){
+								if (err) throw err;
+								if (result.info.numRows != 0){
+									if (req.post.firstname){
+										db.setFirstName(result[0].UserID, req.post.firstname);
+									}
+									if (req.post.lastname){
+										db.setLastName(result[0].UserID, req.post.lastname);
+									}
+									if (req.post.gender){
+										if (req.post.gender=='male'){
+											db.setGender(result[0].UserID, 0);
+										}
+										if (req.post.gender=='female'){
+											db.setGender(result[0].UserID, 1);
+										}
+										if (req.post.gender=='notsure'){
+											db.setGender(result[0].UserID, 2);
+										}
+									}
+									if (req.post.birthdate){
+										db.setBirthDate(result[0].UserID,req.post.birthdate);
+									}
+									if (req.post.phonenumber){
+										db.setPhoneNumber(result[0].UserID, req.post.phonenumber);
+									}
+									if (req.post.city){
+										db.setCity(result[0].UserID, req.post.city);
+									}
+									if (req.post.description){
+										db.setDescription(result[0].UserID, req.post.description);
+									}
+								} else {
+									console.log("WTF !");
+								}
+							});
 						},1000);
 						req.session.user=req.post.username;
 						res.redirect("/");
@@ -202,10 +245,10 @@ app.get('/user/:id', function(req, res){
 
 app.get('/confirm/:id', function(req,res){
 	var sql = "SELECT * FROM Confirmation WHERE ID='"+req.params.id+"'";
-	console.log(sql);
+	//console.log(sql);
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
-		console.log(result);
+		//console.log(result);
 		if (result.info.numRows != 0){
 			db.setConfirmed(result[0].UserID,1);
 			res.redirect("/");
@@ -215,31 +258,33 @@ app.get('/confirm/:id', function(req,res){
 	});
 });
 
-app.get('/profile/', function(req,res){
+app.get('/profile', function(req,res){
 	if (!req.session.user || req.session.user=="Anonymous"){
 		res.redirect("/login");
 		return;
 	}
 	var sql = "SELECT * FROM User WHERE UserName ='"+req.session.user+"'";
-		db.con.query(sql, function(err, result, fields){
-			if (err) throw err;
-			if (result.info.numRows == 0){
-				res.redirect("/");
-			} else {
-				var descr = result[0].Description;
-				res.render('profile.ejs', {desc: descr})
-			}
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect("/");
+		} else {
+			var descr = result[0].Description;
+			var gend = result[0].Gender;
+			var ag = getAge(result[0].BirthDate);
+			var use = result[0].UserName
+			res.render('profile.ejs', {user: use, desc: descr, gender: gend, age:ag, });
+			return;
 		}
-
-	res.render('profile.ejs');
+	})
 });
 
 
 
 
 app.use(function(req, res, next){
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
+	res.setHeader('Content-Type', 'text/plain');
+	res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
 });
 
 //app.listen(8080,"localhost");

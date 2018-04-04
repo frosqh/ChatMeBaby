@@ -96,12 +96,8 @@ body {
     background-color: #111;
 }
 
-.active {
-    background-color: #666699;
-}
-
-.indexPage {
-  background-color: #111;
+.active, .indexPage {
+    background-color: #111;
 }
 
 /* Search Bar */

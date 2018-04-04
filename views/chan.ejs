@@ -63,7 +63,7 @@
 
       </section>
     </div>
-    <form action= method="post" id="formulaire_chat">
+    <form  method="post" id="formulaire_chat">
       <div>
         <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus autocomplete="off"/>
         <input type="submit" id="envoi_message" value="Envoyer" />
@@ -79,7 +79,7 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    var user = <%=user%>
+    var user = '<%=user%>'
     // Connexion � socket.io
     var socket = io.connect();
     var lastMsg=false;
