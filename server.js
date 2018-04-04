@@ -174,7 +174,17 @@ app.post('/create-account', function(req, res){
 					if (result.info.numRows == 0){
 						db.User(req.post.username,req.post.email,req.post.password);
 						setTimeout(function(){
-							//Faire si dans la requête
+							var sql = "SELECT UserID FROM User WHERE UserName ='"+req.post.username+"'";
+							db.con.query(sql, function(err, result, fields){
+								if (err) throw err;
+								if (result.info.numRows != 0){
+									if (req.post.firstname){
+										setFirstName(result[0].UserID, firstName);
+									}
+								} else {
+									console.log("WTF !");
+								}
+							});
 						},1000);
 						req.session.user=req.post.username;
 						res.redirect("/");
@@ -221,15 +231,15 @@ app.get('/profile/', function(req,res){
 		return;
 	}
 	var sql = "SELECT * FROM User WHERE UserName ='"+req.session.user+"'";
-		db.con.query(sql, function(err, result, fields){
-			if (err) throw err;
-			if (result.info.numRows == 0){
-				res.redirect("/");
-			} else {
-				var descr = result[0].Description;
-				res.render('profile.ejs', {desc: descr})
-			}
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect("/");
+		} else {
+			var descr = result[0].Description;
+			res.render('profile.ejs', {desc: descr})
 		}
+	}
 
 	res.render('profile.ejs');
 });
@@ -237,9 +247,9 @@ app.get('/profile/', function(req,res){
 
 
 
-app.use(function(req, res, next){
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
-});
+	app.use(function(req, res, next){
+		res.setHeader('Content-Type', 'text/plain');
+		res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
+	});
 
 //app.listen(8080,"localhost");

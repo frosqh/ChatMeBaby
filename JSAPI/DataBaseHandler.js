@@ -74,7 +74,19 @@ module.exports = {
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		})
-	}, 
+	},
+	setFirstName:function(UserID, firstName){
+		var sql="UPDATE User SET FirstName = '"+firstName+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	},
+	setLastName:function(UserID, lastName){
+		var sql="UPDATE User SET LastName = '"+lastName+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	}
 }
 // API User
 
@@ -105,19 +117,7 @@ function disconnect(UserID){
 	setConnected(UserID,0);
 }
 
-function setFirstName(UserID, firstName){
-	var sql="UPDATE User SET FirstName = '"+firstName+"' WHERE UserID ="+UserID;
-	con.query(sql, function(err, result){
-		if (err) throw err;
-	});
-}
 
-function setLastName(UserID, lastName){
-	var sql="UPDATE User SET LastName = '"+lastName+"' WHERE UserID ="+UserID;
-	con.query(sql, function(err, result){
-		if (err) throw err;
-	});
-}
 
 function setBirthDate(UserID, birthDate){
 	var sql="UPDATE User SET BirthDate ='"+birthDate+"' WHERE UserID ="+UserID;
