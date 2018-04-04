@@ -3,8 +3,9 @@ var app = express();
 app.use(express.static(__dirname + '/static'));
 var querystring = require('querystring');
 var http = require('http');
-var server = http.createServer(express);
-var io = require('socket.io').list(server);
+var server = http.createServer(app);
+server.listen(8080);
+var io = require('socket.io')(server);
 var ent = require('ent');
 var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
@@ -32,12 +33,12 @@ io.sockets.on('connection', function(socket) {
 		socket.emit('nouveau_client', users[k]);
 	}
 
-	socket.on('login', function(err){
+	socket.on('login', function(user){
 		me=user;
-		m.username=ent.encore(me.username);
+		me.username=ent.encode(me.username);
 		me.id="id"+ent.encode(user.username);
 		users[me.id]=me;
-		io.socket.emit('nouveau_client', me);
+		io.sockets.emit('nouveau_client', me);
 	});
 	socket.on('message', function(message){
 		message.content=ent.encode(message.content);
@@ -207,9 +208,9 @@ app.get('/confirm/:id', function(req,res){
 	});
 });
 
-app.use(function(req, res, next){
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(404).send('Page introuvable !');
-});
+//app.use(function(req, res, next){
+//    res.setHeader('Content-Type', 'text/plain');
+//    res.status(404).send('Page introuvable !');
+//});
 
-app.listen(8080,"localhost");
+//app.listen(8080,"localhost");
