@@ -114,8 +114,8 @@
             minute  :date.getMinutes()
           }); // Transmet le message aux autres
           $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
-
         }
+        return false;
     });
 
     // Quand on recoit un message, on l'insere dans la page
