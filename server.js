@@ -35,6 +35,7 @@ app.use(express.static(__dirname + '/static'));
 db.init();
 
 app.get('/', function(req, res) {
+	console.log("COUCOU !");
 	res.render('index.ejs');
 });
 
@@ -61,4 +62,4 @@ app.post('/create-account', function(req, res){
 	})
 })
 
-app.listen(80,"localhost");
+app.listen(8080,"localhost");

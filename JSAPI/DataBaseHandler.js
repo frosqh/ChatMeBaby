@@ -6,7 +6,7 @@ const helper= require('./Helper');
 var con = new Client({
 	host: 'localhost',
 	user: 'root',
-	password: '1234',
+	password: '1233',
 
 });
 //Init DataBase (first Launch)
@@ -28,7 +28,7 @@ module.exports = {
 							if (err) throw err;
 						});
 					}
-					test();
+					
 				});
 			});
 		});
