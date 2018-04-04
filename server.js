@@ -35,8 +35,12 @@ function processPost(request, response, callback) {
     }
 }
 
-function disconnect(username){
+function disconnect(req){
 	req.session.username=undefined;
+}
+
+function login(username, password){
+	
 }
 
 app.use(express.static(__dirname + '/static'));
@@ -63,6 +67,28 @@ app.get('/login', function(req, res){
 	res.render('login.ejs');
 })
 
+app.post('/login', function(req, res){
+	processPost(req, res, function(){
+		user = req.post.username;
+		pass = req.post.password;
+		var sql="SELECT Password FROM User WHERE Username='"+user+"'";
+		con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.length > 0){
+			p = result[0].Password;
+			if (db.helper.hashFnv32a(p,true)==pass){
+				req.session.username = user;
+				res.redirect('/');
+			} else {
+				res.send("Erf !");
+			}
+		} else {
+			res.send("Erf !");
+		}
+	});
+	})
+})
+
 app.get('/create-account', function(req, res){
 	res.render('create-account.ejs');
 })
@@ -80,7 +106,7 @@ app.post('/create-account', function(req, res){
 })
 
 app.get('/logout', function(req, res){
-	disconnect(req.session.username);
+	disconnect(req);
 	res.redirect("/");
 })
 
