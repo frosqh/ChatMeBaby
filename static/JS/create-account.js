@@ -20,13 +20,4 @@ function checkAllValidate() {
       password.checkValidity() && terms.checked) {
     //alert("OK");
     document.getElementById("myForm").submit();
-
-  } else {
-    if (!terms.checked) {
-      alert("You must agree to the Terms of Service and Privacy Policy to sign up.");
-    }
-    else {
-      alert("At least one required field is not correct.");
-    }
-  }
 }

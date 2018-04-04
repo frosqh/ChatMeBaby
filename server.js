@@ -54,26 +54,36 @@ app.use(express.static(__dirname + '/static'));
 db.init();
 
 app.get('/', function(req, res) {
-	
 	if (req.session.user){
 		userf = req.session.user;
 	} else {
 		userf = "Anonymous";
 		req.session.user=userf;
 	}
-
 	res.render('index.ejs', {user: userf});
 });
 
 app.get('/channels', function(req,res) {
+	if (!req.session.user || req.session.user=='Anonymous'){
+		res.redirect("/login");
+		return;
+	}
 	res.render('channel.ejs');
 })
 
 app.get('/login', function(req, res){
+	if (req.session.user && req.session.user!="Anonymous"){
+		res.redirect("/");
+		return;
+	}
 	res.render('login.ejs', {notif: undefined});
 })
 
 app.post('/login', function(req, res){
+	if (req.session.user && req.session.user!="Anonymous"){
+		res.redirect("/");
+		return;
+	}
 	processPost(req, res, function(){
 		user = req.post.user;
 		pass = req.post.password;		
@@ -98,6 +108,10 @@ app.post('/login', function(req, res){
 })
 
 app.get('/create-account', function(req, res){
+	if (req.session.user && req.session.user!="Anonymous"){
+		res.redirect("/");
+		return;
+	}
 	res.render('create-account.ejs');
 })
 
@@ -106,6 +120,10 @@ app.get('/home', function(req, res){
 })
 
 app.post('/create-account', function(req, res){
+	if (req.session.user && req.session.user!="Anonymous"){
+		res.redirect("/");
+		return;
+	}
 	processPost(req, res, function(){
 		db.User(req.post.username,req.post.email,req.post.password);
 		req.session.user=req.post.username;
