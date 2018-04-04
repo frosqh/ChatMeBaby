@@ -57,7 +57,7 @@ module.exports = {
 			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
-				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(result.insertId,UserName)+"'> here </a>");
+				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
 			});
 		});
 	},
@@ -69,7 +69,6 @@ module.exports = {
 			return result.length;
 		});
 	},
-
 }
 // API User
 
@@ -166,7 +165,11 @@ function setConfirmed(UserID, confirmed){
 //Création Confirmation
 
 function Confirmation(UserName, UserID){
-	var sql = 'INSERT INTO Confirmation (ID, UserID) VALUES ('+UserName+","+UserID+")";
+	console.log("Entrée dans Confirmation");
+	console.log("UserName" + UserName);
+	console.log(UserID);
+	var sql = 'INSERT INTO Confirmation (ID, UserID) VALUES (\''+UserName+"',"+UserID+")";
+	console.log(sql);
 	con.query(sql, function(err, result){
 		if (err) throw err;
 		return result.info.insertId;
@@ -400,7 +403,10 @@ function sendMail(addr, subject, body) {
 }
 
 function generateConfirm(UserId, UserName){
-	user = helper.hashFnv32a(UserName);
-	Confirmation(UserId, user);
+	console.log(UserName);
+	console.log(UserId);
+	user = helper.hashFnv32a(UserName,true);
+	console.log("Avant le call à Confirmation !");
+	Confirmation(user, UserId);
 	return "193.54.15.211/confirm/"+user;
 }

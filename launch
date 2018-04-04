@@ -1,0 +1,5 @@
+pm2 stop all
+pm2 delete all
+pm2 flush
+pm2 start server.js
+pm2 logs server

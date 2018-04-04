@@ -160,9 +160,11 @@ app.get('/user/:id', function(req, res){
 
 app.get('/confirm/:id', function(req,res){
 	var sql = "SELECT * FROM Confirmation WHERE ID='"+req.params.id+"'";
+	console.log(sql);
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
-		if (result.info.numRows == 0){
+		console.log(result);
+		if (result.info.numRows != 0){
 			db.setConfirmed(result[0].UserID,1);
 		} else {
 			res.redirect("/404");
