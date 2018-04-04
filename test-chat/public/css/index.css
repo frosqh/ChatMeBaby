@@ -3,8 +3,9 @@
 }
 
 body {
+    background: #f1f1f1;
     margin: 0px;
-    font-family: 'Roboto', sans-serif;
+    font-family:"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
     font-variant-ligatures:common-ligatures;
     -moz-osx-font-smoothing:grayscale;
     -webkit-font-smoothing:antialiased;
@@ -37,43 +38,17 @@ body {
 .header {
     padding: 30px;
     text-align: center;
-    /* background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4); */
+    /*background: white; For browsers that do not support gradients
+    background: linear-gradient(-90deg, #FF69B4, #4BCFCA);  Standard syntax (must be last) */
+    background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);
 }
 
-.connectedUser{
-  position: absolute;
-  color: #ffffff;
-  border-radius: 4px;
-  top: 8px;
-  right: 16px;
-  background: #003366;
-}
-
-#userText td{
-  padding-left: 5px;
-  padding-right: 5px;
-
-}
-
-#settingico a img{
-  height: 20px;
-  width: auto;
-  cursor: pointer;
-}
-#settingico{
-  border-left: 1px solid #cdd0d4;
-  border-right: 1px solid #cdd0d4;
-}
-
-#signoutico a img{
-  height: 20px;
-  width: auto;
-  cursor: pointer;
+.header h1 {
+    font-size: 50px;
 }
 
 /* Style the top navigation bar */
 .topnav {
-    font-family: 'Roboto Condensed', sans-serif;
     overflow: hidden;
     background-color: #333;
     position: -webkit-sticky; /* Safari */
@@ -91,6 +66,19 @@ body {
     text-decoration: none;
 }
 
+.topnav div{
+  float: left;
+  display: block;
+  height: 15%;
+  padding: 1px 16px;
+  background-color: #666699;
+  color: white;
+}
+
+.topnav p{
+  margin: 10px 5px 10px;
+}
+
 /* Change color on hover */
 .topnav a:hover:not(.active) {
     background-color: #111;
@@ -100,101 +88,180 @@ body {
     background-color: #666699;
 }
 
-/* Search Bar */
-.searchbarbutton{
-  text-align: right;
-  padding: 10px;
-  margin-right: 60px;
+/* Create two unequal columns that floats next to each other */
+/* Right column */
+.rightcolumn {
+    float: right;
+    width: 88%;
 }
 
-.searchbar{
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 17px;
-  color: #f2f2f2;
-  background-color: #333;
-  border:none;
-}
-::placeholder{
-  color: #b7b7b7;
-}
-
-.searchbutton{
-  background:url("../../Logo/Icones/search.png") no-repeat;
-  cursor:pointer;
-  width: 20px;
-  height: 20px;
-  border: none;
+.content{
+  width: 87%;
+  height: 90%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  bottom: 45px;
+  right:0;
 }
 
-/* **************** */
+/* Left column */
+.client_channel_list_container {
+    float: left;
+    width: 12%;
+    height: 1500px;
+    background-color: #666699;
+    color:lightgray;
+    overflow: hidden;
 
-footer {
-    color: #ffffff;
-    text-align: center;
-    padding: 40px;
-    background: #000010;
-    margin-top: 5%;
-    width: 100%;
-    bottom: 0px;
+}
+.client_channel_list_container ul{
+  list-style-type: none;
+  padding: 0;
 }
 
-.tableFooter{
-  margin-right: 5px;
-  text-align: center;
-  border-color: #ffffff;
-  padding-bottom: 1%;
+.client_channel_list_container a{
+  float: top;
+  display: block;
+  color: lightgray;
+  text-decoration: none;
 }
 
-.contact, .copyright{
-  font-family: 'Roboto Condensed', sans-serif;
+.workingLab{
+  padding: 14px 16px 5px;
+  margin:0;
 }
 
-.copyright{
+.workingLab_sidebar:hover:not(.active_channel),.channelTitle:hover:not(.active_channel),.channel:hover:not(.active_channel),.PrivateMessageTitle:hover:not(.active_channel),
+.user:hover:not(.active_channel),.addPeople:hover:not(.active_channel),.babyTitle:hover:not(.active_channel),.baby:hover:not(.active_channel){
+  background-color: rgb(0,0,0,0.3);
+}
+
+.disponible{
+  float:left;
+	width: 10px;
+	height: 10px;
+  display: flex;
+  align-items: center;
+	background: #38948B;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+  margin: 2px 0 1px 18px;
+}
+
+.absent{
+  float:left;
+	width: 10px;
+	height: 10px;
+	border: 2px solid #999;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+  margin: 2px 0 1px 18px;
+}
+
+.username{
+  padding: 0px 36px 0px;
+  font-size:12px;
+  margin:0;
+}
+
+.user,.menu_user{
+  padding: 5px 20px 5px;
+  margin:0;
+}
+
+.channelTitle{
+  padding: 10px 16px 5px;
+  margin:0;
+  font-size: 14px;
+}
+
+.channelName p{
+  margin: 10px 0;
+}
+
+
+
+.channel{
+  padding: 5px 30px;
+  margin:0;
   font-size: 12px;
 }
 
-.backTop > a{
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 11px;
-  color: #ffffff;
-  text-decoration: none;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.backTop > a:hover{
-  text-decoration: underline;
+.active_channel{
+  background-color: rgb(0,0,0,0.5);
 }
 
-.backTop{
-  padding-bottom: 1%;
-  margin-right: 1%;
-}
-
-#LogoTransparent {
-  height: 180px;
-  width: auto;
-}
-
-.chatmebaby{
-    font-family : 'Pacifico',sans-serif;
-}
-
-.buttonContact{
-  background: #000010;
-  color: #ffffff;
-  font-family: 'Roboto Condensed', sans-serif;
+.PrivateMessageTitle{
+  padding: 10px 16px 10px;
+  margin:0;
   font-size: 14px;
-  border-radius: 4px;
-  padding: 11px;
-  border: 0px;
 }
 
-.buttonContact:hover{
-  background: #ffffff;
-  color: #000000;
+.addPeople{
+  padding: 10px 16px;
+  margin:0;
+  font-size: 14px;
+}
+
+
+.babyTitle{
+  padding: 10px 16px;
+  margin:0;
+  font-size: 14px;
+}
+
+.baby{
+  padding: 5px 30px;
+  margin:0;
+  font-size: 12px;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input[type=text] {
+    width: 93%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    outline: none;
+    height: auto;
+}
+
+form{
+  position: fixed;
+  bottom: 0;
+  width: 85%;
+
+}
+
+form div{
+  background-color: white;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
 }
 
 input[type=submit] {
@@ -209,10 +276,14 @@ input[type=submit] {
 }
 
 /*Message*/
-.sender-name div:not(.time){
+.avatar{
+    float: left;
+}
+
+.sender-name .sender{
   font-size: 18px;
   font-weight: bold;
-  padding: 0 10px 0 50px;
+  padding: 0 10px 0 18px;
   float: left;
 }
 
@@ -226,7 +297,7 @@ input[type=submit] {
 }
 
 .message_content:hover{
-  background-color: rgb(0,0,0,0.1);
+  background-color: rgb(0,0,0,0.05);
 }
 
 .time{
@@ -258,77 +329,20 @@ padding-left: 50px;
     }
 }
 
-.buttonContact, .facebook, .linkedin, .twitter{
-  cursor: pointer;
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
 }
 
-
-
-body{
-  /* background-color: #4d82cc; */
-    background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);
+#LogoTransparent {
+  height: 180px;
+  width: auto;
 }
 
-.setting {
-  font-family: 'Roboto', sans-serif;
-  font-size: 25px;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  width:70%;
-  height:auto;
-  background:#ffffff;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  border-radius: 7px;
-}
-
-.title{
-  font-size: 55px;
-}
-.textSett{
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.checkbox {
-  position: relative;
-  top: -0.375rem;
-  margin: 0 1rem 0 0;
-  cursor: pointer;
-}
-
-.checkbox:before {
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  content: "";
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid #f2f2f2;
-}
-
-.checkbox:checked:before {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
- height: .5rem;
-  border-color: #009688;
-  border-top-style: none;
-  border-right-style: none;
-}
-
-.checkbox:after {
-  content: "";
-  position: absolute;
-  top: -0.125rem;
-  left: 0;
-  width: 1.1rem;
-  height: 1.1rem;
-  background: #fff;
-  cursor: pointer;
+@font-face{
+    font-family : "chatMeBaby";
+    src : url('../font/Spring In My Step.ttf');
 }

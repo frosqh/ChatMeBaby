@@ -18,7 +18,7 @@
       </div>
       <div class="channel_sidebar">
         <p class="channelTitle">Channels</p>
-        <p class="channel">General</p>
+        <p class="channel active_channel">General</p>
         <p class="channel">Random</p>
       </div>
       <div class="privateMessage_sidebar">
@@ -54,35 +54,34 @@
 
   <div class="rightcolumn">
     <div class="topnav">
-      <div>
+      <div class="channelName">
         <p><b>#channelName</b></p>
       </div>
     </div>
     <div class = content>
       <section id="zone_chat">
-
       </section>
     </div>
     <form action="/" method="post" id="formulaire_chat">
       <div>
         <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus autocomplete="off"/>
         <input type="submit" id="envoi_message" value="Envoyer" />
+
       </div>
     </form>
   </div>
 </div>
-            // Connexion � socket.io
-
-            //var socket = io.connect('http://193.54.15.211:8080');
-
 
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script src="js/channel.js"></script>
 <script>
     var user = prompt('Quel est votre pseudo ?');
+
     // Connexion � socket.io
     var socket = io.connect();
     var lastMsg=false;
+    $('.channelName p b').html($('.active_channel').text());
     // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
 
     socket.emit('login', {
@@ -106,23 +105,23 @@
     $('#formulaire_chat').submit(function (e) {
         e.preventDefault();
         date= new Date();
-        socket.emit('message', {
-          content :$('#message').val(),
-          user    :user,
-          hour    :date.getHours(),
-          minute  :date.getMinutes()
-        }); // Transmet le message aux autres
-        $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
-        return false; // Permet de bloquer l'envoi "classique" du formulaire
+        if($('#message').val()!=''){
+          socket.emit('message', {
+            content :$('#message').val(),
+            user    :user,
+            hour    :date.getHours(),
+            minute  :date.getMinutes()
+          }); // Transmet le message aux autres
+          $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+
+        }
     });
 
     // Quand on recoit un message, on l'insere dans la page
     socket.on('msg', function(message) {
       if(lastMsg != message.user){
-        $('#zone_chat').append('<div class="sender-name"><div>'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div></div>');
+        $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
         lastMsg = message.user;
-        $('#zone_chat').append('<div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
-
       } else {
         $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
         $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
@@ -133,5 +132,4 @@
 </script>
 
 </body>
-
 </html>

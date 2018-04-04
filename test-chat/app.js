@@ -4,8 +4,6 @@ var app = require('express')(),
     io = require('socket.io').listen(server),
     ent = require('ent'), // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
     fs = require('fs');
-server.listen(80,"http://193.54.12.211");
-var socket = io.listen(server);
 
 // Chargement de la page index.html
 app.get('/', function (req, res) {
@@ -25,7 +23,8 @@ io.sockets.on('connection', function (socket) {
     socket.on('login', function(user) {
         me=user;
         me.username=ent.encode(me.username);
-        me.id="id"+ent.encode(user.username);
+        me.id=ent.encode(user.username)+Math.random();
+        console.log(me.id);
         users[me.id]=me;
         io.sockets.emit('nouveau_client', me);
     });
@@ -46,5 +45,5 @@ io.sockets.on('connection', function (socket) {
 });
 
 
+
 server.listen(8080);
-//server.listen(80,193.54.15.211);
