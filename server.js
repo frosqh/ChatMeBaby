@@ -2,6 +2,7 @@ var express = require('express');
 var querystring = require('querystring');
 var http = require('http');
 var db = require('./JSAPI/DataBaseHandler.js');
+var cookieParser = require('cookie-parser');
 
 var app = express();
 
@@ -35,8 +36,11 @@ app.use(express.static(__dirname + '/static'));
 db.init();
 
 app.get('/', function(req, res) {
+	if (req.cookies['user'] == undefined){
+		req.cookies['user'] == 'Unconnected !';
+	}
 	console.log("COUCOU !");
-	res.render('index.ejs');
+	res.render('index.ejs', {user: req.cookies['user']});
 });
 
 app.get('/channels', function(req,res) {
@@ -58,7 +62,8 @@ app.get('/home', function(req, res){
 app.post('/create-account', function(req, res){
 	processPost(req, res, function(){
 		db.User(req.post.username,req.post.email,req.post.password);
-		res.render('create-account.ejs')
+		res.cookie('user',username);
+		res.redirect("/");
 	})
 })
 
