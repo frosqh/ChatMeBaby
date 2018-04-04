@@ -103,7 +103,11 @@ app.get('/', function(req, res) {
 
 
 app.get('/channels', function(req,res) {
-	res.render('chan.ejs');
+	if (!req.session.user || req.session.user=="Anonymous"){
+		res.redirect("/login");
+		return;
+	}
+	res.render('chan.ejs', {user: req.session.user});
 })
 
 app.get('/login', function(req, res){
@@ -169,6 +173,9 @@ app.post('/create-account', function(req, res){
 					if (err) throw err;
 					if (result.info.numRows == 0){
 						db.User(req.post.username,req.post.email,req.post.password);
+						setTimeout(function(){
+							//Faire si dans la requête
+						},1000);
 						req.session.user=req.post.username;
 						res.redirect("/");
 					} else {
@@ -213,6 +220,17 @@ app.get('/profile/', function(req,res){
 		res.redirect("/login");
 		return;
 	}
+	var sql = "SELECT * FROM User WHERE UserName ='"+req.session.user+"'";
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows == 0){
+				res.redirect("/");
+			} else {
+				var descr = result[0].Description;
+				res.render('profile.ejs', {desc: descr})
+			}
+		}
+
 	res.render('profile.ejs');
 });
 
