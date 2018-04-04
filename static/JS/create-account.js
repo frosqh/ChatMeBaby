@@ -16,7 +16,17 @@ function checkAllValidate() {
   var password = document.getElementById("confirm-password");
   var terms = document.getElementById("myonoffswitch");
 
-  if (username.checkValidity() && email.checkValidity() && password.checkValidity() && terms.checked) {
-    	document.getElementById("myForm").submit();
-	}
+  if (username.checkValidity() && email.checkValidity() &&
+      password.checkValidity() && terms.checked) {
+    alert("OK");
+    document.getElementById("myForm").submit();
+    window.location.href="../index.html";
+  } else {
+    if (!terms.checked) {
+      alert("You must agree to the Terms of Service and Privacy Policy to sign up.");
+    }
+    else {
+      alert("At least one required field is not correct.");
+    }
+  }
 }

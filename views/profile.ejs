@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>ChatMeBaby - My profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="front/css/profile.css">
+  <link rel="stylesheet" type="text/css" href="front/css/button.css">
+  <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
+  <script src="JS/profile.js"></script>
+</head>
+
+<body style="margin: 0; padding: 0;">
+<form id="myForm" method="post">
+
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td style="padding: 20px 0 30px 0;">
+
+     <table align="center" border="0" cellpadding="0" cellspacing="0" width="70%" style="border: 1px solid #636363; box-shadow: 0px 7px 15px 8px #4c4c4c;">
+        <tr>
+          <td align="center" style="padding: 0px 0 0px 0; background: linear-gradient(0.25turn, #8100a8, #a26eb2, #8100a8);">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0">
+              <tr height="150px">
+                <td width="50%">
+                  <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="160px" align="center">
+                        <img id="myPicture" src="front/img/profile-picture.png" width="120px" alt="Picture">
+                      </td>
+                      <td>
+                        <p id="username" class="username">Baptman</p>
+                        <p id="gender-age" class="gender-age">Male - 23</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="50%">
+                  <blockquote id="description" class="description">
+                    This is a description. Yes it is. Are you surprised? You should not, it was to be expected on a profile page. By the way, I'm Baptman - nice to meet you! Now Chat Me Baby. ;)
+                  </q>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Profile form -->
+        <tr>
+          <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+             <tr>
+               <td style="color: #081419; font-family: 'Pacifico', Arial, sans-serif; font-size: 30px;">
+                <b>My profile</b>
+               </td>
+             </tr>
+
+             <tr>
+              <td style="color: #3d3d3d; font-family: 'Roboto'; font-size: 14px; line-height: 20px; padding: 0 0 0 0;">
+                <i>You can consult and modify your personal and account information here. Click on the Apply button down below to save your changes.</i>
+              </td>
+             </tr>
+
+             <!-- Personal information -->
+             <!-- Several things, check it out -->
+             <tr><td><table border="0" width="100%">
+
+               <tr>
+
+                 <td width="48%" style="padding: 0 0 0 0;"><table border="0" width="100%">
+                   <tr><td style="width: 50%; color: #081419; font-family: 'Pacifico', Arial, sans-serif; font-size: 24px; line-height: 20px; padding: 25px 0 5px 0;">
+                     <label for="nom"><b>Personal information</b></label><br>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">First name</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input class="input" type="text" name="firstname" id="firstname" title="Is this your first name ?" placeholder="Your first name.."/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Gender</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 8px 0 5px 5px;">
+                     <input type="radio" name="gender" id="male" />
+                     <label class="label" for="male">Male</label>
+                     <input type="radio" name="gender" id="female" />
+                     <label class="label" for="female">Female</label>
+                     <input type="radio" name="gender" id="notsure" />
+                     <label class="label" for="notsure">Not sure</label>
+                     <!--<input type="text" name="gender" id="gender" title="Is this your gender ?" placeholder="Your gender.."/>
+                   --></td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">City</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input class="input" type="text" name="city" id="city" placeholder="Your city.."/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Description</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <textarea form="myForm" name="description">
+                     </textarea>
+                   </td></tr>
+                 </table></td>
+
+                 <td>
+                 </td>
+
+                 <td width="48%" style="padding: 0 0 0 0;"><table border="0" width="100%">
+                   <tr><td style="width: 50%; color: #ffffff; font-family: 'Pacifico', Arial, sans-serif; font-size: 24px; line-height: 20px; padding: 25px 0 5px 0;">
+                     <label for="nom"><b>Personal information</b></label><br>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Last name</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input class="input" type="text" name="lastname" id="lastname" title="Is this your last name ?" placeholder="Your last name.."/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Birth date</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 8px 0 12px 5px;">
+                     <input class="input" type="date" name="birthdate" id="birthdate" placeholder="DD/MM/YYYY"/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Phone number</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 4px 0 169px 5px;">
+                     <input class="input" type="tel" name="phonenumber" id="phonenumber" placeholder="Your phone number.."/>
+                   </td></tr>
+                 </table></td>
+
+               </tr>
+
+           </table></td></tr>
+
+             <!-- Account information -->
+             <!-- Email and password -->
+             <tr><td><table border="0" width="100%">
+
+               <tr>
+
+                 <td width="48%" style="padding: 0 0 0 0;"><table border="0" width="100%">
+                   <tr><td style="width: 50%; color: #081419; font-family: 'Pacifico', Arial, sans-serif; font-size: 24px; line-height: 20px; padding: 25px 0 5px 0;">
+                     <label for="nom"><b>Account information</b></label><br>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Current email</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input type="email" name="current-email" id="current-email" placeholder="Current email.." disabled/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">New email</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input type="email" name="new-email" id="new-email" onchange="validateEmail()" placeholder="New email.."/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Confirm email</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input type="email" name="confirm-email" id="confirm-email" onchange="validateEmail()" placeholder="Confirm email.."/>
+                   </td></tr>
+                 </table></td>
+
+                 <td>
+                 </td>
+
+                 <td width="48%" style="padding: 0 0 0 0;"><table border="0" width="100%">
+                   <tr><td style="width: 50%; color: #ffffff; font-family: 'Pacifico', Arial, sans-serif; font-size: 24px; line-height: 20px; padding: 25px 0 5px 0;">
+                     <label for="nom"><b>Account information</b></label><br>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Current password</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 6px 0 11px 5px;">
+                     <input type="password" name="current-password" id="current-password" placeholder="Current password.."/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">New password</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 6px 0 11px 5px;">
+                     <input type="password" name="new-password" id="new-password" onchange="validatePassword()" placeholder="New password.."/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Confirm password</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 6px 0 11px 5px;">
+                     <input type="password" name="confirm-password" id="confirm-password" onchange="validatePassword()" placeholder="Confirm password.."/>
+                   </td></tr>
+                 </table></td>
+
+               </tr>
+
+           </table></td></tr>
+
+        <!-- Terms of Service and Privacy Policy -->
+        <tr>
+          <td align="center" style="padding: 20px 0 0 0;">
+            <a class=button-apply onclick="checkAllValidate()">
+              <span style="font-size: 36px;">Apply !</span>
+            </a>
+          </td>
+        </tr>
+     </table>
+
+   </td>
+  </tr>
+ </table>
+
+</form>
+</body>
+
+</html>

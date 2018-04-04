@@ -6,43 +6,71 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="front/css/home.css">
+  <link rel="stylesheet" type="text/css" href="front/css/button.css">
   <script type="text/javascript" src="front/indexJS/index.js"></script>
+  <script type="text/javascript" src="JS/js.js"></script>
+  <script type="text/javascript" src="JS/jquery.stellar.min.js"></script>
+  <script type="text/javascript" src="JS/waypoints.min.js"></script>
+  <script type="text/javascript" src="JS/jquery.easing.1.3.js"></script>
+
   <title>Welcome on Chat Me Baby !</title>
 </head>
-<body>
+<body >
 
 <div class="header">
-  <img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" />
+  <a href="index.html"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
   <div class="connectedUser">
-    <span id="userText">
-	    <span id="user"><%= user %></span> |<% if (user=='Anonymous') {%> <a href="login" style="text-decoration: none""> Connexion</a> <%} else {%> <a href="logout" style="text-decoration: none""> Déconnexion</a> <% } %>
-    </span>
+    <table id="userText" border="0">
+      <td>User</td>
+      <td id="settingico"><a><img src="Logo/Icones/settings.png"/></a></td>
+      <td class="settingsPage" id="signoutico"><a><img src="Logo/Icones/signOut.png"/></a></td>
+    </table>
   </div>
 </div>
 
 <div class="topnav">
-  <a class="indexPage">Accueil</a>
-  <a href="channels">Salons</a>
-  <a class="settingsPage">Param&egrave;tres</a>
+  <a class="indexPage ">Home</a>
+  <a href="html/channel.html">MyChatRooms</a>
+  <a href="#">MyChatFriends</a>
+  <a href="#">Surprise Me!</a>
+  <div class="searchbarbutton">
+    <form method="post">
+      <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+      <input class="searchbutton" type="submit" value=""></input>
+    </form>
+  </div>
 </div>
 
 <div class="content" >
-  <div class='coucou'>
-    <h1>Super</h1>
-  </div>
 </div>
 
 
 <footer>
   <table class="tableFooter" border="0" align="center">
-    <td class="contact"><button class="buttonContact">Contact Us!</button></td>
-    <td class="copyright" width="85%">
-    Copyright © 2018 - <span class="chatmebaby">Chat Me Baby </span>- Hynes Monchicourt Raimondi Roudaut
-    </td>
-    <td class="linkedin" width="3%"><img src="Logo/Icones/linkedin-box.png"/></td>
-    <td class="facebook" width="3%"><img src="Logo/Icones/facebook-box.png"/></td>
-    <td class="twitter" width="3%"><a><img src="Logo/Icones/twitter-box.png"/></a></td>
+    <tr align="right">
+      <td class="backTop" colspan="3">
+        <a href="#">Back to top &#9650;</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="contact" width="10%"><button class="buttonContact">Contact Us!</button></td>
+      <td class="copyright" width="90%">
+        Copyright © 2018 - <span class="chatmebaby">Chat Me Baby </span>- Hynes Monchicourt Raimondi Roudaut
+      </td>
+      <td>
+        <table>
+          <td class="linkedin" width="3%"><img src="Logo/Icones/linkedin-box.png"/></td>
+          <td class="facebook" width="3%"><img src="Logo/Icones/facebook-box.png"/></td>
+          <td class="twitter" width="3%"><a><img src="Logo/Icones/twitter-box.png"/></a></td>
+        </table>
+      </td>
+
+
+    </tr>
   </table>
 </footer>
 
