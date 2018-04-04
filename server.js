@@ -40,14 +40,14 @@ app.use(express.static(__dirname + '/static'));
 db.init();
 
 app.get('/', function(req, res) {
-	console.log(req.cookies)
-	if (req.session.username){
-		userf = req.session.username;
+	
+	if (req.session.user){
+		userf = req.session.user;
 	} else {
 		userf = "Anonymous";
-		req.session.username=userf;
+		req.session.user=userf;
 	}
-	console.log("COUCOU !");
+
 	res.render('index.ejs', {user: userf});
 });
 
