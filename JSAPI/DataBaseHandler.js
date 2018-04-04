@@ -9,81 +9,57 @@ var con = new Client({
 	password: '1234',
 
 });
-var c=0;
-
-init();
-
 //Init DataBase (first Launch)
 
-function init(){
-	con.query("CREATE DATABASE IF NOT EXISTS ChatMeDB", function(err,result){
-		if (err) throw err;
-		con.query("USE ChatMeDB", function(err) {
+module.exports = {
+	init:function(){
+		con.query("CREATE DATABASE IF NOT EXISTS ChatMeDB", function(err,result){
 			if (err) throw err;
-		//console.log("Succeed!");
-			fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
+			con.query("USE ChatMeDB", function(err) {
 				if (err) throw err;
-				v = data.split(";");
-				for (var w in v.slice(0,v.length-1)){
+			//console.log("Succeed!");
+				fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
+					if (err) throw err;
+					v = data.split(";");
+					for (var w in v.slice(0,v.length-1)){
 
-					con.query(v[w]+";", function(err, result) {
+						con.query(v[w]+";", function(err, result) {
 
-						if (err) throw err;
-					});
-				}
-				test();
+							if (err) throw err;
+						});
+					}
+					test();
+				});
 			});
 		});
-	});
-}
-
-function test(){
-	i = User("frosqh", "frosqh@gmail.com","pass");
-	setTimeout(function(){
-		j = User("Cha", "neko@gmail.com", "word");
-		c = Channel("Inu");
-		m = Message(i,c,"Plop ^^");
-		n = Message(j,c,"Hey ^^");
-		k = Message(i,c,"Sans accent :p");
-	},1000);
-}
-
-// Création User
-
-function User(UserName, Mail, Password){
-	var i = undefined;
-	function wait(){
-		if (i == undefined){
-			setTimeout(wait,500)
-		}
-		return i;
-	}
-	var sql="SELECT * FROM User";
-	con.query(sql, function(err,result){
-		if (err) throw err;
-		if (result == undefined){
-			UserID=  0;
-		} else {
-			UserID = result.info.numRows;
-		}
-		var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
-		con.query(sql, function(err, result) {
-			if (err) throw err;*
-			i = result.info.insertId;
+	},
+	// Création User
+	User:function(UserName, Mail, Password){
+		var sql="SELECT * FROM User";
+		con.query(sql, function(err,result){
+			if (err) throw err;
+			if (result == undefined){
+				UserID=  0;
+			} else {
+				UserID = result.info.numRows;
+			}
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+")";
+			con.query(sql, function(err, result) {
+				if (err) throw err;
+			});
 		});
-		return wait()
-	});
-}
+	},
+	//API User
+	getUsersList:function(){
+		var sql="SELECT * FROM User";
+		con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			return result.length;
+		});
+	},
 
+}
 // API User
-
-function getUsersList(){
-	var sql="SELECT * FROM User";
-	con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		return result.length;
-	});
-}
 
 function getUserId(username){ //À modifier, l'async fout le bordel monstre ><
 	var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
@@ -363,3 +339,17 @@ function setTitle(UbCId,Title){
 }
 
 //Suite API
+
+
+
+function test(){
+	i = User("frosqh", "frosqh@gmail.com","pass");
+	setTimeout(function(){
+		j = User("Cha", "neko@gmail.com", "word");
+		c = Channel("Inu");
+		m = Message(i,c,"Plop ^^");
+		n = Message(j,c,"Hey ^^");
+		k = Message(i,c,"Sans accent :p");
+	},1000);
+}
+
