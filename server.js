@@ -7,7 +7,11 @@ var session = require('express-session');
 
 var app = express();
 app.use(cookieParser());
-app.use(session({secret: "ChatMeCharoy"}));
+app.use(session({
+	secret: "ChateCharoy",
+	resave : true,
+	saveUninitialized: true
+}));
 
 
 function processPost(request, response, callback) {
@@ -19,6 +23,7 @@ function processPost(request, response, callback) {
             queryData += data;
             if(queryData.length > 1e6) {
                 queryData = "";
+		console.log("Problem ? :p");
                 response.writeHead(413, {'Content-Type': 'text/plain'}).end();
                 request.connection.destroy();
             }
@@ -30,13 +35,14 @@ function processPost(request, response, callback) {
         });
 
     } else {
+	console.log("Problem ! ><");
         response.writeHead(405, {'Content-Type': 'text/plain'});
         response.end();
     }
 }
 
 function disconnect(req){
-	req.session.username=undefined;
+	req.session.user=undefined;
 }
 
 function login(username, password){
@@ -64,26 +70,28 @@ app.get('/channels', function(req,res) {
 })
 
 app.get('/login', function(req, res){
-	res.render('login.ejs');
+	res.render('login.ejs', {notif: undefined});
 })
 
 app.post('/login', function(req, res){
 	processPost(req, res, function(){
-		user = req.post.username;
-		pass = req.post.password;
-		var sql="SELECT Password FROM User WHERE Username='"+user+"'";
-		con.query(sql, function(err, result, fields){
+		user = req.post.user;
+		pass = req.post.password;		
+		var sql="SELECT Password FROM User WHERE UserName='"+user+"'";
+		db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
 		if (result.length > 0){
 			p = result[0].Password;
-			if (db.helper.hashFnv32a(p,true)==pass){
-				req.session.username = user;
+			if (db.helper.hashFnv32a(pass,true)==p){
+				req.session.user = user;
 				res.redirect('/');
 			} else {
-				res.send("Erf !");
+				console.log("Wrong password !");
+				res.render('login.ejs',{notif: "Wrong password !"});
 			}
 		} else {
-			res.send("Erf !");
+			console.log("Wrong username !");
+			res.render('login.ejs', {notif: "Wrong username !"});
 		}
 	});
 	})
