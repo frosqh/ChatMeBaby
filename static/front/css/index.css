@@ -100,6 +100,10 @@ body {
     background-color: #666699;
 }
 
+.indexPage {
+  background-color: #111;
+}
+
 /* Search Bar */
 .searchbarbutton{
   text-align: right;
