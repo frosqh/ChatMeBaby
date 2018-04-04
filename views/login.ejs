@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>ChatMeBaby - Log in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="front/css/login.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body style="margin: 0; padding: 0;">
+	
+	
+	<div id="tableContainer-1">
+  <div id="tableContainer-2">
+    <form method="post">
+    <table id="myTable" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          <img src="front/img/login-top.png" alt="ChatMeBaby" width="600" style="display: block;"/>
+        </td>
+      </tr>
+
+      <tr>
+        <td height=75px style="padding: 0 15px 0 15px;">
+          <input type="text" name="user" id="user" title="Enter your username or your email." placeholder="Username/Email" value="<%if (wrong!=undefined) { user } %>" required/>
+        </td>
+      </tr>
+      <tr>
+        <td height=65px style="padding: 0 15px 0 15px;">
+          <input type="password" name="password" id="password" title="Enter your password." placeholder="Password" value="<%if (wrong) { pass } %>" required/>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="center" style="padding: 10px 0 0 0;">
+          <a href="#" id="frgt-pswd">Forgot your password ?</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="center">
+          <button type="submit">
+       <!-- <a href=# class=button onclick="checkAllValidate()"> -->
+       <span style="font-size: 36px;">Chat now !</span>
+       <!-- </a> -->
+     </button>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="center" id="create-account">
+          or <a href="create-account" id="link">create your account</a> right now
+        </td>
+      </tr>
+
+    </table>
+  </form>
+  </div>
+  </div>
+
+  <% if (wrong) {%> 
+    <script>
+      <% if (wrong=="User") {%>
+        $("#user").effect("shake");
+      <%} else if (wrong=="Pass") {%>
+        $("#password").effect("shake");
+      <%}%>
+    </script>
+  <% } %>
+</body>
+
+</html>
