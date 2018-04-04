@@ -117,6 +117,12 @@ module.exports = {
 			if (err) throw err;
 		});
 	},
+	setGender:function(UserID, gender){
+		var sql="UPDATE User SET Gender ="+gender+"WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	},
 	setPhoneNumber:function(UserID, phoneNumbe){
 		var sql="UPDATE User SET PhoneNumber ="+phoneNumbe+" WHERE UserID ="+UserID;
 		con.query(sql, function(err, result){

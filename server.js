@@ -194,7 +194,6 @@ app.post('/create-account', function(req, res){
 										if (req.post.gender=='notsure'){
 											db.setGender(result[0].UserID, 2);
 										}
-										console.log(req.post.gender);
 									}
 									if (req.post.birthdate){
 										db.setBirthDate(result[0].UserID,req.post.birthdate);
@@ -269,24 +268,24 @@ app.get('/profile/', function(req,res){
 
 
 
-		db.con.query(sql, function(err, result, fields){
-			if (err) throw err;
-			if (result.info.numRows == 0){
-				res.redirect("/");
-			} else {
-				var descr = result[0].Description;
-				res.render('profile.ejs', {desc: descr});
-				return;
-			}
-		})
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect("/");
+		} else {
+			var descr = result[0].Description;
+			res.render('profile.ejs', {desc: descr});
+			return;
+		}
+	})
 });
 
 
 
 
-	app.use(function(req, res, next){
-		res.setHeader('Content-Type', 'text/plain');
-		res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
-	});
+app.use(function(req, res, next){
+	res.setHeader('Content-Type', 'text/plain');
+	res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
+});
 
 //app.listen(8080,"localhost");
