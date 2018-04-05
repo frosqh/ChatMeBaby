@@ -157,7 +157,8 @@
             content :$('#message').val(),
             user    :user,
             hour    :date.getHours(),
-            minute  :date.getMinutes()
+            minute  :date.getMinutes(),
+            channel :$('.active_channel').text()
           }); // Transmet le message aux autres
           $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
 
@@ -166,14 +167,16 @@
 
     // Quand on recoit un message, on l'insere dans la page
     socket.on('msg', function(message) {
-      if(lastMsg != message.user){
-        $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
-        lastMsg = message.user;
-      } else {
-        $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
-        $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+      if(message.channel==$('.active_channel').text()){
+        if(lastMsg != message.user){
+          $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
+          lastMsg = message.user;
+        } else {
+          $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
+          $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+        }
       }
-        })
+    })
 
         socket.on('test', function(data) {
           console.log('Incoming message:'+ data);
