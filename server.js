@@ -45,7 +45,7 @@ io.sockets.on('connection', function(socket) {
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows != 0){
-				db.Message(resul[0].UserId,0,message.content);
+				db.Message(result[0].UserID,0,message.content);
 			}
 		});
 		io.sockets.emit('msg',message);
