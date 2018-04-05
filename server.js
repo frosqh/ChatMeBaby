@@ -77,6 +77,7 @@ io.sockets.on('connection', function(socket) {
 		if(!me){
 				return false;
 		}
+		console.log("A delete !");
 		delete users[me.id];
 		io.sockets.emit('deconnexion_client',me);
 		
