@@ -47,6 +47,11 @@ function sendForm() {
   }
 }
 
+$('#myForm').submit(function (e) {
+  e.preventDefault();
+  $('channel_sidebar').append('<p class="channel">'+$('.channelname').text()+'</p>')
+}
+
 var Mcounter = 1;
 
 function MaddInput(myButton){
