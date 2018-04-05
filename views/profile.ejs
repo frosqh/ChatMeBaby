@@ -37,8 +37,7 @@
                   </table>
                 </td>
                 <td width="50%">
-                  <blockquote id="description" class="description">
-                    <%= desc %>                  
+                  <blockquote id="description" class="description"><%=desc%>                  
                 </td>
               </tr>
             </table>
@@ -85,11 +84,11 @@
                    </td></tr>
 
                    <tr><td style="padding: 8px 0 5px 5px;">
-                     <input type="radio" name="gender" id="male" value='male' />
+                     <input type="radio" name="gender" id="male" value='male' <% if (gender==0) {%> checked <%}%>/>
                      <label class="label" for="male" >Male</label>
-                     <input type="radio" name="gender" id="female" value="female"/>
+                     <input type="radio" name="gender" id="female" value="female" <% if (gender==1) {%> checked <%}%>/>
                      <label class="label" for="female">Female</label>
-                     <input type="radio" name="gender" id="notsure" value="notsure"/>
+                     <input type="radio" name="gender" id="notsure" value="notsure" <% if (gender==2) {%> checked <%}%>/>
                      <label class="label" for="notsure">Not sure</label>
                      <!--<input type="text" name="gender" id="gender" title="Is this your gender ?" placeholder="Your gender.."/>
                    --></td></tr>
@@ -107,9 +106,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 0 0 5px 5px;">
-                     <textarea form="myForm" name="description">
-                      <%= desc %>
-                     </textarea>
+                     <textarea form="myForm" name="description"><%= desc %></textarea>
                    </td></tr>
                  </table></td>
 
