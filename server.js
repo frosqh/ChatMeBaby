@@ -7,6 +7,7 @@ var server = http.createServer(app);
 server.listen(8080);
 var io = require('socket.io')(server);
 var ent = require('ent');
+var mobile = require("is-mobile");
 var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -144,7 +145,11 @@ app.get('/', function(req, res) {
 		userf = "Anonymous";
 		req.session.user=userf;
 	}
-	res.render('home.ejs', {user: userf});
+	if (mobile(req)){
+		res.send("Hey !");
+	} else {
+		res.render('home.ejs', {user: userf});
+	}
 });
 
 
