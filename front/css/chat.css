@@ -52,7 +52,6 @@
 .modal-content {
    background-color: #fefefe;
    margin: 15% auto; /* 15% from the top and centered */
-   padding: 20px;
    border: 1px solid #888;
    width: 60%; /* Could be more or less, depending on screen size */
 }
@@ -65,12 +64,75 @@
    font-weight: bold;
 }
 
+/* The Modal Tittle */
+#myModalTitle {
+  font-family: 'Pacifico', 'Roboto', Arial, sans-serif;
+  font-size: 36px;
+  padding: 0 0 0 0;
+  margin-bottom: 3%;
+}
+
 .close:hover,
 .close:focus {
    color: black;
    text-decoration: none;
    cursor: pointer;
 }
+
+.inNewChan {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 8px 0;
+    display: inline-block;
+		/*border: 1px solid #ccc;
+    border-radius: 4px;*/
+		border: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+.inNewChan:focus, .inNewChan:invalid:focus, .inNewChan:valid:focus {
+		width: 100%;
+    border: none;
+		border-bottom: 2px solid #1a75f4;
+    transition: 0.4s;
+}
+
+.inNewChan:invalid {
+		width: 100%;
+		border: none;
+		border-bottom: 2px solid #ff3838;
+		box-shadow: none;
+}
+
+.inNewChan:required:valid {
+		width: 100%;
+		border: none;
+		border-bottom: 2px solid green;
+}
+
+/* Buttons to add and remove members */
+.add {
+  background: url(../img/add.png) no-repeat center center;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  border : none;
+	color : transparent;
+  cursor: pointer;
+}
+
+.rm {
+  background: url(../img/rm.png) no-repeat center center;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  border : none;
+	color : transparent;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
 
 /* ScrollBar*/
 ::-webkit-scrollbar {
@@ -125,7 +187,7 @@
     background-color: #333;
     position: -webkit-sticky; /* Safari */
     position: sticky;
-    top: 0;
+    top: 47px;
 }
 
 /* Style the topnavchat links */
@@ -168,10 +230,10 @@
 }
 
 .content{
-  width: 87%;
-  height: 90%;
+  width: 100%;
+  height: calc(100vh-47px);
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   /*position: fixed;*/
   bottom: 45px;
   right:0;
@@ -181,7 +243,7 @@
 .client_channel_list_container {
     float: left;
     width: 12%;
-    height: calc(100vh - 48px);
+    height: 93.6vh;
     background-color: #666699;
     color:lightgray;
     overflow: hidden;
@@ -325,7 +387,7 @@ input[type=text]:focus {
     border: 3px solid #555;
 }
 
-form button {
+.form button {
   width: 9%;
   height: 45px;
   background: #666699;
@@ -406,4 +468,12 @@ padding-left: 50px;
 @font-face{
     font-family : "chatMeBaby";
     src : url('../font/Spring In My Step.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
