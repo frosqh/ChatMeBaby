@@ -381,7 +381,8 @@ app.get('/profile', function(req,res){
 			var phone = result[0].PhoneNumber;
 			var cit = result[0].City;
 			var mail = result[0].Mail;
-			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, });
+			var av = result[0].AvatarURI;
+			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av});
 			return;
 		}
 	})
