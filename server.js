@@ -57,12 +57,13 @@ io.sockets.on('connection', function(socket) {
 					if (err) throw err;
 					if (result.info.numRows > 0){
 						db.Message(id,result[0].ChannelID,message.content, message.user, av);
+						message.image = av;
+						io.sockets.emit('msg',message);
 					}
 				})
 				
 			}
 		});
-		io.sockets.emit('msg',message);
 	});
 
 	socket.on('disconnect', function(user){
