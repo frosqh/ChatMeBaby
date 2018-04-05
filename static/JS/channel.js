@@ -6,7 +6,7 @@ $('.channel').on( "click", function() {
   date= new Date();
   $('.channelName p b').html(newChannelName);
   socket.emit('getUser');
-  socket.on('user'), function(user) {
+  socket.on('user', function(user) {
     socket.emit('message', {
       content :"test",
       user    :user,
