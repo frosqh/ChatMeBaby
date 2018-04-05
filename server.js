@@ -52,24 +52,34 @@ io.sockets.on('connection', function(socket) {
 		io.sockets.emit('msg',message);
 	});
 
-	socket.on('disconnect', function(){
-		if (it){
-			console.log("Disconnect from home");
-		} else {
-			if(!me){
-				return false;
-			}
-			delete users[me.id];
-			io.sockets.emit('deconnexion_client',me);
+	socket.on('disconnect', function(user){
+		if (user.username!="Anonymous"){
+			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				if (result.info.numRow != 0){
+					db.disconnect(result[0].UserID);
+				}
+			})
 		}
+		if(!me){
+				return false;
+		}
+		delete users[me.id];
+		io.sockets.emit('deconnexion_client',me);
+		
 	})
 
 	socket.on('loginNC', function(user){
-		it=true;
-		me=user;
-		console.log(user);
-		me.username=ent.encode(me.username);
-		me.id="id"+ent.encode(user.username);
+		if (user.username!="Anonymous"){
+			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				if (result.info.numRow != 0){
+					db.connect(result[0].UserID);
+				}
+			})
+		}
 	})
 
 	socket.on('getUser',function(){
@@ -114,10 +124,6 @@ function disconnect(req){
 			}
 		});
 	req.session.user=undefined;
-}
-
-function checkForConnected(){
-	var sql = "SELECT LastActivity FROM User WHERE "
 }
 
 function getAge(birthdate){
@@ -320,6 +326,30 @@ app.get('/profile', function(req,res){
 			return;
 		}
 	})
+});
+
+app.get('/notif', function(req, res){
+	if (!req.session.user || req.session.user=="Anonymous"){
+		res.redirect("/login");
+		return;
+	}
+	var sql = "SELECT UserID FROM User WHERE UserName ='"+req.session.user+"'";
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect('/');
+		} else {
+			var sql = "SELECT * FROM Notification WHERE User="+result[0].UserID;
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				l = [];
+				for (i=0;i<result.info.numRows;i++){
+					l.push(result[i].Txt);
+				}
+				res.render('notifications.ejs', {notif:l});
+			})
+		}
+	});
 });
 
 
