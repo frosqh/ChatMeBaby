@@ -84,6 +84,27 @@ io.sockets.on('connection', function(socket) {
 		}
 	})
 
+	socket.on('getMessages', function(channel){
+		console.log("Coucou !");
+		channelName = channel.channel.substring(1,channel.channel.length);
+		console.log(channelName);
+		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channelName+"'";
+		console.log(sql);
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			console.log(result);
+			if (result.info.numRows > 0){
+				var sql = "SELECT * FROM Message WHERE ChannelId="+result[0].ChannelID+"";
+				db.con.query(sql, function(err, result, fields){
+					if (err) throw err;
+					//console.log(result);
+					socket.emit("messages",result);
+				});
+			}
+
+		})
+	});
+
 	socket.on('getUser',function(){
 			socket.emit('user',me);
 		})
