@@ -70,6 +70,10 @@ io.sockets.on('connection', function(socket) {
 		me.username=ent.ecode(me.username);
 		me.id="id"+ent.encode(user.username);
 	})
+
+	socket.on('getUser',function(){
+			socket.emit('user',me);
+		})
 })
 
 
@@ -161,7 +165,7 @@ app.post('/login', function(req, res){
 	}
 	processPost(req, res, function(){
 		user = req.post.user;
-		pass = req.post.password;		
+		pass = req.post.password;
 		var sql="SELECT Password,UserID,Connected FROM User WHERE UserName='"+user+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
@@ -256,7 +260,7 @@ app.post('/create-account', function(req, res){
 						render("create-account.ejs", {notif: "This mail is alreay used. Perhaps should you try to login"});
 					}
 				})
-				
+
 			} else {
 				res.render("create-account.ejs",{notif: "This username is already taken"});
 			}

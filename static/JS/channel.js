@@ -3,7 +3,18 @@ $('.channel').on( "click", function() {
   $('.active_channel').removeClass("active_channel");
   $(this).toggleClass("active_channel");
   var newChannelName = $('.active_channel').text();
+  date= new Date();
   $('.channelName p b').html(newChannelName);
-  socket.emit('room',newChannelName);
-  console.log("channel.js",newChannelName);
+  socket.emit('getUser');
+  socket.on('user'), function(user) {
+    socket.emit('message', {
+      content :"test",
+      user    :user,
+      hour    :date.getHours(),
+      minute  :date.getMinutes()
+    });
+    console.log("channel.js",newChannelName);
+  });
+
+
 });
