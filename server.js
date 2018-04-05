@@ -26,21 +26,28 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-var users={};
+var users=[];
 io.sockets.on('connection', function(socket) {
 	var it=false;
 	var me=false;
-	for (var k in users){
+	for (var k=0;k<users.length;k++){
 		socket.emit('nouveau_client', users[k]);
 	}
 
 	socket.on('login', function(user){
-		me=user;
-		me.username=ent.encode(me.username);
-		me.id="id"+ent.encode(user.username);
-		users[me.id]=me;
-		io.sockets.emit('nouveau_client', me);
+		var index = users.indexOf(user);
+		if(index!=-1){
+			users[index].connected = 1;
+		} else {
+			me=user;
+			me.username=ent.encode(me.username);
+			me.connected=1;
+			users.push(me);
+			index = users.indexOf(user);
+		}
+		io.sockets.emit('nouveau_client', users[index]);
 	});
+
 	socket.on('message', function(message){
 		console.log("test");
 		message.content=ent.encode(message.content);
@@ -61,7 +68,7 @@ io.sockets.on('connection', function(socket) {
 						io.sockets.emit('msg',message);
 					}
 				})
-				
+
 			}
 		});
 	});
@@ -80,9 +87,12 @@ io.sockets.on('connection', function(socket) {
 				return false;
 		}
 		console.log("A delete !");
-		delete users[me.id];
+		var index = users.indexOf(me.username);
+		if (index > -1) {
+    	users[index].connected=0;
+		}
 		io.sockets.emit('deconnexion_client',me);
-		
+
 	})
 
 	socket.on('loginNC', function(user){
