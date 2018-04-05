@@ -276,7 +276,7 @@ left: 400px;
 *******************************/
 
 #slide4{
-	background-image:url(img/home/slide-4.gif);
+	background-image:url(../img/home/slide-4.gif);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
