@@ -67,34 +67,12 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('disconnect', function(user){
-		if (user.username!="Anonymous"){
-			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
-			db.con.query(sql, function(err, result, fields){
-				if (err) throw err;
-				if (result.info.numRows != 0){
-					db.disconnect(result[0].UserID);
-				}
-			})
-		}
 		if(!me){
 				return false;
 		}
-		console.log("A delete !");
 		delete users[me.id];
 		io.sockets.emit('deconnexion_client',me);
 		
-	})
-
-	socket.on('loginNC', function(user){
-		if (user.username!="Anonymous"){
-			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
-			db.con.query(sql, function(err, result, fields){
-				if (err) throw err;
-				if (result.info.numRows != 0){
-					db.connect(result[0].UserID);
-				}
-			})
-		}
 	})
 
 	socket.on('getMessages', function(channel){
