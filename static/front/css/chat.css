@@ -171,7 +171,7 @@
   width: 87%;
   height: 90%;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   /*position: fixed;*/
   bottom: 45px;
   right:0;
