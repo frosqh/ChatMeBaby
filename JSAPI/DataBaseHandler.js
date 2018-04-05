@@ -54,10 +54,12 @@ module.exports = {
 			} else {
 				UserID = result.info.numRows;
 			}
-			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed,LastActivity) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+",NOW())";
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
 				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
+				UserByChannel(UserID, 0, "General", 25);
+				setTimeout(function(){UserByChannel(UserID, 1, "Random", 25);},500);
 			});
 		});
 	},
@@ -353,7 +355,7 @@ function setPJ(MessageID, PJ){
 }
 
 //Création UserByChannel
-function UserByChannel(UserID, ChannelID, Power){
+function UserByChannel(UserID, ChannelID,Name, Power){
 	var sql="SELECT * FROM UserByChannel";
 	con.query(sql, function(err, result){
 		if (err) throw err;
@@ -362,7 +364,7 @@ function UserByChannel(UserID, ChannelID, Power){
 		} else {
 			UbCId = result.info.numRows;
 		}
-		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+")";
+		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;

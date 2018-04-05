@@ -7,6 +7,7 @@ var server = http.createServer(app);
 server.listen(8080);
 var io = require('socket.io')(server);
 var ent = require('ent');
+var mobile = require("is-mobile");
 var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -41,6 +42,7 @@ io.sockets.on('connection', function(socket) {
 		io.sockets.emit('nouveau_client', me);
 	});
 	socket.on('message', function(message){
+		console.log("test");
 		message.content=ent.encode(message.content);
 		var sql = "SELECT UserID FROM User WHERE UserName ='"+message.user+"'";
 		db.con.query(sql, function(err, result, fields){
@@ -57,7 +59,7 @@ io.sockets.on('connection', function(socket) {
 			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
-				if (result.info.numRow != 0){
+				if (result.info.numRows != 0){
 					db.disconnect(result[0].UserID);
 				}
 			})
@@ -75,7 +77,7 @@ io.sockets.on('connection', function(socket) {
 			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
-				if (result.info.numRow != 0){
+				if (result.info.numRows != 0){
 					db.connect(result[0].UserID);
 				}
 			})
@@ -127,6 +129,9 @@ function disconnect(req){
 }
 
 function getAge(birthdate){
+	if (birthdate == null){
+		return "???";
+	}
 	var today = new Date();
 	var t = birthdate.split('-');
 	var age = today.getFullYear() - t[0];
@@ -144,7 +149,11 @@ app.get('/', function(req, res) {
 		userf = "Anonymous";
 		req.session.user=userf;
 	}
-	res.render('home.ejs', {user: userf});
+	if (mobile(req)){
+		res.send("Hey !");
+	} else {
+		res.render('home.ejs', {user: userf});
+	}
 });
 
 
@@ -154,8 +163,26 @@ app.get('/channels', function(req,res) {
 		res.redirect("/login");
 		return;
 	}
-	res.render('chan.ejs', {user: req.session.user});
-})
+	var sql = "SELECT UserID FROM User WHERE UserName = '"+req.session.user+"'";
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows > 0){
+			var sql = "SELECT Name FROM UserByChannel WHERE UserID = "+result[0].UserID;
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				l="";
+				for (i=0;i<result.info.numRows;i++){
+					l+=result[i].Name+" ";
+				}
+				console.log(req.session.user);
+				console.log(l);
+				res.render('chan.ejs', {user: req.session.user, channels:(l.substring(0,l.length-1)).split(' ')});
+			});
+		} else {
+			res.redirect('/');
+		}
+	})
+});
 
 app.get('/login', function(req, res){
 	if (req.session.user && req.session.user!="Anonymous"){
@@ -317,7 +344,6 @@ app.get('/profile', function(req,res){
 			var use = result[0].UserName
 			var first = result[0].FirstName;
 			var last = result[0].LastName;
-			var t = result[0].BirthDate.split("-");
 			var birt = result[0].BirthDate;
 			var phone = result[0].PhoneNumber;
 			var cit = result[0].City;
@@ -328,36 +354,8 @@ app.get('/profile', function(req,res){
 	})
 });
 
-app.get('/notif', function(req, res){
-	if (!req.session.user || req.session.user=="Anonymous"){
-		res.redirect("/login");
-		return;
-	}
-	var sql = "SELECT UserID FROM User WHERE UserName ='"+req.session.user+"'";
-	db.con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result.info.numRows == 0){
-			res.redirect('/');
-		} else {
-			var sql = "SELECT * FROM Notification WHERE User="+result[0].UserID;
-			db.con.query(sql, function(err, result, fields){
-				if (err) throw err;
-				l = [];
-				for (i=0;i<result.info.numRows;i++){
-					l.push(result[i].Txt);
-				}
-				res.render('notifications.ejs', {notif:l});
-			})
-		}
-	});
-});
-
-
-
-
 app.use(function(req, res, next){
-	res.setHeader('Content-Type', 'text/plain');
-	res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
+	res.status(404).render("404.ejs");
 });
 
 //app.listen(8080,"localhost");

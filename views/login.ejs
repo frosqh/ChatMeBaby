@@ -69,6 +69,24 @@
       <%}%>
     </script>
   <% } %>
+  <script>
+	var inputUser = document.getElementById('user');
+	inputUser.addEventListener("keyup",function(event){
+		event.preventDefault();
+		if(event.keyCode === 13){
+			document.getElementById('myForm').submit();
+		} 
+	})
+
+	var inputPassword = document.getElementById('password');
+	inputPassword.addEventListener("keyup",function(event){
+		event.preventDefault();
+		if(event.keyCode === 13){
+			document.getElementById('myForm').submit();
+		} 
+	})
+  </script>
+
 </body>
 
 </html>
