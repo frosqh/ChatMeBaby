@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS Confirmation (
 CREATE TABLE IF NOT EXISTS Notification (
   ID INT NOT NULL,
   Txt TEXT NOT NULL,
-  User INT NOT NULL,
+  UserI INT NOT NULL,
   CreationDate DATETIME NOT NULL,
-  Read INT NOT NULL,
+  IsRead INT NULL,
   PRIMARY KEY (
     ID
   )
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS UserByChannel (
   ID INT NOT NULL,
   UserID INT NOT NULL,
   ChannelID INT NOT NULL,
-  ChannelName VARCHAR(75) NOT NULL,
+  Name VARCHAR(75) NOT NULL,
   Power INT NOT NULL,
   Title VARCHAR(50) NULL,
   PRIMARY KEY (
@@ -116,8 +116,6 @@ REFERENCES User (UserID);
 ALTER TABLE UserByChannel ADD CONSTRAINT fk_UserByChannel_ChannelID FOREIGN KEY IF NOT EXISTS (ChannelID)
 REFERENCES Channel (ChannelID);
 
-ALTER TABLE UserByChannel ADD CONSTRAINT fk_UserByChannel_ChannelName FOREIGN KEY IF NOT EXISTS (ChannelName)
-REFERENCES Channel (Name);
 
 ALTER TABLE Friends ADD CONSTRAINT fk_Friends_UserA FOREIGN KEY IF NOT EXISTS (UserA)
 REFERENCES User (UserID);
@@ -125,11 +123,11 @@ REFERENCES User (UserID);
 ALTER TABLE Friends ADD CONSTRAINT fk_Friends_UserB FOREIGN KEY IF NOT EXISTS (UserB)
 REFERENCES User (UserID);
 
-ALTER TABLE Notification ADD CONSTRAINT fk_Notif_User FOREIGN KEY IF NOT EXISTS (User)
+ALTER TABLE Notification ADD CONSTRAINT fk_Notif_User FOREIGN KEY IF NOT EXISTS (UserI)
 REFERENCES User (UserID);
 
 INSERT IGNORE INTO User (UserID, UserName, Mail, Connected, Password, Confirmed) VALUES (0,"Anonymous","chatmebaby2k18@gmail.com",1,"admin",1);
 INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (0,"General", NOW());
 INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (1,"Random", NOW());
-INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power) VALUES (0,0,0,100,"General");
-INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power) VALUES (1,0,1,100,"Random");
+INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power,Name) VALUES (0,0,0,100,"General");
+INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power,Name) VALUES (1,0,1,100,"Random");

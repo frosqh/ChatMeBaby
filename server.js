@@ -128,6 +128,9 @@ function disconnect(req){
 }
 
 function getAge(birthdate){
+	if (birthdate == null){
+		return "???";
+	}
 	var today = new Date();
 	var t = birthdate.split('-');
 	var age = today.getFullYear() - t[0];
@@ -163,21 +166,21 @@ app.get('/channels', function(req,res) {
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
 		if (result.info.numRows > 0){
-			var sql = "SELECT ChannelName FROM UserByUser WHERE UserID = "+result[0].UserID;
+			var sql = "SELECT Name FROM UserByChannel WHERE UserID = "+result[0].UserID;
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
-				l=[];
-				for (i=0;i<result.info.numRows){
-					l.push(result[i].ChannelName);
+				l="";
+				for (i=0;i<result.info.numRows;i++){
+					l+=result[i].Name+" ";
 				}
-				res.render('chan.ejs', {user: req.session.user, channes:l});
+				console.log(req.session.user);
+				console.log(l);
+				res.render('chan.ejs', {user: req.session.user, channels:(l.substring(0,l.length-1)).split(' ')});
 			});
 		} else {
 			res.redirect('/');
 		}
 	})
-	
-	res.render('chan.ejs', {user: req.session.user});
 });
 
 app.get('/login', function(req, res){
@@ -340,7 +343,6 @@ app.get('/profile', function(req,res){
 			var use = result[0].UserName
 			var first = result[0].FirstName;
 			var last = result[0].LastName;
-			var t = result[0].BirthDate.split("-");
 			var birt = result[0].BirthDate;
 			var phone = result[0].PhoneNumber;
 			var cit = result[0].City;
@@ -351,35 +353,7 @@ app.get('/profile', function(req,res){
 	})
 });
 
-app.get('/notif', function(req, res){
-	if (!req.session.user || req.session.user=="Anonymous"){
-		res.redirect("/login");
-		return;
-	}
-	var sql = "SELECT UserID FROM User WHERE UserName ='"+req.session.user+"'";
-	db.con.query(sql, function(err, result, fields){
-		if (err) throw err;
-		if (result.info.numRows == 0){
-			res.redirect('/');
-		} else {
-			var sql = "SELECT * FROM Notification WHERE User="+result[0].UserID;
-			db.con.query(sql, function(err, result, fields){
-				if (err) throw err;
-				l = [];
-				for (i=0;i<result.info.numRows;i++){
-					l.push(result[i].Txt);
-				}
-				res.render('notifications.ejs', {notif:l});
-			})
-		}
-	});
-});
-
-
-
-
 app.use(function(req, res, next){
-	res.setHeader('Content-Type', 'text/plain');
 	res.status(404).render("404.ejs");
 });
 
