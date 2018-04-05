@@ -35,7 +35,8 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-		var index = users.indexOf(user);
+		var index = users.indexOf(user.username);
+		console.log(user + " : "+ index);
 		if(index!=-1){
 			users[index].connected = 1;
 		} else {
