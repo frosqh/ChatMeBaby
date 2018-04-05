@@ -139,7 +139,7 @@ module.exports = {
 			if (err) throw err;
 		});
 	},
-	Message:function(UserId, ChannelId, Text){
+	Message:function(UserId, ChannelId, Text, Name){
 	var sql="SELECT * FROM Message";
 	con.query(sql, function(err,result){
 		if (err) throw err;
@@ -152,7 +152,7 @@ module.exports = {
 		console.log("Channel "+ChannelId);
 		console.log("Pignouf "+UserId);
 		console.log(Text);
-		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW())";
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate, UserName) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW(),'"+Name"')";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;

@@ -48,7 +48,15 @@ io.sockets.on('connection', function(socket) {
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows != 0){
-				db.Message(result[0].UserID,0,message.content);
+				id = result[0].UserID
+				var sql= "SELECT ChannelID FROM Channel WHERE ChannelName ='"+message.channel+"'";
+				db.con.query(sql, function(err, result, fields){
+					if (err) throw err;
+					if (result.info.numRows > 0){
+						db.Message(id,result[0].ChannelID,message.content);
+					}
+				})
+				
 			}
 		});
 		io.sockets.emit('msg',message);
