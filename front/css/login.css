@@ -2,6 +2,7 @@ html {
   height: 100%;
 }
 
+
 body {
   height: 100%;
   background: linear-gradient(0.25turn, #0951c4, #95b4e5, #0951c4);
@@ -174,4 +175,19 @@ input:invalid {
     -moz-transform: translate(0, 4px);
     -o-transform: translate(0, 4px);
     transform: translate(0, 4px);
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .logo {
+        width: 100%;
+        padding-bottom: 10px;
+      }
+    .inputUsername, #user {
+      width: 100%;
+    }
+
+    .button{
+      60%
+    }
 }
