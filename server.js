@@ -55,7 +55,7 @@ io.sockets.on('connection', function(socket) {
 				db.con.query(sql, function(err, result, fields){
 					if (err) throw err;
 					if (result.info.numRows > 0){
-						db.Message(id,result[0].ChannelID,message.content);
+						db.Message(id,result[0].ChannelID,message.content, message.user);
 					}
 				})
 				
