@@ -26,7 +26,6 @@ app.use(session({
 }));
 
 var users={};
-
 io.sockets.on('connection', function(socket) {
 	var me=false;
 	for (var k in users){
@@ -42,6 +41,13 @@ io.sockets.on('connection', function(socket) {
 	});
 	socket.on('message', function(message){
 		message.content=ent.encode(message.content);
+		var sql = "SELECT UserID FROM User WHERE UserName ='"+message.user+"'";
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows != 0){
+				db.Message(resul[0].UserId,0,message.content);
+			}
+		});
 		io.sockets.emit('msg',message);
 	});
 
@@ -83,6 +89,13 @@ function processPost(request, response, callback) {
 }
 
 function disconnect(req){
+	var sql = "SELECT UserID FROM User WHERE UserName ='"+req.session.user+"'";
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows != 0){
+				disconnect(result[0].UserID);
+			}
+		});
 	req.session.user=undefined;
 }
 
@@ -133,12 +146,13 @@ app.post('/login', function(req, res){
 	processPost(req, res, function(){
 		user = req.post.user;
 		pass = req.post.password;		
-		var sql="SELECT Password FROM User WHERE UserName='"+user+"'";
+		var sql="SELECT Password,UserID FROM User WHERE UserName='"+user+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.length > 0){
 				p = result[0].Password;
 				if (db.helper.hashFnv32a(pass,true)==p){
+					db.connect(result[0].UserID);
 					req.session.user = user;
 					res.redirect('/');
 				} else {
@@ -214,6 +228,7 @@ app.post('/create-account', function(req, res){
 									if (req.post.description){
 										db.setDescription(result[0].UserID, req.post.description);
 									}
+									db.connect(result[0].UserID);
 								} else {
 									console.log("WTF !");
 								}
