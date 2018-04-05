@@ -136,7 +136,27 @@ module.exports = {
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		});
-	}
+	},
+	Message:function(UserId, ChannelId, Text){
+	var sql="SELECT * FROM Message";
+	con.query(sql, function(err,result){
+		if (err) throw err;
+		if (result == undefined){
+			messageId  = 0;
+		} else {
+			
+			messageId = result.info.numRows;
+		}
+		console.log("Channel "+ChannelId);
+		console.log("Pignouf "+UserId);
+		console.log(Text);
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW())";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
+	});
+}
 }
 // API User
 
@@ -322,26 +342,7 @@ function setSetting1(SettingId, setting1){
 }
 
 //Création Message
-function Message(UserId, ChannelId, Text){
-	var sql="SELECT * FROM Message";
-	con.query(sql, function(err,result){
-		if (err) throw err;
-		if (result == undefined){
-			messageId  = 0;
-		} else {
-			
-			messageId = result.info.numRows;
-		}
-		console.log("Channel "+ChannelId);
-		console.log("Pignouf "+UserId);
-		console.log(Text);
-		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW())";
-		con.query(sql, function(err, result){
-			if (err) throw err;
-			return result.info.insertId;
-		});
-	});
-}
+
 
 //API Message
 function setPJ(MessageID, PJ){
