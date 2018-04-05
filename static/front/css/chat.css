@@ -169,19 +169,20 @@
 
 .content{
   width: 87%;
-  height: 90%;
+  height: calc(100vh - 87px);
   overflow-x: hidden;
   overflow-y: scroll;
   /*position: fixed;*/
   bottom: 45px;
   right:0;
+  padding-left: 10px;
 }
 
 /* Left column */
 .client_channel_list_container {
     float: left;
     width: 12%;
-    height: calc(100vh - 48px);
+    height: calc(100vh);
     background-color: #666699;
     color:lightgray;
     overflow: hidden;
