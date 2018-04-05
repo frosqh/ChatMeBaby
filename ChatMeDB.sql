@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS User (
   PhoneNumber VARCHAR(12) NULL,
   City VARCHAR(100) NULL,
   Gender INT NULL,
+  LastActivity DATETIME NOT NULL,
   PRIMARY KEY (
     UserID
   )

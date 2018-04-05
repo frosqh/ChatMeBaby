@@ -99,6 +99,10 @@ function disconnect(req){
 	req.session.user=undefined;
 }
 
+function checkForConnected(){
+	var sql = "SELECT LastActivity FROM User WHERE "
+}
+
 function getAge(birthdate){
 	var today = new Date();
 	var t = birthdate.split('-');
@@ -146,7 +150,7 @@ app.post('/login', function(req, res){
 	processPost(req, res, function(){
 		user = req.post.user;
 		pass = req.post.password;		
-		var sql="SELECT Password,UserID FROM User WHERE UserName='"+user+"'";
+		var sql="SELECT Password,UserID,Connected FROM User WHERE UserName='"+user+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.length > 0){

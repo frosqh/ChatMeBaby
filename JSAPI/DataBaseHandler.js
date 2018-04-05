@@ -54,7 +54,7 @@ module.exports = {
 			} else {
 				UserID = result.info.numRows;
 			}
-			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed,LastActivity) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+",NOW())";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
 				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
