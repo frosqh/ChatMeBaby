@@ -38,4 +38,4 @@ function refresh(newChannelName){
           $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
       }
    }
-}
+});
