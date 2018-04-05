@@ -184,14 +184,5 @@
 		</tr>
 	</table>
 </footer>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-	var socket = io.connect();
-	var user = '<%=user%>';
-	socket.emit('loginNC', {
-		username: user
-	});
-</script>
 </body>
 </html>

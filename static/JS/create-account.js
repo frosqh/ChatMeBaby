@@ -18,7 +18,7 @@ function checkAllValidate() {
 
   if (username.checkValidity() && email.checkValidity() &&
       password.checkValidity() && terms.checked) {
-    alert("OK");
+    //alert("OK");
     document.getElementById("myForm").submit();
     //window.location.href="../index.html";
   } else {

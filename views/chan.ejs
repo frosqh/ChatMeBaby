@@ -19,7 +19,7 @@
 <body id="body">
 
   <div class="header" style="background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);">
-    <a href="home.html"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+    <a href="/"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
     <div class="connectedUser">
       <% if (user!='Anonymous') {%>
       <table id="userText" border="0">
@@ -188,7 +188,7 @@
     <table border="0" width="100%">
       <tr>
         <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
-          <span id="spanMembers" class="close">&times;</span>
+          <span id="closeMembers" class="close">&times;</span>
           <p id="myModalTitle">Add Members</p>
         </td>
       </tr>
@@ -277,7 +277,7 @@
     var socket = io.connect();
     var lastMsg=false;
     $('.channelNam p b').html($('.active_channel').text());
-
+$('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
     refresh($('.active_channel').text());
     // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
 
@@ -309,6 +309,7 @@
             minute  :date.getMinutes(),
             channel :$('.active_channel').text()
           }); // Transmet le message aux autres
+	  $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
           $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
 
         }
@@ -317,13 +318,14 @@
     // Quand on recoit un message, on l'insere dans la page
     socket.on('msg', function(message) {
       if(message.channel==$('.active_channel').text()){
-        message.content = message.content.replace(RegExp(":\\w+:"),function(p1){return '<i class="em em-'+p1+'"></i>'});
+        message.content = message.content.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){
+            return '<i class="em em-'+p3+'"></i>'});
         if(lastMsg != message.user){
           $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="'+message.image+'" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
           lastMsg = message.user;
         } else {
           $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
-          $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+          
         }
       }
     })

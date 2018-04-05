@@ -38,11 +38,14 @@ io.sockets.on('connection', function(socket) {
 		me=user;
 		me.username=ent.encode(me.username);
 		me.id="id"+ent.encode(user.username);
+		if !(me.id in users){
+			users[me.id]=me;
+			io.sockets.emit('nouveau_client', me);
+		}
 		users[me.id]=me;
-		io.sockets.emit('nouveau_client', me);
+
 	});
 	socket.on('message', function(message){
-		console.log("test");
 		message.content=ent.encode(message.content);
 		var sql = "SELECT UserID, AvatarURI FROM User WHERE UserName ='"+message.user+"'";
 		db.con.query(sql, function(err, result, fields){
@@ -67,45 +70,20 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('disconnect', function(user){
-		if (user.username!="Anonymous"){
-			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
-			db.con.query(sql, function(err, result, fields){
-				if (err) throw err;
-				if (result.info.numRows != 0){
-					db.disconnect(result[0].UserID);
-				}
-			})
-		}
 		if(!me){
 				return false;
 		}
-		console.log("A delete !");
 		delete users[me.id];
 		io.sockets.emit('deconnexion_client',me);
 		
 	})
 
-	socket.on('loginNC', function(user){
-		if (user.username!="Anonymous"){
-			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
-			db.con.query(sql, function(err, result, fields){
-				if (err) throw err;
-				if (result.info.numRows != 0){
-					db.connect(result[0].UserID);
-				}
-			})
-		}
-	})
-
 	socket.on('getMessages', function(channel){
-		console.log("Coucou !");
 		channelName = channel.channel.substring(1,channel.channel.length);
 		console.log(channelName);
 		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channelName+"'";
-		console.log(sql);
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
-			console.log(result);
 			if (result.info.numRows > 0){
 				var sql = "SELECT * FROM Message WHERE ChannelId="+result[0].ChannelID+"";
 				db.con.query(sql, function(err, result, fields){
@@ -322,7 +300,7 @@ app.post('/create-account', function(req, res){
 							});
 						},1000);
 						req.session.user=req.post.username;
-						res.redirect("/");
+						res.render("confirm-email.ejs");
 					} else {
 						render("create-account.ejs", {notif: "This mail is alreay used. Perhaps should you try to login"});
 					}
@@ -339,10 +317,6 @@ app.post('/create-account', function(req, res){
 app.get('/logout', function(req, res){
 	disconnect(req);
 	res.redirect("/");
-})
-
-app.get('/user/:id', function(req, res){
-	res.send("Profil de l'utilisateur : "+req.params.id);
 })
 
 app.get('/confirm/:id', function(req,res){
@@ -381,11 +355,38 @@ app.get('/profile', function(req,res){
 			var phone = result[0].PhoneNumber;
 			var cit = result[0].City;
 			var mail = result[0].Mail;
-			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, });
+			var av = result[0].AvatarURI;
+		    des = desc.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'});
+			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av, descToShow : des});
 			return;
 		}
 	})
 });
+
+app.get('/user/:id', function(req, res){
+	var sql = "SELECT * FROM User WHERE UserID ="+req.params.id;
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect("/");
+		} else {
+			var descr = result[0].Description;
+			var gend = result[0].Gender;
+			var ag = getAge(result[0].BirthDate);
+			var use = result[0].UserName
+			var first = result[0].FirstName;
+			var last = result[0].LastName;
+			var birt = result[0].BirthDate;
+			var phone = result[0].PhoneNumber;
+			var cit = result[0].City;
+			var mail = result[0].Mail;
+			var av = result[0].AvatarURI;
+			res.render('profile_min.ejs', {user: use, desc: descr, gender: gend, age:ag, avatar:av});
+			return;
+		}
+	})
+})
+
 
 app.use(function(req, res, next){
 	res.status(404).render("404.ejs");
