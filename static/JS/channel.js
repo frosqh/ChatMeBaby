@@ -10,9 +10,11 @@ $('.channel').on( "click", function() {
     });
   socket.on('messages', function(messages){
 	  console.log(messages);
+    $('#zone_chat').html('');
    for (i in messages){
 	   m=messages[i];
 	   console.log(m.UserID+"-"+m.Txt);
+     $('#zone_chat').append("<p>"+m.UserId+"--"+m.Txt+"</p>");
    }
   })
   //socket.emit('getUser');
