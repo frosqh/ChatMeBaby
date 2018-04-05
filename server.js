@@ -35,7 +35,7 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-		if(index!=-1){
+		if(!user.username in users){
 			users[user.username].connected = 1;
 		} else {
 			me=user;
