@@ -143,7 +143,7 @@ function disconnect(req){
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows != 0){
-				disconnect(result[0].UserID);
+				db.disconnect(result[0].UserID);
 			}
 		});
 	req.session.user=undefined;
