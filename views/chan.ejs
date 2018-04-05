@@ -3,14 +3,17 @@
 <head>
  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="front/css/chat.css">
-
+  <link rel="stylesheet" type="text/css" href="front/css/chat.css">
+  <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
+  <link rel="stylesheet" type="text/css" href="front/css/button.css">
+  <link rel="stylesheet" type="text/css" href="front/css/combobox.css">
   <link rel="stylesheet" type="text/css" href="front/css/index.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body id="body">
 
@@ -97,16 +100,173 @@
 
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Add -->
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
+    <form id="myFormMembers" method="post">
+    <table border="0" width="100%">
+      <tr>
+        <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
+          <span id="close" class="close">&times;</span>
+          <p id="myModalTitle">Create a new channel</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table id="tableForm" border="0" width="100%">
+            <!-- Channel name and status -->
+            <tr>
+              <td width=55% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Create a channel</label><br>
+              </td>
+
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Status</label><br>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 0 30px 5px 20px;">
+                <input type="text" class="inNewChan" name="channelname" id="channelname" title="You must enter the channel name." placeholder="Channel name.." autofocus required/>
+              </td>
+
+              <td style="padding: 8px 0 5px 15px;">
+                <input type="radio" name="status" id="public" checked/>
+                <label class="label" for="public">Public</label>
+                <input type="radio" name="status" id="private" />
+                <label class="label" for="private">Private</label>
+              </td>
+            </tr>
+            <!-- Add members -->
+            <tr>
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+
+              <td width=45% style="color: #ffffff; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+            </tr>
+
+            <tr>
+              <td id="memberInputs" style="padding: 0 10px 0 30px;">
+                <div>
+                  <input id="inp1" type="text" class="inNewChan" name="member1" id="member1" title="New member." placeholder="New member.."/>
+                </div>
+              </td>
+
+              <td id="buttonInputs" style="padding: 8px 0 5px 15px;">
+                <div>
+                  <button type="button" class="add" onclick="addInput(this)" id="1"></button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <!-- Create the new channel -->
+      <tr>
+        <td align="center" style="padding-top: 10px; padding-bottom: 30px;">
+          <a href=# class=button onclick="sendForm()">
+            <span style="font-size: 36px;">Create !</span>
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </form>
   </div>
 </div>
 
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<!-- The Modal Members -->
+<div id="myModalMembers" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <form id="myFormMembers" method="post">
+    <table border="0" width="100%">
+      <tr>
+        <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
+          <span id="closeMembers" class="close">&times;</span>
+          <p id="myModalTitle">Add Members</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table id="tableForm" border="0" width="100%">
+            <!-- Channel name and status -->
+            <tr>
+              <td width=55% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Select channel</label><br>
+              </td>
+
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Status</label><br>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 0 30px 5px 20px;">
+                <div class="styled-select purple semi-square">
+                  <select id="channelnameMembers">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </div>
+              </td>
+
+              <td style="padding: 8px 0 5px 15px;">
+                <input type="radio" name="status" id="public" disabled/>
+                <label class="label" for="public">Public</label>
+                <input type="radio" name="status" id="private" disabled/>
+                <label class="label" for="private">Private</label>
+              </td>
+            </tr>
+            <!-- Add members -->
+            <tr>
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+
+              <td width=45% style="color: #ffffff; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+            </tr>
+
+            <tr>
+              <td id="MmemberInputs" style="padding: 0 10px 0 30px;">
+                <div>
+                  <input id="M1inp" type="text" class="inNewChan" name="member1" title="New member." placeholder="New member.."/>
+                </div>
+              </td>
+
+              <td id="MbuttonInputs" style="padding: 8px 0 5px 15px;">
+                <div>
+                  <button id="M1" type="button" class="add" onclick="MaddInput(this)"></button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <!-- Create the new channel -->
+      <tr>
+        <td align="center" style="padding-top: 10px; padding-bottom: 30px;">
+          <a href=# class=button onclick="sendFormMembers()">
+            <span style="font-size: 36px;">Add them !</span>
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </form>
+  </div>
+</div>
+
+<script src="JS/modalNewChan.js" language="Javascript" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="JS/channel.js"></script>
 <script>
@@ -175,27 +335,39 @@
 <script>
 // Get the modal
 var modal = document.getElementById('myModal');
+var modalMembers = document.getElementById('myModalMembers');
 
 // Get the button that opens the modal
 var btn = document.getElementById("newchan");
+var btnMembers = document.getElementById("addPeople");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementById("close");
+var spanMembers = document.getElementById("closeMembers");
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
+}
+btnMembers.onclick = function() {
+  modalMembers.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
 }
+spanMembers.onclick = function() {
+  modalMembers.style.display = "none";
+}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
       modal.style.display = "none";
+  }
+  if (event.target == modalMembers) {
+      modalMembers.style.display = "none";
   }
 }
 </script>
