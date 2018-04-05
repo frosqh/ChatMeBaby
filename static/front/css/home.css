@@ -26,7 +26,7 @@ html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pr
     font-family: 'Pacifico';
     font-style: normal;
     font-weight: normal;
-    src: local('Pacifico'), url('http://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
+    src: local('Pacifico'), url('http:://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
 }
 
 @font-face {
@@ -276,7 +276,7 @@ left: 400px;
 *******************************/
 
 #slide4{
-	background-image:url(../img/home/slide-4.gif);
+	background-image:url(img/home/slide-4.gif);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
