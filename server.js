@@ -57,7 +57,7 @@ io.sockets.on('connection', function(socket) {
 			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
-				if (result.info.numRow != 0){
+				if (result.info.numRows != 0){
 					db.disconnect(result[0].UserID);
 				}
 			})
@@ -75,7 +75,7 @@ io.sockets.on('connection', function(socket) {
 			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
-				if (result.info.numRow != 0){
+				if (result.info.numRows != 0){
 					db.connect(result[0].UserID);
 				}
 			})
@@ -154,8 +154,26 @@ app.get('/channels', function(req,res) {
 		res.redirect("/login");
 		return;
 	}
+	var sql = "SELECT UserID FROM User WHERE UserName = '"+req.session.user+"'";
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows > 0){
+			var sql = "SELECT ChannelName FROM UserByUser WHERE UserID = "+result[0].UserID;
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				l=[];
+				for (i=0;i<result.info.numRows){
+					l.push(result[i].ChannelName);
+				}
+				res.render('chan.ejs', {user: req.session.user, channes:l});
+			});
+		} else {
+			res.redirect('/');
+		}
+	})
+	
 	res.render('chan.ejs', {user: req.session.user});
-})
+});
 
 app.get('/login', function(req, res){
 	if (req.session.user && req.session.user!="Anonymous"){
