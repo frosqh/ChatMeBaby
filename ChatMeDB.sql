@@ -27,6 +27,27 @@ CREATE TABLE IF NOT EXISTS Confirmation (
   )
 );
 
+CREATE TABLE IF NOT EXISTS Notification (
+  ID INT NOT NULL,
+  Txt TEXT NOT NULL,
+  User INT NOT NULL,
+  CreationDate DATETIME NOT NULL,
+  Read INT NOT NULL,
+  PRIMARY KEY (
+    ID
+  )
+);
+
+CREATE TABLE IF NOT EXISTS Friends ( 
+  ID INT NOT NULL,
+  UserA INT NOT NULL,
+  UserB INT NOT NULL,
+  CreationDate DATETIME NOT NULL,
+  PRIMARY KEY (
+    ID
+  )
+);
+
 CREATE TABLE IF NOT EXISTS Preferences (PrefID INT NOT NULL,UserID INT NOT NULL,Theme INT NOT NULL,Display INT NOT NULL,PRIMARY KEY (PrefID));
 
 
@@ -93,3 +114,18 @@ REFERENCES User (UserID);
 
 ALTER TABLE UserByChannel ADD CONSTRAINT fk_UserByChannel_ChannelID FOREIGN KEY IF NOT EXISTS (ChannelID)
 REFERENCES Channel (ChannelID);
+
+ALTER TABLE Friends ADD CONSTRAINT fk_Friends_UserA FOREIGN KEY IF NOT EXISTS (UserA)
+REFERENCES User (UserID);
+
+ALTER TABLE Friends ADD CONSTRAINT fk_Friends_UserB FOREIGN KEY IF NOT EXISTS (UserB)
+REFERENCES User (UserID);
+
+ALTER TABLE Notification ADD CONSTRAINT fk_Notif_User FOREIGN KEY IF NOT EXISTS (User)
+REFERENCES User (UserID);
+
+INSERT IGNORE INTO User (UserID, UserName, Mail, Connected, Password, Confirmed) VALUES (0,"Anonymous","chatmebaby2k18@gmail.com",1,"admin",1);
+INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (0,"General", NOW());
+INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (1,"Random", NOW());
+INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power) VALUES (0,0,0,100);
+INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power) VALUES (1,0,1,100);

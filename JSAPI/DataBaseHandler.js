@@ -54,7 +54,7 @@ module.exports = {
 			} else {
 				UserID = result.info.numRows;
 			}
-			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed,LastActivity) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+",NOW())";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
 				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
@@ -136,7 +136,27 @@ module.exports = {
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		});
-	}
+	},
+	Message:function(UserId, ChannelId, Text){
+	var sql="SELECT * FROM Message";
+	con.query(sql, function(err,result){
+		if (err) throw err;
+		if (result == undefined){
+			messageId  = 0;
+		} else {
+			
+			messageId = result.info.numRows;
+		}
+		console.log("Channel "+ChannelId);
+		console.log("Pignouf "+UserId);
+		console.log(Text);
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW())";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		});
+	});
+}
 }
 // API User
 
@@ -322,26 +342,7 @@ function setSetting1(SettingId, setting1){
 }
 
 //Création Message
-function Message(UserId, ChannelId, Text){
-	var sql="SELECT * FROM Message";
-	con.query(sql, function(err,result){
-		if (err) throw err;
-		if (result == undefined){
-			messageId  = 0;
-		} else {
-			
-			messageId = result.info.numRows;
-		}
-		console.log("Channel "+ChannelId);
-		console.log("Pignouf "+UserId);
-		console.log(Text);
-		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Text, SendDate) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW())";
-		con.query(sql, function(err, result){
-			if (err) throw err;
-			return result.info.insertId;
-		});
-	});
-}
+
 
 //API Message
 function setPJ(MessageID, PJ){

@@ -15,9 +15,13 @@ app.get('/', function (req, res) {
 
 var users= {};
 
+
 io.sockets.on('connection', function (socket) {
+
+    socket.join('general');
     // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
     var me=false;
+    var rooms=false;
     for(var k in users){
       socket.emit('nouveau_client',users[k]);
     }
@@ -44,8 +48,18 @@ io.sockets.on('connection', function (socket) {
         delete users[me.id];
         io.sockets.emit('deconnexion_client',me);
       });
-});
 
+      socket.on('room',function(room){
+        if(rooms)
+        socket.leave(rooms);
+
+        rooms = room;
+        console.log('room',rooms);
+        socket.join(room);
+        });
+
+
+});
 
 
 server.listen(8080);

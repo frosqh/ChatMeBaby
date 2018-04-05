@@ -14,13 +14,17 @@
 <body id="body">
 
   <div class="header" style="background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);">
-    <a href="home.html"><img id='LogoTransparent' src="../Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+    <a href="home.html"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
     <div class="connectedUser">
+      <% if (user!='Anonymous') {%>
       <table id="userText" border="0">
-        <td>User</td>
-        <td id="settingico"><a><img src="Logo/Icones/settings.png"/></a></td>
-        <td class="settingsPage" id="signoutico"><a><img src="Logo/Icones/signOut.png"/></a></td>
+        <td><%=user%></td>
+        <td id="settingico"><a href="/profile"><img src="Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a href='/logout'><img src="Logo/Icones/signOut.png"/></a></td>
       </table>
+      <%} else {%>
+      <a href='/login' style='text-decoration: none'> Log in !</a>
+      <% } %>
     </div>
   </div>
 
@@ -40,17 +44,18 @@
 <div class="row">
   <div class="client_channel_list_container">
     <div class="sidebar">
-      <a href="home.html"><img src="Logo/LogoWithNameTrans.png" style="height:70px; width:auto; padding-left: 25px; padding-top:5px;"/></a>
+      <a href="/"><img src="Logo/LogoWithNameTrans.png" style="height:70px; width:auto; padding-left: 25px; padding-top:5px;"/></a>
       <div class="workingLab_sidebar">
         <div class="menu_user">
           <div class="disponible"></div>
-          <p class="username">UserName</p>
+          <p class="username"><=%user%></p>
         </div>
       </div>
       <div class="channel_sidebar">
-        <p class="channelTitle">Channels</p>
-        <p class="channel">General</p>
-        <p class="channel">Random</p>
+        <p class="channelTitle">Channels<button id="newchan" class="newchan"></button></p>
+        <% for i in channels { %>
+                 <p class="channel"><%= i %></p>
+      <%}%>
       </div>
       <div class="privateMessage_sidebar">
         <p class="PrivateMessageTitle">Private Message</p>
@@ -106,9 +111,18 @@
 
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+</div>
+
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="js/channel.js"></script>
+<script src="JS/channel.js"></script>
 <script>
 
     var user = '<%=user%>'
@@ -144,7 +158,8 @@
             content :$('#message').val(),
             user    :user,
             hour    :date.getHours(),
-            minute  :date.getMinutes()
+            minute  :date.getMinutes(),
+            channel :$('.active_channel').text()
           }); // Transmet le message aux autres
           $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
 
@@ -153,16 +168,49 @@
 
     // Quand on recoit un message, on l'insere dans la page
     socket.on('msg', function(message) {
-      if(lastMsg != message.user){
-        $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
-        lastMsg = message.user;
-      } else {
-        $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
-        $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+      if(message.channel==$('.active_channel').text()){
+        if(lastMsg != message.user){
+          $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
+          lastMsg = message.user;
+        } else {
+          $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
+          $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+        }
       }
-        })
+    })
 
+        socket.on('test', function(data) {
+          console.log('Incoming message:'+ data);
+        });
 
+</script>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("newchan");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
+}
 </script>
 
 </body>

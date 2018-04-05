@@ -26,8 +26,8 @@ app.use(session({
 }));
 
 var users={};
-
 io.sockets.on('connection', function(socket) {
+	var it=false;
 	var me=false;
 	for (var k in users){
 		socket.emit('nouveau_client', users[k]);
@@ -42,16 +42,49 @@ io.sockets.on('connection', function(socket) {
 	});
 	socket.on('message', function(message){
 		message.content=ent.encode(message.content);
+		var sql = "SELECT UserID FROM User WHERE UserName ='"+message.user+"'";
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows != 0){
+				db.Message(result[0].UserID,0,message.content);
+			}
+		});
 		io.sockets.emit('msg',message);
 	});
 
-	socket.on('disconnect', function(){
+	socket.on('disconnect', function(user){
+		if (user.username!="Anonymous"){
+			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				if (result.info.numRow != 0){
+					db.disconnect(result[0].UserID);
+				}
+			})
+		}
 		if(!me){
-			return false;
+				return false;
 		}
 		delete users[me.id];
 		io.sockets.emit('deconnexion_client',me);
+		
 	})
+
+	socket.on('loginNC', function(user){
+		if (user.username!="Anonymous"){
+			var sql = "SELECT UserID FROM User WHERE UserName ='"+user+"'";
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				if (result.info.numRow != 0){
+					db.connect(result[0].UserID);
+				}
+			})
+		}
+	})
+
+	socket.on('getUser',function(){
+			socket.emit('user',me);
+		})
 })
 
 
@@ -83,6 +116,13 @@ function processPost(request, response, callback) {
 }
 
 function disconnect(req){
+	var sql = "SELECT UserID FROM User WHERE UserName ='"+req.session.user+"'";
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows != 0){
+				disconnect(result[0].UserID);
+			}
+		});
 	req.session.user=undefined;
 }
 
@@ -132,13 +172,14 @@ app.post('/login', function(req, res){
 	}
 	processPost(req, res, function(){
 		user = req.post.user;
-		pass = req.post.password;		
-		var sql="SELECT Password FROM User WHERE UserName='"+user+"'";
+		pass = req.post.password;
+		var sql="SELECT Password,UserID,Connected FROM User WHERE UserName='"+user+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.length > 0){
 				p = result[0].Password;
 				if (db.helper.hashFnv32a(pass,true)==p){
+					db.connect(result[0].UserID);
 					req.session.user = user;
 					res.redirect('/');
 				} else {
@@ -214,6 +255,7 @@ app.post('/create-account', function(req, res){
 									if (req.post.description){
 										db.setDescription(result[0].UserID, req.post.description);
 									}
+									db.connect(result[0].UserID);
 								} else {
 									console.log("WTF !");
 								}
@@ -225,7 +267,7 @@ app.post('/create-account', function(req, res){
 						render("create-account.ejs", {notif: "This mail is alreay used. Perhaps should you try to login"});
 					}
 				})
-				
+
 			} else {
 				res.render("create-account.ejs",{notif: "This username is already taken"});
 			}
@@ -276,13 +318,38 @@ app.get('/profile', function(req,res){
 			var first = result[0].FirstName;
 			var last = result[0].LastName;
 			var t = result[0].BirthDate.split("-");
-			var birt = t[1]+"/"+t[2]+"/"+t[0];
+			var birt = result[0].BirthDate;
 			var phone = result[0].PhoneNumber;
 			var cit = result[0].City;
-			res.render('profile.ejs', {city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, });
+			var mail = result[0].Mail;
+			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, });
 			return;
 		}
 	})
+});
+
+app.get('/notif', function(req, res){
+	if (!req.session.user || req.session.user=="Anonymous"){
+		res.redirect("/login");
+		return;
+	}
+	var sql = "SELECT UserID FROM User WHERE UserName ='"+req.session.user+"'";
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect('/');
+		} else {
+			var sql = "SELECT * FROM Notification WHERE User="+result[0].UserID;
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				l = [];
+				for (i=0;i<result.info.numRows;i++){
+					l.push(result[i].Txt);
+				}
+				res.render('notifications.ejs', {notif:l});
+			})
+		}
+	});
 });
 
 

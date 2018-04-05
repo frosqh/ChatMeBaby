@@ -41,10 +41,11 @@
 	</div>
 
 	<div class="topnav">
-		<a class="indexPage ">Home</a>
+		<a class="indexPage">Home</a>
 		<a href="/channels">MyChatRooms</a>
 		<a href="#">MyChatFriends</a>
 		<a href="#">Surprise Me!</a>
+		<a href="/notif">Notifications</a>
 		<div class="searchbarbutton">
 			<form method="post">
 				<input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
@@ -184,5 +185,14 @@
 		</tr>
 	</table>
 </footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io.connect();
+	var user = '<%=user%>';
+	socket.emit('loginNC', {
+		username: user
+	});
+</script>
 </body>
 </html>

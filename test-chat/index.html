@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="front/css/chat.css">
-  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
   <title>Chat</title>
 </head>
 <body>
@@ -52,8 +51,6 @@
     </div>
   </div>
 
-  <i class="em-svg em-alien"></i>
-
 
   <div class="rightcolumn">
     <div class="topnav">
@@ -65,7 +62,7 @@
       <section id="zone_chat">
       </section>
     </div>
-    <form  method="post" id="formulaire_chat">
+    <form action="/" method="post" id="formulaire_chat">
       <div>
         <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus autocomplete="off"/>
         <input type="submit" id="envoi_message" value="Envoyer" />
@@ -75,12 +72,12 @@
   </div>
 </div>
 
-
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script src="js/channel.js"></script>
 <script>
+    var user = prompt('Quel est votre pseudo ?');
 
-    var user = '<%=user%>'
     // Connexion � socket.io
     var socket = io.connect();
     var lastMsg=false;
@@ -116,8 +113,8 @@
             minute  :date.getMinutes()
           }); // Transmet le message aux autres
           $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+
         }
-        return false;
     });
 
     // Quand on recoit un message, on l'insere dans la page
@@ -130,6 +127,10 @@
         $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
       }
         })
+
+    socket.on('test', function(data) {
+      console.log('Incoming message:'+ data);
+    });
 
 
 </script>
