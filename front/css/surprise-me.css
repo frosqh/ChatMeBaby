@@ -204,7 +204,7 @@ div.top-right {
 div.bottom-right {
     position: absolute;
     bottom: 0;
-    right: -65%;
+    right: 0;
 }
 
 /* Centered text */
@@ -258,7 +258,7 @@ img.art-bg {
   font-size: 14px;
   color: #262626;
   min-height: 30px;
-  max-width: 50%;
+  max-width: 90%;
   text-indent: 20px;
   text-align: justify;
 }
