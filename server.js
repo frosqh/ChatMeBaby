@@ -341,10 +341,6 @@ app.get('/logout', function(req, res){
 	res.redirect("/");
 })
 
-app.get('/user/:id', function(req, res){
-	res.send("Profil de l'utilisateur : "+req.params.id);
-})
-
 app.get('/confirm/:id', function(req,res){
 	var sql = "SELECT * FROM Confirmation WHERE ID='"+req.params.id+"'";
 	//console.log(sql);
@@ -387,6 +383,31 @@ app.get('/profile', function(req,res){
 		}
 	})
 });
+
+app.get('/user/:id', function(req, res){
+	var sql = "SELECT * FROM User WHERE UserID ="+req.params.id;
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect("/");
+		} else {
+			var descr = result[0].Description;
+			var gend = result[0].Gender;
+			var ag = getAge(result[0].BirthDate);
+			var use = result[0].UserName
+			var first = result[0].FirstName;
+			var last = result[0].LastName;
+			var birt = result[0].BirthDate;
+			var phone = result[0].PhoneNumber;
+			var cit = result[0].City;
+			var mail = result[0].Mail;
+			var av = result[0].AvatarURI;
+			res.render('profile_min.ejs', {user: use, desc: descr, gender: gend, age:ag, avatar:av});
+			return;
+		}
+	})
+})
+
 
 app.use(function(req, res, next){
 	res.status(404).render("404.ejs");
