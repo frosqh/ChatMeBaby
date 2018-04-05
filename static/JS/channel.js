@@ -13,10 +13,10 @@ $('.channel').on( "click", function() {
     $('#zone_chat').html('');
    for (i in messages){
 	   m=messages[i];
-     $('#zone_chat').append("<p>"+m.UserName+"--"+m.Txt+"</p>");
      time = m.SendDate.split(' ')[1];
      minute= time[1];
      hour = time[0];
+     lastMsg="";
      if(lastMsg != message.user){
           $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+m.UserName+'</div><div class="time">'+hour+':'+minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + m.Txt + '</div></div></div>');
           lastMsg = message.user;
