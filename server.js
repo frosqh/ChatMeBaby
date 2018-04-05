@@ -380,7 +380,7 @@ app.get('/notif', function(req, res){
 
 app.use(function(req, res, next){
 	res.setHeader('Content-Type', 'text/plain');
-	res.status(404).send('404 ! Va chercher ailleurs, clanpin :P');
+	res.status(404).render("404.ejs");
 });
 
 //app.listen(8080,"localhost");
