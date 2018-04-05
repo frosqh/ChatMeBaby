@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Chat Me Baby - MyChatRooms</title>
  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="front/css/chat.css">
   <link rel="stylesheet" type="text/css" href="front/css/chat.css">
   <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
   <link rel="stylesheet" type="text/css" href="front/css/button.css">
@@ -63,11 +63,11 @@
 	<p class="channel <% if (i==0){%> active_channel <%}%>"> <%= channels[i] %></p>
 	<% } %>
       </div>
+      <div class="addPeople_sidebar">
+        <p id="addPeople" class="addPeople">Add people</p>
+      </div>
       <div class="privateMessage_sidebar">
         <p class="PrivateMessageTitle">Private Message</p>
-      </div>
-      <div class="addPeople_sidebar">
-        <p class="addPeople">Add people</p>
       </div>
       <div class="baby_sidebar">
         <p class="babyTitle">Chat new babies</p>
