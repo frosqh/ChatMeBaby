@@ -27,6 +27,7 @@ app.use(session({
 
 var users={};
 io.sockets.on('connection', function(socket) {
+	var it=false;
 	var me=false;
 	for (var k in users){
 		socket.emit('nouveau_client', users[k]);
@@ -52,11 +53,22 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('disconnect', function(){
-		if(!me){
-			return false;
+		if (it){
+			console.log("Disconnect from home");
+		} else {
+			if(!me){
+				return false;
+			}
+			delete users[me.id];
+			io.sockets.emit('deconnexion_client',me);
 		}
-		delete users[me.id];
-		io.sockets.emit('deconnexion_client',me);
+	})
+
+	socket.on('loginNC', function(user){
+		it=true;
+		me=user;
+		me.username=ent.ecode(me.username);
+		me.id="id"+ent.encode(user.username);
 	})
 })
 
