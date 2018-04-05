@@ -48,7 +48,15 @@ io.sockets.on('connection', function(socket) {
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows != 0){
-				db.Message(result[0].UserID,0,message.content);
+				id = result[0].UserID
+				var sql= "SELECT ChannelID FROM Channel WHERE ChannelName ='"+message.channel+"'";
+				db.con.query(sql, function(err, result, fields){
+					if (err) throw err;
+					if (result.info.numRows > 0){
+						db.Message(id,result[0].ChannelID,message.content);
+					}
+				})
+				
 			}
 		});
 		io.sockets.emit('msg',message);
@@ -84,16 +92,25 @@ io.sockets.on('connection', function(socket) {
 		}
 	})
 
-	socket.on('getMessage', function(channel){
-		channelName = channel.channel;
-		var sql = "SELECT ChannelID FROM User WHERE ChannelName='"+channelName+"'";
+	socket.on('getMessages', function(channel){
+		console.log("Coucou !");
+		channelName = channel.channel.substring(1,channel.channel.length);
+		console.log(channelName);
+		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channelName+"'";
+		console.log(sql);
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
+			console.log(result);
 			if (result.info.numRows > 0){
-				console.log(result[0]);
+				var sql = "SELECT * FROM Message WHERE ChannelId="+result[0].ChannelID+"";
+				db.con.query(sql, function(err, result, fields){
+					if (err) throw err;
+					socket.emit("messages",result);
+				});
 			}
+
 		})
-	}
+	});
 
 	socket.on('getUser',function(){
 			socket.emit('user',me);
@@ -133,7 +150,7 @@ function disconnect(req){
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows != 0){
-				disconnect(result[0].UserID);
+				db.disconnect(result[0].UserID);
 			}
 		});
 	req.session.user=undefined;

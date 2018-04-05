@@ -1,0 +1,9 @@
+config:
+  target: "http://193.54.15.211"
+  phases:
+    - duration: 60
+      arrivalRate: 50
+scenarios:
+  - flow:
+      - get:
+          url: "/login"

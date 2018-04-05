@@ -1,0 +1,20 @@
+config:
+  target: "http://193.54.15.211"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+  socketio:
+    query: "username=Jeremy"
+scenarios:
+    - name: "Connect and send a bunch of messages"
+      engine: "socketio"
+      flow:
+      - url: "/channels"
+        loop:
+          - emit:
+              channel: "send message"
+              data: "hello world!"
+          - think: 1
+        count: 50
+		
+
