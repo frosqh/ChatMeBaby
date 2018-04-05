@@ -67,7 +67,8 @@ io.sockets.on('connection', function(socket) {
 	socket.on('loginNC', function(user){
 		it=true;
 		me=user;
-		me.username=ent.ecode(me.username);
+		console.log(user);
+		me.username=ent.encode(me.username);
 		me.id="id"+ent.encode(user.username);
 	})
 
