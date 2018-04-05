@@ -1,4 +1,4 @@
-![alt text](https://chatmebaby.telecomnancy.univ-lorraine.fr/Logo/LogoWithNameTrans.png)
+![alt text](https://raw.githubusercontent.com/JeremyHynes/pweb-2018-chatmebaby/Logo/LogoWithName.png)
 # Chat Me Baby : La nouvelle application de chat hot près de chez vous
 ### <em>Une application développée par Jeremy Hynes, Baptiste Monchicourt, Gautier Raimondi et Tanguy Roudaut - Télécom Nancy - Université de Lorraine</em>
 
@@ -19,7 +19,7 @@ Le site est développé sur un serveur tournant sur Debian avec comme modules d'
 - MariaDb
 
 
-> Le site est désormé disponible sur [Chat Me Baby: chatmebaby.telecomnancy.univ-lorraine.fr](chatmebaby.telecomnancy.univ-lorraine.fr), sécurisé avec le protocole HTTPS et un certificat SSL (Let's Encrypt).
+> Le site est désormé disponible sur [Chat Me Baby: chatmebaby.telecomnancy.univ-lorraine.fr](http://chatmebaby.telecomnancy.univ-lorraine.fr), sécurisé avec le protocole HTTPS et un certificat SSL (Let's Encrypt).
 
 ## Mardi 04/03/18
 - [X] Login - Done (manque liaison DB + cookie)
