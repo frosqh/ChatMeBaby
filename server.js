@@ -38,11 +38,14 @@ io.sockets.on('connection', function(socket) {
 		me=user;
 		me.username=ent.encode(me.username);
 		me.id="id"+ent.encode(user.username);
+		if !(me.id in users){
+			users[me.id]=me;
+			io.sockets.emit('nouveau_client', me);
+		}
 		users[me.id]=me;
-		io.sockets.emit('nouveau_client', me);
+
 	});
 	socket.on('message', function(message){
-		console.log("test");
 		message.content=ent.encode(message.content);
 		var sql = "SELECT UserID, AvatarURI FROM User WHERE UserName ='"+message.user+"'";
 		db.con.query(sql, function(err, result, fields){
@@ -76,14 +79,11 @@ io.sockets.on('connection', function(socket) {
 	})
 
 	socket.on('getMessages', function(channel){
-		console.log("Coucou !");
 		channelName = channel.channel.substring(1,channel.channel.length);
 		console.log(channelName);
 		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channelName+"'";
-		console.log(sql);
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
-			console.log(result);
 			if (result.info.numRows > 0){
 				var sql = "SELECT * FROM Message WHERE ChannelId="+result[0].ChannelID+"";
 				db.con.query(sql, function(err, result, fields){
