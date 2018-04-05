@@ -1,4 +1,6 @@
-![alt text](https://github.com/TELECOMNancy/pweb-2018-chatmebaby/blob/master/Logo/LogoWithNameTransPetit.png?raw=true)
+<p align="center">
+  <img src="https://github.com/TELECOMNancy/pweb-2018-chatmebaby/blob/master/Logo/LogoWithNameTransPetit.png?raw=true" alt="ChatMeBaby's custom image"/>
+</p>
 # Chat Me Baby : La nouvelle application de chat hot près de chez vous
 ### <em>Une application développée par Jeremy Hynes, Baptiste Monchicourt, Gautier Raimondi et Tanguy Roudaut - Télécom Nancy - Université de Lorraine</em>
 
