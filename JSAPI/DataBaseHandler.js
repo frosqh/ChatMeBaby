@@ -152,7 +152,7 @@ module.exports = {
 		console.log("Channel "+ChannelId);
 		console.log("Pignouf "+UserId);
 		console.log(Text);
-		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate, UserName) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW(),'"+Name"')";
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate, UserName) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW(),'"+Name+"')";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;

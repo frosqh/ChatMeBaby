@@ -13,8 +13,8 @@ $('.channel').on( "click", function() {
     $('#zone_chat').html('');
    for (i in messages){
 	   m=messages[i];
-	   //console.log(m.UserID+"-"+m.Txt);
-     $('#zone_chat').append("<p>"+m.Name+"--"+m.Txt+"</p>");
+	   console.log(m.UserID+"-"+m.Txt);
+     $('#zone_chat').append("<p>"+m.UserName+"--"+m.Txt+"</p>");
    }
   })
   //socket.emit('getUser');
