@@ -21,6 +21,57 @@
   cursor: pointer;
 }
 
+/* Button to create a new chan */
+.newchan {
+  background: url(../img/plus.png) no-repeat top center;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  border : none;
+	color : transparent;
+  cursor: pointer;
+  margin-left: 45%;
+  padding: 8px 0 0 0;
+}
+
+/* The Modal (background) */
+.modal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0,0,0); /* Fallback color */
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+   background-color: #fefefe;
+   margin: 15% auto; /* 15% from the top and centered */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+   color: #aaa;
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+   color: black;
+   text-decoration: none;
+   cursor: pointer;
+}
+
 /* ScrollBar*/
 ::-webkit-scrollbar {
     width: 8px;
@@ -94,7 +145,6 @@
   padding: 1px 16px;
   background-color: #666699;
   color: white;
-
 }
 
 .topnavchat p{
@@ -122,7 +172,7 @@
   height: 90%;
   overflow-x: hidden;
   overflow-y: auto;
-  position: fixed;
+  /*position: fixed;*/
   bottom: 45px;
   right:0;
 }
@@ -154,7 +204,7 @@
   margin:0;
 }
 
-.workingLab_sidebar:hover,.channelTitle:hover,.channel:hover,.PrivateMessageTitle:hover,.user:hover,.addPeople:hover,.babyTitle:hover,.baby:hover{
+/*.workingLab_sidebar:hover,.channelTitle:hover,*/.channel:hover,/*.PrivateMessageTitle:hover,*/.user:hover,.addPeople:hover,/*.babyTitle:hover,*/.baby:hover{
   background-color: rgb(0,0,0,0.3);
 }
 
@@ -284,6 +334,44 @@ form button {
   color: #f2f2f2;
   position: fixed;
     bottom: 0;
+}
+
+/*Message*/
+.avatar{
+    float: left;
+}
+
+.sender-name .sender{
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 10px 0 18px;
+  float: left;
+}
+
+.sender-name .time{
+  float: none;
+  padding-top: 8px;
+}
+
+.message_content{
+  margin: 8px 0;
+}
+
+.message_content:hover{
+  background-color: rgb(0,0,0,0.05);
+}
+
+.time{
+  font-size: 8px;
+  color:grey;
+  float: left;
+  margin: 4px;
+  padding: 2px 0;
+}
+
+.message_body{
+margin: 0;
+padding-left: 50px;
 }
 
 /* Footer */
