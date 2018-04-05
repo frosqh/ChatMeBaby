@@ -291,10 +291,11 @@ app.get('/profile', function(req,res){
 			var first = result[0].FirstName;
 			var last = result[0].LastName;
 			var t = result[0].BirthDate.split("-");
-			var birt = t[1]+"/"+t[2]+"/"+t[0];
+			var birt = result[0].BirthDate;
 			var phone = result[0].PhoneNumber;
 			var cit = result[0].City;
-			res.render('profile.ejs', {city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, });
+			var mail = result[0].Mail;
+			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, });
 			return;
 		}
 	})
