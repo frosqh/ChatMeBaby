@@ -30,22 +30,19 @@ var users=[];
 io.sockets.on('connection', function(socket) {
 	var it=false;
 	var me=false;
-	for (var k=0;k<users.length;k++){
+	for (k in users){
 		socket.emit('nouveau_client', users[k]);
 	}
 
 	socket.on('login', function(user){
-		var index = users.indexOf(user.username);
-		console.log(user + " : "+ index);
-		if(index!=-1){
-			users[index].connected = 1;
+		if(!user.username in users){
+			users[user.username].connected = 1;
 		} else {
 			me=user;
 			me.username=ent.encode(me.username);
 			me.connected=1;
 			users.push(me);
-			index = users.indexOf(user);
-			io.sockets.emit('nouveau_client', users[index]);
+			io.sockets.emit('nouveau_client', me);
 		}
 	});
 
@@ -77,10 +74,8 @@ io.sockets.on('connection', function(socket) {
 		if(!me){
 				return false;
 		}
-		console.log("A delete !");
-		var index = users.indexOf(me.username);
 		if (index > -1) {
-    	users[index].connected=0;
+    		users[user.username].connected=0;
 		}
 		io.sockets.emit('deconnexion_client',me);
 
