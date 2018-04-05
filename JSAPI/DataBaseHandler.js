@@ -3,6 +3,7 @@ var result = {};
 const fs = require('fs');
 const helper= require('./Helper');
 var nodemailer = require('nodemailer');
+var crypto = require("crypto");
 
 var transporter = nodemailer.createTransport({
 	service: 'gmail',
@@ -54,7 +55,8 @@ module.exports = {
 			} else {
 				UserID = result.info.numRows;
 			}
-			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+")";
+			hash = crypto.createHash('md5').update(Mail).digest("hex");
+			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed,AvatarURI) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+",'https://www.gravatar.com/avatar/"+hash+".jpg?d=robohash')";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
 				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
@@ -139,7 +141,7 @@ module.exports = {
 			if (err) throw err;
 		});
 	},
-	Message:function(UserId, ChannelId, Text, Name){
+	Message:function(UserId, ChannelId, Text, Name, avatar){
 	var sql="SELECT * FROM Message";
 	con.query(sql, function(err,result){
 		if (err) throw err;
@@ -152,7 +154,7 @@ module.exports = {
 		console.log("Channel "+ChannelId);
 		console.log("Pignouf "+UserId);
 		console.log(Text);
-		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate, UserName) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW(),'"+Name+"')";
+		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate, UserName, Image) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW(),'"+Name+"','"+avatar+"')";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;
