@@ -54,27 +54,11 @@
       <div class="channel_sidebar">
         <p class="channelTitle">Channels<button id="newchan" class="newchan"></button></p>
         <% for i in channels { %>
-                 <p class="channel"><%= i %></p>
+	<p class="channel <% if (i=='General') {%> activechannel <% } %>"><%= i %></p>
       <%}%>
       </div>
       <div class="privateMessage_sidebar">
         <p class="PrivateMessageTitle">Private Message</p>
-        <div class="user">
-          <div class="disponible"></div>
-          <p class="username">Tanguy</p>
-        </div>
-        <div class="user">
-          <div class="absent"></div>
-          <p class="username">Jeremy</p>
-        </div>
-        <div class="user">
-          <div class="absent"></div>
-          <p class="username">Baptiste</p>
-        </div>
-        <div class="user">
-          <div class="absent"></div>
-          <p class="username">Gautier</p>
-        </div>
       </div>
       <div class="addPeople_sidebar">
         <p class="addPeople">Add people</p>
