@@ -35,10 +35,8 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-		var index = users.indexOf(user);
-		console.log(user.username + " : "+ index);
 		if(index!=-1){
-			users[index].connected = 1;
+			users[user.username].connected = 1;
 		} else {
 			me=user;
 			me.username=ent.encode(me.username);
@@ -76,9 +74,8 @@ io.sockets.on('connection', function(socket) {
 		if(!me){
 				return false;
 		}
-		var index = users.indexOf(me);
 		if (index > -1) {
-    		users[index].connected=0;
+    		users[user.username].connected=0;
 		}
 		io.sockets.emit('deconnexion_client',me);
 
