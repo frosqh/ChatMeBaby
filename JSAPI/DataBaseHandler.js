@@ -59,7 +59,7 @@ module.exports = {
 				if (err) throw err;
 				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
 				UserByChannel(UserID, 0, "General", 25);
-				UserByChannel(UserID, 1, "Random", 25);
+				setTimeout(function(){UserByChannel(UserID, 1, "Random", 25);},500);
 			});
 		});
 	},
@@ -364,7 +364,7 @@ function UserByChannel(UserID, ChannelID,Name, Power){
 		} else {
 			UbCId = result.info.numRows;
 		}
-		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"'')";
+		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;

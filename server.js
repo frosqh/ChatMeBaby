@@ -42,6 +42,7 @@ io.sockets.on('connection', function(socket) {
 		io.sockets.emit('nouveau_client', me);
 	});
 	socket.on('message', function(message){
+		console.log("test");
 		message.content=ent.encode(message.content);
 		var sql = "SELECT UserID FROM User WHERE UserName ='"+message.user+"'";
 		db.con.query(sql, function(err, result, fields){

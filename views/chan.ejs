@@ -49,14 +49,14 @@
       <div class="workingLab_sidebar">
         <div class="menu_user">
           <div class="disponible"></div>
-          <p class="username"><=% user %></p>
+          <p class="username"> <=% user %> </p>
         </div>
       </div>
       <div class="channel_sidebar">
         <p class="channelTitle">Channels<button id="newchan" class="newchan"></button></p>
 
 	<%for (i in channels) { %>
-	<p class="channel <% if (i==0){%> activechannel <%}%>"> <%= channels[i] %></p>
+	<p class="channel <% if (i==0){%> active_channel <%}%>"> <%= channels[i] %></p>
 	<% } %>
       </div>
       <div class="privateMessage_sidebar">
@@ -76,8 +76,8 @@
 
   <div class="rightcolumn">
     <div class="topnavchat">
-      <div>
-        <p id="channelName"><b>#channelName</b></p>
+      <div class="channelNam">
+        <p><b>#channelName</b></p>
       </div>
     </div>
     <div class = content>
@@ -115,7 +115,7 @@
     // Connexion � socket.io
     var socket = io.connect();
     var lastMsg=false;
-    $('.channelName').html($('.active_channel').text());
+    $('.channelNam p b').html($('.active_channel').text());
     // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
 
     socket.emit('login', {
