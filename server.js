@@ -38,7 +38,7 @@ io.sockets.on('connection', function(socket) {
 		me=user;
 		me.username=ent.encode(me.username);
 		me.id="id"+ent.encode(user.username);
-		if !(me.id in users){
+		if (!(me.id in users)){
 			users[me.id]=me;
 			io.sockets.emit('nouveau_client', me);
 		}
@@ -154,6 +154,7 @@ function getAge(birthdate){
 }
 
 app.get('/', function(req, res) {
+	console.log("Erf !");
 	if (req.session.user){
 		userf = req.session.user;
 	} else {
