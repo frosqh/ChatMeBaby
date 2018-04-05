@@ -6,10 +6,14 @@ $('.channel').on( "click", function() {
   date= new Date();
   $('.channelNam p b').html(newChannelName);
   socket.emit('getMessages', {
-      channel: newChannelName;
+      channel: newChannelName
     });
   socket.on('messages', function(messages){
-    
+	  console.log(messages);
+   for (i in messages){
+	   m=messages[i];
+	   console.log(m.UserID+"-"+m.Txt);
+   }
   })
   //socket.emit('getUser');
   //socket.on('user', function(user) {
