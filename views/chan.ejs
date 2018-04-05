@@ -180,16 +180,15 @@
   </div>
 </div>
 
-<!-- The Modal Members -->
-<div id="myModalMembers" class="modal">
+<div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
     <form id="myFormMembers" method="post">
     <table border="0" width="100%">
       <tr>
         <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
-          <span id="spanMembers" class="close">&times;</span>
-          <p id="myModalTitle">Add Members</p>
+          <span id="close" class="close">&times;</span>
+          <p id="myModalTitle">Create a new channel</p>
         </td>
       </tr>
       <tr>
@@ -198,7 +197,7 @@
             <!-- Channel name and status -->
             <tr>
               <td width=55% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
-                <label for="nom">Select channel</label><br>
+                <label for="nom">Create a channel</label><br>
               </td>
 
               <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
@@ -207,20 +206,13 @@
             </tr>
             <tr>
               <td style="padding: 0 30px 5px 20px;">
-                <div class="styled-select purple semi-square">
-                  <select id="channelnameMembers">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
+                <input type="text" class="inNewChan" name="channelname" id="channelname" title="You must enter the channel name." placeholder="Channel name.." autofocus required/>
               </td>
 
               <td style="padding: 8px 0 5px 15px;">
-                <input type="radio" name="status" id="public" disabled/>
+                <input type="radio" name="status" id="public" checked/>
                 <label class="label" for="public">Public</label>
-                <input type="radio" name="status" id="private" disabled/>
+                <input type="radio" name="status" id="private" />
                 <label class="label" for="private">Private</label>
               </td>
             </tr>
@@ -236,15 +228,15 @@
             </tr>
 
             <tr>
-              <td id="MmemberInputs" style="padding: 0 10px 0 30px;">
+              <td id="memberInputs" style="padding: 0 10px 0 30px;">
                 <div>
-                  <input id="M1inp" type="text" class="inNewChan" name="member1" title="New member." placeholder="New member.."/>
+                  <input id="inp1" type="text" class="inNewChan" name="member1" id="member1" title="New member." placeholder="New member.."/>
                 </div>
               </td>
 
-              <td id="MbuttonInputs" style="padding: 8px 0 5px 15px;">
+              <td id="buttonInputs" style="padding: 8px 0 5px 15px;">
                 <div>
-                  <button id="M1" type="button" class="add" onclick="MaddInput(this)"></button>
+                  <button type="button" class="add" onclick="addInput(this)" id="1"></button>
                 </div>
               </td>
             </tr>
@@ -255,8 +247,8 @@
       <!-- Create the new channel -->
       <tr>
         <td align="center" style="padding-top: 10px; padding-bottom: 30px;">
-          <a href=# class=button onclick="sendFormMembers()">
-            <span style="font-size: 36px;">Add them !</span>
+          <a href=# class=button onclick="sendForm()">
+            <span style="font-size: 36px;">Create !</span>
           </a>
         </td>
       </tr>
@@ -265,6 +257,7 @@
   </form>
   </div>
 </div>
+
 
 <script src="JS/modalNewChan.js" language="Javascript" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
