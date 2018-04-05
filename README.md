@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/TELECOMNancy/pweb-2018-chatmebaby/master/Logo/LogoWithName.png)
+![alt text](https://github.com/TELECOMNancy/pweb-2018-chatmebaby/blob/master/Logo/LogoWithName.png?raw=true)
 # Chat Me Baby : La nouvelle application de chat hot près de chez vous
 ### <em>Une application développée par Jeremy Hynes, Baptiste Monchicourt, Gautier Raimondi et Tanguy Roudaut - Télécom Nancy - Université de Lorraine</em>
 
@@ -9,6 +9,7 @@
 
 :+1: Il propose notamment des salons offrant la possibilité à l'utilisateur de les rejoindre et ainsi discuter avec les utilisateurs connectés
 dans le salon.
+
 :information_desk_person: Les utilisateurs peuvent aussi voir les profils d'autres utilisateurs et personnaliser le leur.
 
 Le site est développé sur un serveur tournant sur Debian avec comme modules d'installés:
