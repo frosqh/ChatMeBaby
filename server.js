@@ -44,18 +44,19 @@ io.sockets.on('connection', function(socket) {
 	socket.on('message', function(message){
 		console.log("test");
 		message.content=ent.encode(message.content);
-		var sql = "SELECT UserID FROM User WHERE UserName ='"+message.user+"'";
+		var sql = "SELECT UserID, AvatarURI FROM User WHERE UserName ='"+message.user+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows != 0){
 				id = result[0].UserID
+				av = result[0].AvatarURI
 				chan = message.channel.substring(1,message.channel.length);
 				console.log(message.channel);
 				var sql= "SELECT ChannelID FROM Channel WHERE Name ='"+chan+"'";
 				db.con.query(sql, function(err, result, fields){
 					if (err) throw err;
 					if (result.info.numRows > 0){
-						db.Message(id,result[0].ChannelID,message.content, message.user);
+						db.Message(id,result[0].ChannelID,message.content, message.user, av);
 					}
 				})
 				
