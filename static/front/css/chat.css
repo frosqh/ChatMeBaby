@@ -125,7 +125,7 @@
     background-color: #333;
     position: -webkit-sticky; /* Safari */
     position: sticky;
-    top: 0;
+    top: 47px;
 }
 
 /* Style the topnavchat links */
@@ -182,7 +182,7 @@
 .client_channel_list_container {
     float: left;
     width: 12%;
-    height: calc(100vh);
+    height: calc(95vh);
     background-color: #666699;
     color:lightgray;
     overflow: hidden;

@@ -125,14 +125,13 @@
 
     // Quand un nouveau client se connecte, on affiche l'information
     socket.on('nouveau_client', function(user) {
-        $('#zone_chat').append('<p><em>' + user.username + ' a rejoint le Chat !</em></p>');
         $('.privateMessage_sidebar').append('<div class="user" id="'+user.id+'"><div class="disponible"></div><p class="username">'+user.username+'</p></div>');
     })
 
     // Quand un nouveau client se deconnecte, on affiche l'information
     socket.on('deconnexion_client',function(user){
-      $('#zone_chat').append('<p><em>' + user.username + ' a quitté le Chat !</em></p>');
-      $('#'+user.id).remove();
+      $('#'+user.id).children("div").toggleClass("disponible");
+      $('#'+user.id).children("div").toggleClass("absent");
     })
 
     // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
