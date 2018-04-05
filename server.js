@@ -322,7 +322,7 @@ app.post('/create-account', function(req, res){
 							});
 						},1000);
 						req.session.user=req.post.username;
-						res.redirect("/");
+						res.render("confirm-email.ejs");
 					} else {
 						render("create-account.ejs", {notif: "This mail is alreay used. Perhaps should you try to login"});
 					}

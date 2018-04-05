@@ -3,14 +3,29 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>ChatMeBaby - My profile</title>
+  <title>ChatMeBaby - <%= user %>'s profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="front/css/profile.css">
-  <link rel="stylesheet" type="text/css" href="front/css/button.css">
-  <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
-  <script src="JS/profile.js"></script>
+  <link rel="stylesheet" type="text/css" href="../front/css/profile.css">
+  <link rel="stylesheet" type="text/css" href="../front/css/button.css">
+  <link rel="stylesheet" type="text/css" href="../front/css/radiobutton.css">
+  <script src="../JS/profile.js"></script>
 </head>
 <body>
+<div class="header" style="background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);">
+    <a href="/"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+    <div class="connectedUser">
+      <% if (user!='Anonymous') {%>
+      <table id="userText" border="0">
+        <td><%= user %></td>
+        <td id="settingico"><a href="/profile"><img src="../Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a href='/logout'><img src="../Logo/Icones/signOut.png"/></a></td>
+      </table>
+      <%} else {%>
+      <a href='/login' style='text-decoration: none'> Log in !</a>
+      <% } %>
+    </div>
+  </div>
+
   <table border="0" width="100%" cellpadding="0" cellspacing="0">
     <tr height="150px">
       <td width="50%">
