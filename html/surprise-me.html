@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>ChatMeBaby - Surprise me !</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="../front/css/surprise-me.css">
+  <link rel="stylesheet" type="text/css" href="../front/css/button.css">
+  <link rel="stylesheet" type="text/css" href="../front/css/radiobutton.css">
+  <script src="../JSAPI/surprise-me.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../front/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link rel="icon" href="../Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+
+<body style="margin: 0; padding: 0;">
+
+  <div class="header">
+    <a href="home.html"><img id='LogoTransparent' src="../Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+    <div class="connectedUser">
+      <table id="userText" border="0">
+        <td>User</td>
+        <td id="settingico"><a><img src="../Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
+      </table>
+    </div>
+  </div>
+
+  <div class="topnav">
+    <a href="home.html">Home</a>
+    <a href="channel.html">MyChatRooms</a>
+    <a href="friends.html">MyChatFriends</a>
+    <a href="#" class="active">Surprise Me!</a>
+    <div class="searchbarbutton">
+      <form id="searchForm" method="post">
+        <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+        <input class="searchbutton" type="submit" value=""></input>
+      </form>
+    </div>
+  </div>
+
+<form id="myForm" method="post">
+
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td style="padding: 20px 0 30px 0;">
+
+     <table align="center" border="0" cellpadding="0" cellspacing="0" width="70%" style="border: 1px solid #636363; box-shadow: 0px 7px 15px 8px #4c4c4c;">
+        <tr>
+          <td align="center" style="padding: 0px 0 0px 0; background: linear-gradient(0.25turn, #8100a8, #a26eb2, #8100a8);">
+            <p style="font-family: 'Pacifico'; font-size: 48px; margin: 0 0 15px 0;">
+              Surprise me !
+            </p>
+          </td>
+        </tr>
+
+        <!-- Profile form -->
+        <tr>
+          <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+               <td style="color: #3d3d3d; font-family: 'Roboto'; font-size: 14px; line-height: 20px; padding: 0 0 0 0;">
+                 <i>Select your preferences and then let our engine surprise you with some new babies to chat with.</i>
+               </td>
+              </tr>
+
+             <tr>
+               <td>
+                 <form>
+                   <fieldset>
+                     <legend style="color: #081419; font-family: 'Pacifico', Arial, sans-serif; font-size: 30px;">
+                       <b>Preferences</b>
+                     </legend>
+
+                     <table border="0" width="100%">
+                       <tr>
+                         <td>
+                           <table border="0" width="100%">
+                             <tr>
+                               <td width=47% style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                                 <label for="nom">Gender</label><br>
+                               </td>
+                             </tr>
+                             <tr>
+                               <td style="padding: 0 0 5px 5px;">
+                                 <input type="checkbox" name="gender" id="male" />
+                                 <label class="label" for="male">Male</label>
+                                 <input type="checkbox" name="gender" id="female" />
+                                 <label class="label" for="female">Female</label>
+                                 <input type="checkbox" name="gender" id="notsure" />
+                                 <label class="label" for="notsure">Not sure</label>
+                               </td>
+                             </tr>
+                             <tr>
+                               <td width=50% style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                                 <label for="nom">City</label><br>
+                               </td>
+                             </tr>
+                             <tr>
+                               <td>
+                                 <input class="input" type="text" name="city" id="city" placeholder="A city.."/>
+                               </td>
+                             </tr>
+                          </table>
+                         </td>
+                         <td width="6%">
+                         </td>
+                         <td valign="top" width=47% style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px;">
+                           <table border="0" width="100%">
+                             <tr>
+                               <td width=50% style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 0 5px;">
+                                 <label for="nom">Age</label><br>
+                               </td>
+                             </tr>
+                             <tr>
+                               <td>
+                                 <table border="0" width="100%">
+                                   <tr>
+                                     <td width=60%>
+                                       <input type="range" id="ageMin" value=18 min=0 max=150 oninput="ageMini(this);">
+                                     </td>
+                                     <td width=40% style="padding-left: 5px;">
+                                       <p style="font-size: 14px; color: #444444;"> age min: <a id="valMin"></a></p>
+                                     </td>
+                                   </tr>
+                                   <tr>
+                                     <td width=60%>
+                                       <input type="range" id="ageMax" value=50 min=0 max=150 oninput="ageMaxi(this);">
+                                     </td>
+                                     <td width=40% style="padding-left: 5px;">
+                                       <p style="font-size: 14px; color: #444444;"> age max: <a id="valMax"></a></p>
+                                     </td>
+                                   </tr>
+                                 </table>
+                               </td>
+                             </tr>
+                          </table>
+                         </td>
+                       </tr>
+
+                       <tr>
+                         <td align=center colspan="3" style="padding-top: 20px; padding-bottom: 10px;">
+                           <a href="" class=button>
+                             <span style="font-size: 28px;">Surprise me !</span>
+                           </a>
+                         </td>
+                       </tr>
+                     </table>
+                   </fieldset>
+                 </form>
+               </td>
+             </tr>
+
+             <!-- Personal information -->
+             <!-- Several things, check it out -->
+             <tr><td><table border="0" width="100%">
+
+               <tr>
+                 <td id="col1" width="50%" style="padding: 20px 20px 20px 20px;">
+                   <a href="#">
+                     <div id="cont1" class="container">
+                      <img id="img1" width="100%" height="100%" class="art-bg" src="../front/img/img-bg.png" alt="">
+                      <div class="top-left" style="padding-top: 25px;">
+                        <img id="myPicture" src="../front/img/profile-picture.png" width="120px" alt="Picture">
+                      </div>
+                      <div class="top-right" align=right style="padding-top: 5px; padding-right: 10px;">
+                        <p id="username" class="username">Baptman</p>
+                        <p id="gender-age" class="gender-age">Male - 23<br>Dijon</p>
+                      </div>
+                      <div class="bottom-right">
+                        <blockquote id="description" class="description">
+                          This is a description. Yes it is. Are you surprised? You should not, it was to be expected on a profile page. By the way, I'm Baptman - nice to meet you! Now Chat Me Baby. ;)
+                        </q>
+                      </div>
+                     </div>
+                   </a>
+                 </td>
+
+                 <td id="col2" width="50%" style="padding: 20px 20px 20px 20px;">
+                   <a href="#">
+                     <div id="cont1" class="container">
+                      <img id="img1" width="100%" height="100%" class="art-bg" src="../front/img/img-bg.png" alt="">
+                      <div class="top-left" style="padding-top: 25px;">
+                        <img id="myPicture" src="../front/img/profile-picture.png" width="120px" alt="Picture">
+                      </div>
+                      <div class="top-right" align=right style="padding-top: 5px; padding-right: 10px;">
+                        <p id="username" class="username">Baptman</p>
+                        <p id="gender-age" class="gender-age">Male - 23<br>Dijon</p>
+                      </div>
+                      <div class="bottom-right">
+                        <blockquote id="description" class="description">
+                          This is a description. Yes it is. Are you surprised? You should not, it was to be expected on a profile page. By the way, I'm Baptman - nice to meet you! Now Chat Me Baby. ;)
+                        </q>
+                      </div>
+                     </div>
+                   </a>
+                 </td>
+               </tr>
+
+           </table></td></tr>
+     </table>
+
+   </td>
+  </tr>
+ </table>
+
+</td>
+</tr>
+</table>
+
+</form>
+
+<footer>
+  <table class="tableFooter" border="0" align="center">
+    <tr align="right">
+      <td class="backTop" colspan="3">
+        <a href="#">Back to top &#9650;</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="contact" width="10%"><button class="buttonContact">Contact Us!</button></td>
+      <td class="copyright" width="90%">
+        Copyright © 2018 - <span class="chatmebaby">Chat Me Baby </span>- Hynes Monchicourt Raimondi Roudaut
+      </td>
+      <td>
+        <table>
+          <td class="linkedin" width="3%"><img src="../Logo/Icones/linkedin-box.png"/></td>
+          <td class="facebook" width="3%"><img src="../Logo/Icones/facebook-box.png"/></td>
+          <td class="twitter" width="3%"><a><img src="../Logo/Icones/twitter-box.png"/></a></td>
+        </table>
+      </td>
+
+
+    </tr>
+  </table>
+</footer>
+
+<script>ageMini(document.getElementById("ageMin"));</script>
+</body>
+
+</html>
