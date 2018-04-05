@@ -5,6 +5,12 @@ $('.channel').on( "click", function() {
   var newChannelName = $('.active_channel').text();
   date= new Date();
   $('.channelNam p b').html(newChannelName);
+  socket.emit('getMessages', {
+      channel: newChannelName;
+    });
+  socket.on('messages', function(messages){
+    
+  })
   //socket.emit('getUser');
   //socket.on('user', function(user) {
   //  socket.emit('message', {

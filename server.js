@@ -84,6 +84,17 @@ io.sockets.on('connection', function(socket) {
 		}
 	})
 
+	socket.on('getMessage', function(channel){
+		channelName = channel.channel;
+		var sql = "SELECT ChannelID FROM User WHERE ChannelName='"+channelName+"'";
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows > 0){
+				console.log(result[0]);
+			}
+		})
+	}
+
 	socket.on('getUser',function(){
 			socket.emit('user',me);
 		})
