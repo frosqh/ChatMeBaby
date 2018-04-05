@@ -21,6 +21,18 @@
   cursor: pointer;
 }
 
+.newchan {
+  background: url(../img/plus.png) no-repeat top center;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  border : none;
+	color : transparent;
+  cursor: pointer;
+  margin-left: 45%;
+  padding: 8px 0 0 0;
+}
+
 /* ScrollBar*/
 ::-webkit-scrollbar {
     width: 8px;
@@ -94,7 +106,6 @@
   padding: 1px 16px;
   background-color: #666699;
   color: white;
-
 }
 
 .topnavchat p{
@@ -122,7 +133,7 @@
   height: 90%;
   overflow-x: hidden;
   overflow-y: auto;
-  position: fixed;
+  /*position: fixed;*/
   bottom: 45px;
   right:0;
 }
@@ -154,7 +165,7 @@
   margin:0;
 }
 
-.workingLab_sidebar:hover,.channelTitle:hover,.channel:hover,.PrivateMessageTitle:hover,.user:hover,.addPeople:hover,.babyTitle:hover,.baby:hover{
+/*.workingLab_sidebar:hover,.channelTitle:hover,*/.channel:hover,/*.PrivateMessageTitle:hover,*/.user:hover,.addPeople:hover,/*.babyTitle:hover,*/.baby:hover{
   background-color: rgb(0,0,0,0.3);
 }
 
