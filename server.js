@@ -35,7 +35,7 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-		if(!user.username in users){
+	if(user.username in users){
 			users[user.username].connected = 1;
 		} else {
 			me=user;
@@ -74,7 +74,7 @@ io.sockets.on('connection', function(socket) {
 		if(!me){
 				return false;
 		}
-		if (index > -1) {
+		if (user.username in users) {
     		users[user.username].connected=0;
 		}
 		io.sockets.emit('deconnexion_client',me);
