@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS User (
   PhoneNumber VARCHAR(12) NULL,
   City VARCHAR(100) NULL,
   Gender INT NULL,
-  LastActivity DATETIME NOT NULL,
   PRIMARY KEY (
     UserID
   )
@@ -124,3 +123,9 @@ REFERENCES User (UserID);
 
 ALTER TABLE Notification ADD CONSTRAINT fk_Notif_User FOREIGN KEY IF NOT EXISTS (User)
 REFERENCES User (UserID);
+
+INSERT IGNORE INTO User (UserID, UserName, Mail, Connected, Password, Confirmed) VALUES (0,"Anonymous","chatmebaby2k18@gmail.com",1,"admin",1);
+INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (0,"General", NOW());
+INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (1,"Random", NOW());
+INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power) VALUES (0,0,0,100);
+INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power) VALUES (1,0,1,100);

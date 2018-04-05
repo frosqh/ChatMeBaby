@@ -53,8 +53,9 @@
       </div>
       <div class="channel_sidebar">
         <p class="channelTitle">Channels<button id="newchan" class="newchan"></button></p>
-        <p class="channel">General</p>
-        <p class="channel">Random</p>
+        <% for i in channels { %>
+                 <p class="channel"><%= i %></p>
+      <%}%>
       </div>
       <div class="privateMessage_sidebar">
         <p class="PrivateMessageTitle">Private Message</p>
