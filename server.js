@@ -44,8 +44,8 @@ io.sockets.on('connection', function(socket) {
 			me.connected=1;
 			users.push(me);
 			index = users.indexOf(user);
+			io.sockets.emit('nouveau_client', users[index]);
 		}
-		io.sockets.emit('nouveau_client', users[index]);
 	});
 
 	socket.on('message', function(message){
