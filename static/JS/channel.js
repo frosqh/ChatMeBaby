@@ -31,6 +31,7 @@ function refresh(newChannelName){
      minute= time.split(':')[1];
      hour = time.split(':')[0];
      if(lastMsg != m.UserName){
+          m.Txt = m.Txt.replace(':/\w/:','<i class=em em-alien></i>');
           $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="'+m.Image+'" width="32" height="32"/><div class="sender">'+m.UserName+'</div><div class="time">'+hour+':'+minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + m.Txt + '</div></div></div>');
           lastMsg = m.UserName;
       } else {

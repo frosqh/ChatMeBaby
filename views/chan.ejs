@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body id="body">
@@ -316,8 +317,9 @@
     // Quand on recoit un message, on l'insere dans la page
     socket.on('msg', function(message) {
       if(message.channel==$('.active_channel').text()){
+        message.content = message.content.replace(':/\w/:','<i class=em em-alien></i>');
         if(lastMsg != message.user){
-          $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/29792871_130672044443074_3886540281580134733_n.png?_nc_cat=0&oh=ba0d45495f5506030849de77f27b16b6&oe=5B73A591" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
+          $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="'+m.Image+'" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
           lastMsg = message.user;
         } else {
           $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
