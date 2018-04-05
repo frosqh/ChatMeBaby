@@ -1,0 +1,595 @@
+------------ channelTest.yml ------------
+Started phase 0, duration: 60s @ 15:59:53(+0200) 2018-04-05
+Report @ 16:00:03(+0200) 2018-04-05
+  Scenarios launched:  99
+  Scenarios completed: 0
+  Requests completed:  540
+  RPS sent: 54.66
+  Request latency:
+    min: 0.2
+    max: 4.2
+    median: 0.3
+    p95: 0.5
+    p99: 1
+  Codes:
+    0: 540
+
+Report @ 16:00:13(+0200) 2018-04-05
+  Scenarios launched:  101
+  Scenarios completed: 0
+  Requests completed:  1550
+  RPS sent: 154.69
+  Request latency:
+    min: 0.1
+    max: 5.1
+    median: 0.2
+    p95: 0.4
+    p99: 0.6
+  Codes:
+    0: 1550
+
+Report @ 16:00:23(+0200) 2018-04-05
+  Scenarios launched:  100
+  Scenarios completed: 0
+  Requests completed:  2511
+  RPS sent: 250.1
+  Request latency:
+    min: 0
+    max: 5.1
+    median: 0.2
+    p95: 0.4
+    p99: 0.5
+  Codes:
+    0: 2511
+
+Report @ 16:00:33(+0200) 2018-04-05
+  Scenarios launched:  100
+  Scenarios completed: 0
+  Requests completed:  3375
+  RPS sent: 335.49
+  Request latency:
+    min: 0
+    max: 1.1
+    median: 0
+    p95: 0.2
+    p99: 0.3
+  Codes:
+    0: 3375
+
+Report @ 16:00:43(+0200) 2018-04-05
+  Scenarios launched:  101
+  Scenarios completed: 0
+  Requests completed:  4423
+  RPS sent: 439.23
+  Request latency:
+    min: 0
+    max: 1.6
+    median: 0
+    p95: 0.2
+    p99: 0.3
+  Codes:
+    0: 4423
+  Errors:
+    timeout: 1
+    Error: xhr poll error: 98
+
+Report @ 16:00:53(+0200) 2018-04-05
+  Scenarios launched:  99
+  Scenarios completed: 87
+  Requests completed:  4666
+  RPS sent: 463.36
+  Request latency:
+    min: 0
+    max: 9.7
+    median: 0
+    p95: 0.2
+    p99: 0.3
+  Codes:
+    0: 4666
+  Errors:
+    timeout: 1
+
+Report @ 16:01:03(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 77
+  Requests completed:  4110
+  RPS sent: 408.14
+  Request latency:
+    min: 0
+    max: 7.6
+    median: 0
+    p95: 0.2
+    p99: 0.3
+  Codes:
+    0: 4110
+  Errors:
+    timeout: 22
+
+Report @ 16:01:13(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 51
+  Requests completed:  3249
+  RPS sent: 322.96
+  Request latency:
+    min: 0
+    max: 9.7
+    median: 0
+    p95: 0.3
+    p99: 0.4
+  Codes:
+    0: 3249
+  Errors:
+    timeout: 16
+
+Report @ 16:01:24(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 80
+  Requests completed:  2395
+  RPS sent: 239.98
+  Request latency:
+    min: 0
+    max: 9.7
+    median: 0
+    p95: 0.3
+    p99: 0.3
+  Codes:
+    0: 2395
+
+Report @ 16:01:34(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 67
+  Requests completed:  1347
+  RPS sent: 135.24
+  Request latency:
+    min: 0
+    max: 0.7
+    median: 0
+    p95: 0.3
+    p99: 0.4
+  Codes:
+    0: 1347
+
+Report @ 16:01:44(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 67
+  Requests completed:  564
+  RPS sent: 56.68
+  Request latency:
+    min: 0
+    max: 0.6
+    median: 0.2
+    p95: 0.4
+    p99: 0.6
+  Codes:
+    0: 564
+
+Report @ 16:01:54(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 29
+  Requests completed:  110
+  RPS sent: 11.09
+  Request latency:
+    min: 0.1
+    max: 4.2
+    median: 0.3
+    p95: 0.6
+    p99: 2.1
+  Codes:
+    0: 110
+
+Report @ 16:01:59(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 4
+  Requests completed:  10
+  RPS sent: 2.04
+  Request latency:
+    min: 0.3
+    max: 1
+    median: 0.6
+    p95: 1
+    p99: NaN
+  Codes:
+    0: 10
+
+All virtual users finished
+Summary report @ 16:01:59(+0200) 2018-04-05
+  Scenarios launched:  600
+  Scenarios completed: 462
+  Requests completed:  28850
+  RPS sent: 229.73
+  Request latency:
+    min: 0
+    max: 9.7
+    median: 0
+    p95: 0.3
+    p99: 0.4
+  Scenario counts:
+    Connect and send a bunch of messages: 600 (100%)
+  Codes:
+    0: 28850
+  Errors:
+    timeout: 40
+    Error: xhr poll error: 98
+
+
+
+
+
+------------ connectTest.yml ------------
+Started phase 0, duration: 60s @ 16:01:59(+0200) 2018-04-05
+Report @ 16:02:09(+0200) 2018-04-05
+  Scenarios launched:  249
+  Scenarios completed: 249
+  Requests completed:  249
+  RPS sent: 25.03
+  Request latency:
+    min: 2.8
+    max: 11.4
+    median: 3.4
+    p95: 4.5
+    p99: 7.2
+  Codes:
+    200: 249
+
+Report @ 16:02:19(+0200) 2018-04-05
+  Scenarios launched:  251
+  Scenarios completed: 251
+  Requests completed:  251
+  RPS sent: 25.1
+  Request latency:
+    min: 2.8
+    max: 22.5
+    median: 3.3
+    p95: 4.2
+    p99: 8.6
+  Codes:
+    200: 251
+
+Report @ 16:02:29(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25.05
+  Request latency:
+    min: 2.8
+    max: 8.5
+    median: 3.2
+    p95: 3.9
+    p99: 5.4
+  Codes:
+    200: 250
+
+Report @ 16:02:39(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25.03
+  Request latency:
+    min: 2.7
+    max: 12.4
+    median: 3.1
+    p95: 3.8
+    p99: 6
+  Codes:
+    200: 250
+
+Report @ 16:02:49(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25
+  Request latency:
+    min: 2.8
+    max: 14.1
+    median: 3.1
+    p95: 3.7
+    p99: 7.2
+  Codes:
+    200: 250
+
+Report @ 16:02:59(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25
+  Request latency:
+    min: 2.8
+    max: 9.3
+    median: 3.1
+    p95: 3.8
+    p99: 7.2
+  Codes:
+    200: 250
+
+Report @ 16:03:00(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 0
+  Requests completed:  0
+  RPS sent: NaN
+  Request latency:
+    min: NaN
+    max: NaN
+    median: NaN
+    p95: NaN
+    p99: NaN
+
+All virtual users finished
+Summary report @ 16:03:00(+0200) 2018-04-05
+  Scenarios launched:  1500
+  Scenarios completed: 1500
+  Requests completed:  1500
+  RPS sent: 24.81
+  Request latency:
+    min: 2.7
+    max: 22.5
+    median: 3.2
+    p95: 4.1
+    p99: 7.2
+  Scenario counts:
+    0: 1500 (100%)
+  Codes:
+    200: 1500
+
+
+
+
+
+------------ loginTest.yml ------------
+Started phase 0, duration: 60s @ 16:03:00(+0200) 2018-04-05
+Report @ 16:03:10(+0200) 2018-04-05
+  Scenarios launched:  499
+  Scenarios completed: 499
+  Requests completed:  499
+  RPS sent: 50
+  Request latency:
+    min: 2.5
+    max: 26.9
+    median: 2.7
+    p95: 4.8
+    p99: 8.3
+  Codes:
+    200: 499
+
+Warning: 
+CPU usage of Artillery seems to be very high
+which may severely affect its performance.
+See https://artillery.io/docs/faq/#high-cpu-warnings for details.
+
+Report @ 16:03:20(+0200) 2018-04-05
+  Scenarios launched:  501
+  Scenarios completed: 501
+  Requests completed:  501
+  RPS sent: 50.1
+  Request latency:
+    min: 2.4
+    max: 15.6
+    median: 2.7
+    p95: 3.9
+    p99: 9.1
+  Codes:
+    200: 501
+
+Warning: High CPU usage warning.
+See https://artillery.io/docs/faq/#high-cpu-warnings for details.
+
+Report @ 16:03:30(+0200) 2018-04-05
+  Scenarios launched:  501
+  Scenarios completed: 501
+  Requests completed:  501
+  RPS sent: 50.05
+  Request latency:
+    min: 2.4
+    max: 28.5
+    median: 2.7
+    p95: 4.1
+    p99: 9.8
+  Codes:
+    200: 501
+
+Warning: High CPU usage warning.
+See https://artillery.io/docs/faq/#high-cpu-warnings for details.
+
+Report @ 16:03:40(+0200) 2018-04-05
+  Scenarios launched:  501
+  Scenarios completed: 501
+  Requests completed:  501
+  RPS sent: 50.05
+  Request latency:
+    min: 2.5
+    max: 12.1
+    median: 2.6
+    p95: 4.4
+    p99: 7.1
+  Codes:
+    200: 501
+
+Warning: High CPU usage warning.
+See https://artillery.io/docs/faq/#high-cpu-warnings for details.
+
+Report @ 16:03:50(+0200) 2018-04-05
+  Scenarios launched:  500
+  Scenarios completed: 499
+  Requests completed:  499
+  RPS sent: 50
+  Request latency:
+    min: 2.4
+    max: 23
+    median: 2.7
+    p95: 4.5
+    p99: 6.7
+  Codes:
+    200: 499
+  Errors:
+    ENETUNREACH: 1
+
+Warning: High CPU usage warning.
+See https://artillery.io/docs/faq/#high-cpu-warnings for details.
+
+Report @ 16:04:00(+0200) 2018-04-05
+  Scenarios launched:  498
+  Scenarios completed: 498
+  Requests completed:  498
+  RPS sent: 49.75
+  Request latency:
+    min: 2.4
+    max: 26.7
+    median: 2.6
+    p95: 4.1
+    p99: 6.5
+  Codes:
+    200: 498
+
+Report @ 16:04:01(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 0
+  Requests completed:  0
+  RPS sent: NaN
+  Request latency:
+    min: NaN
+    max: NaN
+    median: NaN
+    p95: NaN
+    p99: NaN
+
+All virtual users finished
+Summary report @ 16:04:01(+0200) 2018-04-05
+  Scenarios launched:  3000
+  Scenarios completed: 2999
+  Requests completed:  2999
+  RPS sent: 49.59
+  Request latency:
+    min: 2.4
+    max: 28.5
+    median: 2.7
+    p95: 4.2
+    p99: 8.2
+  Scenario counts:
+    0: 3000 (100%)
+  Codes:
+    200: 2999
+  Errors:
+    ENETUNREACH: 1
+
+
+
+
+
+------------ signupTest.yml ------------
+Started phase 0, duration: 60s @ 16:04:01(+0200) 2018-04-05
+Report @ 16:04:11(+0200) 2018-04-05
+  Scenarios launched:  249
+  Scenarios completed: 249
+  Requests completed:  249
+  RPS sent: 25.03
+  Request latency:
+    min: 2.7
+    max: 11.6
+    median: 3.1
+    p95: 4
+    p99: 9
+  Codes:
+    200: 249
+
+Report @ 16:04:21(+0200) 2018-04-05
+  Scenarios launched:  251
+  Scenarios completed: 251
+  Requests completed:  251
+  RPS sent: 25.1
+  Request latency:
+    min: 2.8
+    max: 10.7
+    median: 3
+    p95: 3.3
+    p99: 5.1
+  Codes:
+    200: 251
+
+Report @ 16:04:31(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25.05
+  Request latency:
+    min: 2.7
+    max: 11.7
+    median: 3
+    p95: 3.7
+    p99: 9.1
+  Codes:
+    200: 250
+
+Report @ 16:04:41(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25.03
+  Request latency:
+    min: 2.7
+    max: 13.6
+    median: 3
+    p95: 3.7
+    p99: 8.5
+  Codes:
+    200: 250
+
+Report @ 16:04:51(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25.03
+  Request latency:
+    min: 2.6
+    max: 9.1
+    median: 3
+    p95: 3.4
+    p99: 7.5
+  Codes:
+    200: 250
+
+Report @ 16:05:01(+0200) 2018-04-05
+  Scenarios launched:  250
+  Scenarios completed: 250
+  Requests completed:  250
+  RPS sent: 25
+  Request latency:
+    min: 2.6
+    max: 26.9
+    median: 3
+    p95: 3.5
+    p99: 8.8
+  Codes:
+    200: 250
+
+Report @ 16:05:02(+0200) 2018-04-05
+  Scenarios launched:  0
+  Scenarios completed: 0
+  Requests completed:  0
+  RPS sent: NaN
+  Request latency:
+    min: NaN
+    max: NaN
+    median: NaN
+    p95: NaN
+    p99: NaN
+
+All virtual users finished
+Summary report @ 16:05:02(+0200) 2018-04-05
+  Scenarios launched:  1500
+  Scenarios completed: 1500
+  Requests completed:  1500
+  RPS sent: 24.8
+  Request latency:
+    min: 2.6
+    max: 26.9
+    median: 3
+    p95: 3.6
+    p99: 8.6
+  Scenario counts:
+    0: 1500 (100%)
+  Codes:
+    200: 1500
+
+
+
+
+
