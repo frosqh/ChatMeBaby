@@ -318,7 +318,7 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
     // Quand on recoit un message, on l'insere dans la page
     socket.on('msg', function(message) {
       if(message.channel==$('.active_channel').text()){
-        message.content = message.content.replace(RegExp("(:)(((\\w)|'-')+)(:)",'g'),function(p1,p2,p3,p4){
+        message.content = message.content.replace(RegExp("(:)(((\\w)|-)+)(:)",'g'),function(p1,p2,p3,p4){
           console.log(p2);
           console.log(p3);
           console.log(p4);
