@@ -277,7 +277,7 @@
     var socket = io.connect();
     var lastMsg=false;
     $('.channelNam p b').html($('.active_channel').text());
-
+$('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
     refresh($('.active_channel').text());
     // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
 
@@ -309,6 +309,7 @@
             minute  :date.getMinutes(),
             channel :$('.active_channel').text()
           }); // Transmet le message aux autres
+	  $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
           $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
 
         }
@@ -324,7 +325,7 @@
           lastMsg = message.user;
         } else {
           $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
-          $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+          
         }
       }
     })
