@@ -168,12 +168,12 @@
 }
 
 .content{
-  width: 87%;
+  width: 100%;
   height: calc(100vh - 87px);
   overflow-x: hidden;
   overflow-y: scroll;
   /*position: fixed;*/
-  bottom: 45px;
+  margin-bottom: 45px;
   right:0;
   padding-left: 10px;
 }
@@ -323,7 +323,7 @@
 }
 
 .form div{
-  background-color: transparent;
+  background-color: #f1f1f1;
 }
 
 input[type=text]:focus {
