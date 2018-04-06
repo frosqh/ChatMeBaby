@@ -172,7 +172,41 @@ module.exports = {
 			return result.info.insertId;
 		});
 	});
+},
+Channel:function(Name,vis){
+	var sql="SELECT * FROM Channel";
+	con.query(sql, function(err,result){
+		if (err) throw err;
+		if (result == undefined){
+			ChannelID=  0;
+		} else {
+			ChannelID = result.info.numRows;
+		}
+		var sql="INSERT INTO Channel (ChannelID, Name, Visibility, CreationDate) VALUES ("+ChannelID+",'"+Name+"',"+Visibility+",NOW())";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			Settings(result.info.insertId);
+			return result.info.insertId;
+		});
+	});
+},
+UserByChannel:function(UserID, ChannelID,Name, Power){
+	var sql="SELECT * FROM UserByChannel";
+	con.query(sql, function(err, result){
+		if (err) throw err;
+		if (result == undefined){
+			UbCId = 0;
+		} else {
+			UbCId = result.info.numRows;
+		}
+		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		})
+	})
 }
+
 }
 // API User
 
@@ -267,23 +301,6 @@ function setDisplay(PrefID, display){
 }
 
 // Création Channel
-function Channel(Name){
-	var sql="SELECT * FROM Channel";
-	con.query(sql, function(err,result){
-		if (err) throw err;
-		if (result == undefined){
-			ChannelID=  0;
-		} else {
-			ChannelID = result.info.numRows;
-		}
-		var sql="INSERT INTO Channel (ChannelID, Name, CreationDate) VALUES ("+ChannelID+",'"+Name+"',NOW())";
-		con.query(sql, function(err, result){
-			if (err) throw err;
-			Settings(result.info.insertId);
-			return result.info.insertId;
-		});
-	});
-}
 
 // API Channel
 function setName(channelID, name){
@@ -369,22 +386,7 @@ function setPJ(MessageID, PJ){
 }
 
 //Création UserByChannel
-function UserByChannel(UserID, ChannelID,Name, Power){
-	var sql="SELECT * FROM UserByChannel";
-	con.query(sql, function(err, result){
-		if (err) throw err;
-		if (result == undefined){
-			UbCId = 0;
-		} else {
-			UbCId = result.info.numRows;
-		}
-		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
-		con.query(sql, function(err, result){
-			if (err) throw err;
-			return result.info.insertId;
-		})
-	})
-}
+
 
 //API UserByChannel
 function setTitle(UbCId,Title){
