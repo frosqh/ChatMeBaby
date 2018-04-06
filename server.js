@@ -394,9 +394,11 @@ app.post('/profile', function(req, res){
 		var lastname = req.post.lastname;
 		var birthdate = req.post.birthdate;
 		var phonenumber = req.post.phonenumber;
-		var mail = req.post.new-email;
-		var pass = req.post.current-password;
-		var newpass = req.post.new-password;
+		var mail = req.post.new_email;
+		var pass = req.post.current_password;
+		var newpass = req.post.new_password;
+		if (firstname != null){
+			db.setFirstName(
 		console.log(firstname+"/"+lastname);
 		console.log(gender);
 		console.log(city);

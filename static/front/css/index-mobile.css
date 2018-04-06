@@ -36,15 +36,10 @@ body {
 /* Header/Blog Title */
 .header {
     padding: 10px;
-<<<<<<< HEAD
-=======
-    text-align: center;
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
     background-color: #111;
     /* background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4); */
 }
 
-<<<<<<< HEAD
 #LogoTransparent {
   display: block;
   height: 4em;
@@ -57,19 +52,11 @@ body {
   position: absolute;
   padding-left: 15px;
   padding-bottom: 5px;
-=======
-#menuico{
-  padding-left: 15px;
-  padding-top: 5px;
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
 }
 
 .connectedUser{
   position: absolute;
-<<<<<<< HEAD
   left: 0px;
-=======
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
   color: #ffffff;
   border-radius: 4px;
   top: 8px;
@@ -107,10 +94,7 @@ body {
     background-color: #333;
     position: -webkit-sticky; /* Safari */
     position: sticky;
-<<<<<<< HEAD
     font-size: 26px;
-=======
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
     top: 0;
     z-index: 500;
 }
@@ -180,11 +164,7 @@ footer {
 }
 
 .copyright{
-<<<<<<< HEAD
   font-size: 15px;
-=======
-  font-size: 12px;
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
 }
 
 .copyright, .backTop, .contact, .facebook{
@@ -193,11 +173,7 @@ footer {
 
 .backTop > a{
   font-family: 'Roboto Condensed', sans-serif;
-<<<<<<< HEAD
   font-size: 24px;
-=======
-  font-size: 11px;
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
   color: #ffffff;
   text-decoration: none;
   -webkit-transition: all 0.3s ease;
@@ -215,14 +191,6 @@ footer {
   margin-right: 1%;
 }
 
-<<<<<<< HEAD
-
-=======
-#LogoTransparent {
-  height: 2em;
-  width: auto;
-}
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
 
 .chatmebaby{
     font-family : 'Pacifico',sans-serif;
@@ -232,11 +200,7 @@ footer {
   background: #000010;
   color: #ffffff;
   font-family: 'Roboto Condensed', sans-serif;
-<<<<<<< HEAD
   font-size: 24px;
-=======
-  font-size: 14px;
->>>>>>> 4486998c26e365fb282f219628e22821db3bcb66
   border-radius: 4px;
   padding: 11px;
   border: 0px;
