@@ -131,7 +131,45 @@ function MrmInput(myButton){
 }
 
 function sendFormMembers() {
-  document.getElementById("myFormMembers").submit();
+  var chanName = document.getElementById("channelnameMembers");
+  if (chanName.checkValidity() ) {
+	  var addUser = [];
+    //document.getElementById("myForm").submit();
+    var modal = document.getElementById('myModalMembers');
+    modal.style.display = "none";
+      for(var k=0;k<=Mcounter;k++){
+        if($("#M"+k+"inp").length != 0) {
+          addUser.push($('#M'+k+'inp').val());
+          //console.log($('#inp'+k).val());
+          //$('#inp'+k).val('');
+        }
+      }
+
+      chanName = $('#channelnameMembers').val();
+      socket.emit('addUser', {
+        name: chanName,
+        users: addUser
+      });
+      //socket.emit('checkName', chanName);
+
+     /* socket.on('nameDispo',function(isDispo){
+        if(isDispo){
+          // Envoie le channel a la BD
+          socket.emit('newChannel', {
+            name    :chanName,
+            status  :stat,
+            users   :addUser
+          });
+
+          clearAndHide();
+        } else {
+            //Souligner le nom du channel en rouge
+        }
+      });**/
+      //$('.channel_sidebar').append('<p class="channel">'+chanName+'</p>');
+	  }
+
+
 }
 
 function checkAllValidate() {
@@ -139,7 +177,7 @@ function checkAllValidate() {
 }
 
 function clearAndHide(){
-  for(var k=0;k<=counter;k++){
+  for(var k=0;k<=Mcounter;k++){
     if($("#inp" + k).length != 0) {
       $('#inp'+k).val('');
     }

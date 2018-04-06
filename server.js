@@ -7,6 +7,7 @@ var server = http.createServer(app);
 server.listen(8080);
 var io = require('socket.io')(server);
 var ent = require('ent');
+var fs = require('fs');
 var mobile = require("is-mobile");
 var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
@@ -112,13 +113,13 @@ io.sockets.on('connection', function(socket) {
 			}
 			emojiContent = data;
 			var emojiName=[];
-			for(int i=0;i<emojiContent.length;i++){
+			for(i=0;i<emojiContent.length;i++){
 				emojiName[i] = JSON.parse(emojiContent[i]).name;
-				console.log(emojiName[i]);
+				//console.log(emojiName[i]);
 			}
 			// Invoke the next step here however you like
 			console.log(content);   // Put all of the code here (not the best solution)
-			processFile();          // Or put the next step in a function and invoke it
+			socket.emit('emojiresponse',emojiName);
 		});
 	});
 
@@ -144,8 +145,19 @@ io.sockets.on('connection', function(socket) {
 	//channel.users : liste des noms des utilisateurs a ajouter
 	socket.on('newChannel',function(channel){
 		db.Channel(channel.name, channel.status);
-		setTimeout(function(){
-			var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channel.name+"'";
+		addUsers(channel);
+
+	});
+
+	socket.on('addUser', function(data){
+		addUsers(data)});
+
+})
+
+function addUsers(channel){setTimeout(function(){
+	console.log(channel.name);
+	console.log(channel.users);
+	var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channel.name+"'";
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
 				if (result.info.numRows > 0){
@@ -165,14 +177,10 @@ io.sockets.on('connection', function(socket) {
 				} else {
 					console.log("SRSLY ?");
 				}
-		});
+		});},300);
 
-	},500)
 
-	});
-
-})
-
+}
 
 
 
@@ -234,13 +242,34 @@ app.get('/', function(req, res) {
 		req.session.user=userf;
 	}
 	if (mobile(req)){
-		res.render('home-mobile.ejs', {user: userf});
+		if (req.session.user==undefined || req.session.user=='Anonymous'){
+			res.render('login.ejs', {wrong:undefined});
+		} else {
+			var sql = "SELECT UserID FROM User WHERE UserName = '"+req.session.user+"'";
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				if (result.info.numRows > 0){
+					var sql = "SELECT Name FROM UserByChannel WHERE UserID = "+result[0].UserID;
+					db.con.query(sql, function(err, result, fields){
+						if (err) throw err;
+						l="";
+						for (i=0;i<result.info.numRows;i++){
+							l+=result[i].Name+" ";
+						}
+					res.render('home-mobile.ejs', {user: req.session.user, channels:(l.substring(0,l.length-1)).split(' ')});
+			});
+		}	})
+		}
+
+
 	} else {
-		res.render('home.ejs', {user: userf});
+		res.render('home.ejs', {user: userf}); 
 	}
 });
 
-
+app.get('/lecharoy', function(req, res) {
+	res.render('charoy.ejs');
+});
 
 app.get('/channels', function(req,res) {
 	if (!req.session.user || req.session.user=="Anonymous"){
@@ -312,7 +341,11 @@ app.get('/create-account', function(req, res){
 		res.redirect("/");
 		return;
 	}
-	res.render('create-account.ejs', {notif: undefined});
+	if (mobile(req)){
+		res.render('create-account-mobile.ejs', {notif: undefined});
+	} else {
+		res.render('create-account.ejs', {notif: undefined});
+	}
 })
 
 app.get('/home', function(req, res){

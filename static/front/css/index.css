@@ -197,6 +197,10 @@ footer {
   color: #000000;
 }
 
+.buttonContact:hover * {
+	color: #000;
+}
+
 .buttonContact, .facebook, .linkedin, .twitter{
   cursor: pointer;
 }

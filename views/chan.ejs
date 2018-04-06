@@ -37,12 +37,12 @@
 
   <div class="topnav">
     <a href="/">Home</a>
-    <a class="indexPage" href="channel.html">MyChatRooms</a>
+    <a class="indexPage" href="/channels">MyChatRooms</a>
     <a href="#">MyChatFriends</a>
     <a href="#">Surprise Me!</a>
     <div class="searchbarbutton">
       <form id="searchForm" method="post">
-        <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+        <input class="searchbar" type="text" placeholder="Search emoji..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
         <input class="searchbutton" type="submit" value=""></input>
       </form>
     </div>
@@ -71,11 +71,7 @@
       <div class="privateMessage_sidebar">
         <p class="PrivateMessageTitle">Private Message</p>
       </div>
-      <div class="baby_sidebar">
-        <p class="babyTitle">Chat new babies</p>
-        <p class="baby">New Baby</p>
-        <p class="baby">Random baby</p>
-      </div>
+
     </div>
   </div>
 
@@ -216,13 +212,6 @@
                   </select>
                 </div>
               </td>
-
-              <td style="padding: 8px 0 5px 15px;">
-                <input type="radio" name="status" id="public" disabled/>
-                <label class="label" for="public">Public</label>
-                <input type="radio" name="status" id="private" disabled/>
-                <label class="label" for="private">Private</label>
-              </td>
             </tr>
             <!-- Add members -->
             <tr>
@@ -281,7 +270,9 @@
 
     socket.emit('emojiParsing');
     socket.on('emojiresponse',function(emoji){
-      
+      for(var k=0;k<emoji.length;k++){
+        console.log(emogi[i]);
+      }
     })
 
     $('.channelNam p b').html($('.active_channel').text());
