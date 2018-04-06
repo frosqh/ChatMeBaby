@@ -46,10 +46,20 @@ function sendForm() {
     //document.getElementById("myForm").submit();
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
-      for(var k=0;k<counter;k++){
+      for(var k=0;k<=counter;k++){
         if($("#inp" + k).length != 0) {
           addUser.push($('#inp'+k).val());
+          console.log($('#inp'+k).val());
           $('#inp'+k).val('');
+        }
+      }
+      $('channel_sidebar').append('<p class="channel">'+$('.channelname').text()+'</p>');
+      $('.channelname').text('');
+      for(var k=0;k<=counter;k++){
+        if($("#" + k).length != 0) {
+          if(('#'+k).hasClass("rs")){
+            $('#'+k).click();
+          }
         }
       }
   }
