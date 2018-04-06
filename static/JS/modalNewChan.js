@@ -53,9 +53,9 @@ function sendForm() {
           $('#inp'+k).val('');
         }
       }
-      $('.channel_sidebar').append('<p class="channel">'+$('.channelname').val()+'</p>');
-      console.log("Channel Name is :"+$('.channelname').val());
-      $('.channelname').val('');
+      $('.channel_sidebar').append('<p class="channel">'+$('#channelname').val()+'</p>');
+      console.log("Channel Name is :"+$('#channelname').val());
+      $('#channelname').val('');
       for(var k=0;k<=counter;k++){
         if($("#" + k).length != 0) {
           if($('#'+k).hasClass("rs")){
