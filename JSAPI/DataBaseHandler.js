@@ -59,7 +59,7 @@ module.exports = {
 			con.query(sql, function(err, result) {
 				if (err) throw err;
 				fs.readFile('../html/mail.html', 'utf8', (err, data)=>{
-				sendMail(Mail,data.replace("%username",UserName).replace("add",generateConfirm(UserID,UserName)));
+				sendMail(Mail,data.replace("%Username",UserName).replace("%add",generateConfirm(UserID,UserName)));
 				} var sql = "SELECT * FROM Channel WHERE Visibility = 1";
 				con.query(sql, function(err, result) {
 					if (err) throw err;
