@@ -35,11 +35,11 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-	if(users[user.username] != undefined){
+	if(users[user.username] != undefined && !users[user.username].connected){
 			users[user.username].connected = 1;
 			me = user;
 			me.connected = 1;
-			socket.broadcast.emit('connecti',me);
+			io.sockets.emit('connecti',me);
 		} else {
 			me = user;
 			me.username=ent.encode(me.username);
@@ -79,9 +79,9 @@ io.sockets.on('connection', function(socket) {
 				return false;
 		}
 		console.log(users[user.username]);
-		if (users[user.username] != undefined) {
+		if (users[me.username] != undefined) {
 			console.log("Not null");
-    		users[user.username].connected=0;
+    		users[me.username].connected=0;
 		}
 		me.conected=0;
 		io.sockets.emit('deconnexion_client',me);
@@ -206,7 +206,7 @@ app.get('/channels', function(req,res) {
 	})
 });
 
-apt.post('/channels', function(req, res) {
+app.post('/channels', function(req, res) {
 	processPost(req, res, function(){
 
 	})
