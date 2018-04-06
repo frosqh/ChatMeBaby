@@ -141,6 +141,18 @@ module.exports = {
 			if (err) throw err;
 		});
 	},
+	setMail:function(UserID, mail){
+		var sql="UPDATE User SET Mail ='"+mail+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	},
+	setPassword:function(UserID, pass){
+		var sql="UPDATE User SET Password ='"+helper.hashFnv32a(pass)+"' WHERE UserID ="+UserID;
+		con.query(sql, function(err, result){
+			if (err) throw err;
+		});
+	}
 	Message:function(UserId, ChannelId, Text, Name, avatar){
 	var sql="SELECT * FROM Message";
 	con.query(sql, function(err,result){

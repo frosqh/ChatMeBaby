@@ -386,28 +386,62 @@ app.post('/profile', function(req, res){
 	if (!req.session.user || req.session.user=='Anonymous'){
 		return;
 	}
-	processPost(req, res, function(){
-		var firstname = req.post.firstname;
-		var gender = req.post.gender;
-		var city = req.post.city;
-		var desc = req.post.description;
-		var lastname = req.post.lastname;
-		var birthdate = req.post.birthdate;
-		var phonenumber = req.post.phonenumber;
-		var mail = req.post.new_email;
-		var pass = req.post.current_password;
-		var newpass = req.post.new_password;
-		if (firstname != null){}
-			
-		console.log(firstname+"/"+lastname);
-		console.log(gender);
-		console.log(city);
-		console.log(desc);
-		console.log(birthdate);
-		console.log(phonenumber);
-		console.log(mail);
-		console.log(pass);
-		console.log(newpass);
+	var sql = "SELECT * FROM User WHERE UserName ='"+req.session.user+"'";
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.redirect("/");
+		} else {
+		processPost(req, res, function(){
+			var firstname = req.post.firstname;
+			var gender = req.post.gender;
+			var city = req.post.city;
+			var desc = req.post.description;
+			var lastname = req.post.lastname;
+			var birthdate = req.post.birthdate;
+			var phonenumber = req.post.phonenumber;
+			var mail = req.post.new_email;
+			var pass = req.post.current_password;
+			var newpass = req.post.new_password;
+			if (firstname != null){
+				db.setFirstName(result[0].UserID, firstname);
+			}
+			if (gender != null){
+				if (gender == 'male'){
+					gender=0;
+				}
+				if (gender == 'female'){
+					gender=1;
+				}
+				if (gender == 'notsure'){
+					gender=2;
+				}
+				db.setGender(result[0].UserID, gender);
+			}
+			if (city != null){
+				db.setCity(result[0].UserID, city);
+			}
+			if (desc != null){
+				db.setDescription(result[0].UserID, description);
+			}
+			if (lastname != null){
+				db.setLastName(result[0].UserID, lastname);
+			}
+			if (birthdate != null){
+				db.setBirthDate(result[0].UserID, birthdate);
+			}
+			if (phonenumber != null){
+				db.setPhoneNumber(result[0].UserID, phonenumber);
+			}
+			if (mail != null){
+				db.setMail(result[0].UserID, mail);
+			}
+			if (db.helper.hashFnv32a(pass)==result[0].Password){
+				db.setPassword(newpass);
+			}
+			res.redirect("/");
+		});
+	}
 	});
 });
 
