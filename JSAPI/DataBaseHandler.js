@@ -199,22 +199,7 @@ Channel:function(Name,vis){
 		});
 	});
 },
-UserByChannel:function(UserID, ChannelID,Name, Power){
-	var sql="SELECT * FROM UserByChannel";
-	con.query(sql, function(err, result){
-		if (err) throw err;
-		if (result == undefined){
-			UbCId = 0;
-		} else {
-			UbCId = result.info.numRows;
-		}
-		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
-		con.query(sql, function(err, result){
-			if (err) throw err;
-			return result.info.insertId;
-		})
-	})
-}
+
 
 }
 // API User
@@ -238,6 +223,23 @@ function setConnected(UserID, connected){
 	});
 }
 
+
+function UserByChannel(UserID, ChannelID,Name, Power){
+	var sql="SELECT * FROM UserByChannel";
+	con.query(sql, function(err, result){
+		if (err) throw err;
+		if (result == undefined){
+			UbCId = 0;
+		} else {
+			UbCId = result.info.numRows;
+		}
+		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		})
+	})
+}
 
 
 
