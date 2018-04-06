@@ -141,7 +141,7 @@ io.sockets.on('connection', function(socket) {
 						db.con.querry(sql, function(err, result, fields){
 							if (err) throw err;
 							if (result.info.numRows > 0){
-								db.UserByChannel(result[0].UserID, channelID, channel.name,25);
+								setTimeout(function(){db.UserByChannel(result[0].UserID, channelID, channel.name,25);},i*50);
 							}
 						});
 					}

@@ -60,8 +60,17 @@ module.exports = {
 			con.query(sql, function(err, result) {
 				if (err) throw err;
 				sendMail(Mail,"Welcome to ChatMeBaby !", "Hi " + UserName + ", thanks for signing up ! </br> You should confirm your address <a href='"+generateConfirm(UserID,UserName)+"'> here </a>");
-				UserByChannel(UserID, 0, "General", 25);
-				setTimeout(function(){UserByChannel(UserID, 1, "Random", 25);},500);
+				var sql = "SELECT * FROM Channel WHERE Visibility = 1";
+				con.query(sql, function(err, result) {
+					if (err) throw err;
+					if (result.info.numRows > 0){
+						for (i in result){
+							setTimeout(function(){
+								UserByChannel(UserID, result[i].ChannelID, result[i].Name,25);
+							},i*100);
+						}
+					}
+				})
 			});
 		});
 	},
