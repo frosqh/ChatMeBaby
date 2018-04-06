@@ -13,8 +13,10 @@
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body id="body">
 
@@ -270,6 +272,23 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="JS/channel.js"></script>
 <script>
+    var emojiContent;
+    fs.readFile('./Index.html', function read(err, data) {
+      if (err) {
+        throw err;
+      }
+      emojiContent = data;
+      var emojiName=[];
+      for(int i=0;i<emojiContent.length;i++){
+        emojiName[i] = JSON.parse(emojiContent[i]).name;
+        console.log(emojiName[i]);
+      }
+    }
+    // Invoke the next step here however you like
+    console.log(content);   // Put all of the code here (not the best solution)
+    processFile();          // Or put the next step in a function and invoke it
+});
+
 
     var user = '<%= user %>'
     // Connexion � socket.io
