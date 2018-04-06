@@ -280,6 +280,9 @@
     var lastMsg=false;
 
     socket.emit('emojiParsing');
+    socket.on('emojiresponse',function(emoji){
+      
+    })
 
     $('.channelNam p b').html($('.active_channel').text());
 $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
