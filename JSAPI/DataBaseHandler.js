@@ -67,8 +67,6 @@ module.exports = {
 						
 						for (i in result){
 							if (i!='info'){
-							console.log(result[i]);
-							console.log(result[i].Name);
 							doSetTimeout(i, result[i], UserID);
 						//	setTimeout(function(){
 						//		UserByChannel(UserID, result[i].ChannelID, result[i].Name,25);
