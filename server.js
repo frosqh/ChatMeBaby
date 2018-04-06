@@ -112,7 +112,7 @@ io.sockets.on('connection', function(socket) {
 			}
 			emojiContent = data;
 			var emojiName=[];
-			for(int i=0;i<emojiContent.length;i++){
+			for(i=0;i<emojiContent.length;i++){
 				emojiName[i] = JSON.parse(emojiContent[i]).name;
 				console.log(emojiName[i]);
 			}
