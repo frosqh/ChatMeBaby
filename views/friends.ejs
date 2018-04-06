@@ -22,13 +22,17 @@
 <body style="margin: 0; padding: 0;">
 
   <div class="header">
-    <a href="home.html"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+    <a href="/"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
     <div class="connectedUser">
+      <% if (user!='Anonymous') {%>
       <table id="userText" border="0">
-        <td>User</td>
-        <td id="settingico"><a><img src="Logo/Icones/settings.png"/></a></td>
-        <td class="settingsPage" id="signoutico"><a><img src="Logo/Icones/signOut.png"/></a></td>
+        <td><%= user %></td>
+        <td id="settingico"><a href="/profile"><img src="Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a href='/logout'><img src="Logo/Icones/signOut.png"/></a></td>
       </table>
+      <%} else {%>
+      <a href='/login' style='text-decoration: none'> Log in !</a>
+      <% } %>
     </div>
   </div>
 
@@ -36,7 +40,7 @@
     <a href="/">Home</a>
     <a href="channels">MyChatRooms</a>
     <a href="#" class="active">MyChatFriends</a>
-    <a href="surprise-me.html">Surprise Me!</a>
+    <a href="/surprise">Surprise Me!</a>
     <div class="searchbarbutton">
       <form id="searchForm" method="post">
         <input class="searchbar" type="text" placeholder="Search emoji..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
@@ -97,9 +101,9 @@
 
                    <a href="#">
                      <div id="cont3" class="container">
-                      <img id="img3" width="100%" height="100%" class="art-bg" src="../front/img/img-bg.png" alt="">
+                      <img id="img3" width="100%" height="100%" class="art-bg" src="front/img/img-bg.png" alt="">
                       <div class="top-left" style="padding-top: 25px;">
-                        <img id="myPicture3" src="../front/img/profile-picture.png" width="120px" alt="Picture">
+                        <img id="myPicture3" src="front/img/profile-picture.png" width="120px" alt="Picture">
                       </div>
                       <div class="top-right" align=right style="padding-top: 5px; padding-right: 10px;">
                         <p id="username3" class="username">Baptman</p>
@@ -119,7 +123,7 @@
                       <div id="cont4" class="container">
                        <img id="img4" width="100%" height="100%" class="art-bg" src="../front/img/img-bg.png" alt="">
                        <div class="top-left" style="padding-top: 25px;">
-                         <img id="myPicture" src="../front/img/profile-picture.png" width="120px" alt="Picture">
+                         <img id="myPicture" src="front/img/profile-picture.png" width="120px" alt="Picture">
                        </div>
                        <div class="top-right" align=right style="padding-top: 5px; padding-right: 10px;">
                          <p id="username4" class="username">Baptman</p>
@@ -138,7 +142,7 @@
                  <td id="col2" width="50%" valign="top" style="padding: 20px 20px 20px 20px;">
                    <a href="#">
                      <div id="cont2" class="container">
-                      <img id="img2" width="100%" height="100%" class="art-bg" src="../front/img/img-bg.png" alt="">
+                      <img id="img2" width="100%" height="100%" class="art-bg" src="front/img/img-bg.png" alt="">
                       <div class="top-left" style="padding-top: 25px;">
                         <img id="myPicture" src="../front/img/profile-picture.png" width="120px" alt="Picture">
                       </div>
@@ -157,7 +161,7 @@
 
                    <a href="#">
                      <div id="cont4" class="container">
-                      <img id="img4" width="100%" height="100%" class="art-bg" src="../front/img/img-bg.png" alt="">
+                      <img id="img4" width="100%" height="100%" class="art-bg" src="front/img/img-bg.png" alt="">
                       <div class="top-left" style="padding-top: 25px;">
                         <img id="myPicture" src="../front/img/profile-picture.png" width="120px" alt="Picture">
                       </div>
@@ -203,9 +207,9 @@
       </td>
       <td>
         <table>
-          <td class="linkedin" width="3%"><img src="../Logo/Icones/linkedin-box.png"/></td>
-          <td class="facebook" width="3%"><img src="../Logo/Icones/facebook-box.png"/></td>
-          <td class="twitter" width="3%"><a><img src="../Logo/Icones/twitter-box.png"/></a></td>
+          <td class="linkedin" width="3%"><img src="Logo/Icones/linkedin-box.png"/></td>
+          <td class="facebook" width="3%"><img src="Logo/Icones/facebook-box.png"/></td>
+          <td class="twitter" width="3%"><a><img src="Logo/Icones/twitter-box.png"/></a></td>
         </table>
       </td>
 
