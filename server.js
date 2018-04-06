@@ -109,9 +109,26 @@ io.sockets.on('connection', function(socket) {
 			socket.emit('user',me);
 	});
 
-	socket.on('newChannel',function(){
+	//chanName est le nom du channel à check
+	socket.on('checkName',function(chanName){
 
-	})
+		//On envoit 1 si le nom est disponible
+		if(/* condition nom dispo*/){
+			socket.emit("nameDispo",1);
+		} else {
+			//On envoit 0 si le nom n'est pas disponible
+			socket.emit("nameDispo",0);
+		}
+	});
+
+	//On recoit le nouveau channel
+	//channel.name : nom du channel
+	//channel.status : Channel "public" ou "private"
+	//channel.users : liste des noms des utilisateurs a ajouter
+	socket.on('newChannel',function(channel){
+
+	});
+
 })
 
 
