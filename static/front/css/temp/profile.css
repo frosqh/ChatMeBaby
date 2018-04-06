@@ -62,7 +62,7 @@ textarea {
   padding-top: 8px;
   background:url('../img/blockquote.png');
   background-repeat:no-repeat;
-  background-size: 10% 25%;
+  background-size: 25px 20px;
   min-height: 30px;
   text-indent: 20px;
   text-align: justify;

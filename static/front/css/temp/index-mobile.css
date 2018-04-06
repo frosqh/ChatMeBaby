@@ -92,6 +92,8 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
     overflow: hidden;
     background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
     font-size: 26px;
     top: 0;
     z-index: 500;
@@ -188,7 +190,6 @@ footer {
   padding-bottom: 1%;
   margin-right: 1%;
 }
-
 
 
 .chatmebaby{

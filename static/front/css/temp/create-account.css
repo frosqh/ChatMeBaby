@@ -9,7 +9,7 @@
     font-family: 'Pacifico';
     font-style: normal;
     font-weight: normal;
-    src: local('Pacifico'), url('http://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
+    src: local('Pacifico'), url('https://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
 }
 
 @font-face {
@@ -26,48 +26,16 @@ body {
 }
 
 textarea {
-  width: 100%;
+  width: 98%;
   height: 100px;
   padding: 5px 5px 5px 5px;
   resize:none;
   font-family: 'Roboto', Arial, sans-serif;
   font-style: italic;
+  font-size: 14px;
   color: #444444;
 }
 
-.username {
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 36px;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.gender-age {
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 24px;
-  margin-top: 2px;
-  margin-bottom: 30px;
-}
-
-.description {
-  /*font-family: 'Roboto', Arial, sans-serif;
-  quotes: "“" "”";*/
-  font-style:normal;
-  margin-left:32px;
-  font-family:'Roboto', serif;
-  font-style: oblique;
-  font-size: 18px;
-  color: #262626;
-  padding-left: 26px;
-  padding-top: 8px;
-  background:url('../img/blockquote.png');
-  background-repeat:no-repeat;
-  background-size: 10% 25%;
-  min-height: 30px;
-  text-indent: 20px;
-  text-align: justify;
-}
-
 /* STYLE FOR INPUT */
 /* STYLE FOR INPUT */
 /* STYLE FOR INPUT */
@@ -75,7 +43,7 @@ textarea {
 /* STYLE FOR INPUT */
 /* STYLE FOR INPUT */
 
-.input, select {
+input, select {
     width: 100%;
     padding: 9px 20px;
     margin: 8px 0;
@@ -87,7 +55,7 @@ textarea {
     box-sizing: border-box;
 }
 
-.input, select {
+input[type=text], select {
     width: 100%;
     padding: 9px 20px;
     margin: 8px 0;
@@ -185,6 +153,7 @@ input:required:valid {
 		border: none;
 		border-bottom: 2px solid green;
 }
+
 
 /* STYLE FOR TOGGLE SWITCH */
 /* STYLE FOR TOGGLE SWITCH */

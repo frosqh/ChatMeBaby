@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 	<title>Chat Me Baby - Home</title>
 
+	<link rel="stylesheet" type="text/css" href="front/css/chat-mobile.css">
+  <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
+  <link rel="stylesheet" type="text/css" href="front/css/button.css">
+  <link rel="stylesheet" type="text/css" href="front/css/combobox.css">
 	<link rel="stylesheet" type="text/css" href="front/css/index-mobile.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
@@ -43,6 +47,324 @@
 	  <a href="#">Surprise Me!</a>
 	</div>
 
+<!----------------------->
+
+
+<div class="row">
+  <div class="client_channel_list_container">
+    <div class="sidebar">
+      <a href="home.html"><img src="Logo/LogoWithNameTrans.png" style="height:40px; width:auto; padding-left: 25px; padding-top:5px;"/></a>
+      <div class="workingLab_sidebar">
+        <div class="menu_user">
+          <div class="disponible"></div>
+          <p class="username">UserName</p>
+        </div>
+      </div>
+      <div class="channel_sidebar">
+        <p class="channelTitle">Channels <button id="newchan" class="newchan"></button></p>
+        <p class="channel">General</p>
+        <p class="channel">Random</p>
+      </div>
+      <div class="addPeople_sidebar">
+        <p id="addPeople" class="addPeople">Add people</p>
+      </div>
+      <div class="privateMessage_sidebar">
+        <p class="PrivateMessageTitle">Private Message</p>
+        <div class="user">
+          <div class="disponible"></div>
+          <p class="username">Tanguy</p>
+        </div>
+        <div class="user">
+          <div class="absent"></div>
+          <p class="username">Jeremy</p>
+        </div>
+        <div class="user">
+          <div class="absent"></div>
+          <p class="username">Baptiste</p>
+        </div>
+        <div class="user">
+          <div class="absent"></div>
+          <p class="username">Gautier</p>
+        </div>
+      </div>
+      <div class="baby_sidebar">
+        <p class="babyTitle">Chat new babies</p>
+        <p class="baby">New Baby</p>
+        <p class="baby">Random baby</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="rightcolumn">
+    <div class="topnavchat">
+      <div>
+        <p><b>#channelName</b></p>
+      </div>
+    </div>
+    <div class = content>
+      <section id="zone_chat">
+
+      </section>
+    </div>
+    <form class="form" action="" class="formulaire_chat">
+      <div>
+        <input id="m" autocomplete="off" type="text" class="input_text"/>
+        <input type="submit" id="envoi_message">
+        </input>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+<!-- The Modal Add -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <form id="myFormMembers" method="post">
+    <table border="0" width="100%">
+      <tr>
+        <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
+          <span id="close" class="close">&times;</span>
+          <p id="myModalTitle">Create a new channel</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table id="tableForm" border="0" width="100%">
+            <!-- Channel name and status -->
+            <tr>
+              <td width=55% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Create a channel</label><br>
+              </td>
+
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Status</label><br>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 0 30px 5px 20px;">
+                <input type="text" class="inNewChan" name="channelname" id="channelname" title="You must enter the channel name." placeholder="Channel name.." autofocus required/>
+              </td>
+
+              <td style="padding: 8px 0 5px 15px;">
+                <input type="radio" name="status" id="public" checked/>
+                <label class="label" for="public">Public</label>
+                <input type="radio" name="status" id="private" />
+                <label class="label" for="private">Private</label>
+              </td>
+            </tr>
+            <!-- Add members -->
+            <tr>
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+
+              <td width=45% style="color: #ffffff; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+            </tr>
+
+            <tr>
+              <td id="memberInputs" style="padding: 0 10px 0 30px;">
+                <div>
+                  <input id="inp1" type="text" class="inNewChan" name="member1" id="member1" title="New member." placeholder="New member.."/>
+                </div>
+              </td>
+
+              <td id="buttonInputs" style="padding: 8px 0 5px 15px;">
+                <div>
+                  <button type="button" class="add" onclick="addInput(this)" id="1"></button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <!-- Create the new channel -->
+      <tr>
+        <td align="center" style="padding-top: 10px; padding-bottom: 30px;">
+          <a href=# class=button onclick="sendForm()">
+            <span style="font-size: 36px;">Create !</span>
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </form>
+  </div>
+</div>
+
+<!-- The Modal Members -->
+<div id="myModalMembers" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <form id="myFormMembers" method="post">
+    <table border="0" width="100%">
+      <tr>
+        <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
+          <span id="closeMembers" class="close">&times;</span>
+          <p id="myModalTitle">Add Members</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table id="tableForm" border="0" width="100%">
+            <!-- Channel name and status -->
+            <tr>
+              <td width=55% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Select channel</label><br>
+              </td>
+
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Status</label><br>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 0 30px 5px 20px;">
+                <div class="styled-select purple semi-square">
+                  <select id="channelnameMembers">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </div>
+              </td>
+
+              <td style="padding: 8px 0 5px 15px;">
+                <input type="radio" name="status" id="public" disabled/>
+                <label class="label" for="public">Public</label>
+                <input type="radio" name="status" id="private" disabled/>
+                <label class="label" for="private">Private</label>
+              </td>
+            </tr>
+            <!-- Add members -->
+            <tr>
+              <td width=45% style="color: #081419; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+
+              <td width=45% style="color: #ffffff; font-family: 'Roboto-Regular', 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 25px;">
+                <label for="nom">Add members</label><br>
+              </td>
+            </tr>
+
+            <tr>
+              <td id="MmemberInputs" style="padding: 0 10px 0 30px;">
+                <div>
+                  <input id="M1inp" type="text" class="inNewChan" name="member1" title="New member." placeholder="New member.."/>
+                </div>
+              </td>
+
+              <td id="MbuttonInputs" style="padding: 8px 0 5px 15px;">
+                <div>
+                  <button id="M1" type="button" class="add" onclick="MaddInput(this)"></button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <!-- Create the new channel -->
+      <tr>
+        <td align="center" style="padding-top: 10px; padding-bottom: 30px;">
+          <a href=# class=button onclick="sendFormMembers()">
+            <span style="font-size: 36px;">Add them !</span>
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </form>
+  </div>
+</div>
+
+
+<script src="../JSAPI/modalNewChan.js" language="Javascript" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    // Connection to socket.io
+    var socket = io.connect();
+
+    // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
+    var pseudo = prompt('Quel est votre pseudo ?');
+    socket.emit('nouveau_client', pseudo);
+    document.title = pseudo + ' - ' + document.title;
+
+    // Quand on re�oit un message, on l'ins�re dans la page
+    socket.on('message', function(data) {
+        insereMessage(data.pseudo, data.message)
+    })
+
+    // Quand un nouveau client se connecte, on affiche l'information
+    socket.on('nouveau_client', function(pseudo) {
+        $('#zone_chat').append('<p><em>' + pseudo + ' a rejoint le Chat !</em></p>');
+    })
+
+    // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
+    $('#formulaire_chat').submit(function () {
+        var message = $('#m').val();
+        console.log(message);
+        socket.emit('message', message); // Transmet le message aux autres
+        insereMessage(pseudo, message); // Affiche le message aussi sur notre page
+        $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+        return false; // Permet de bloquer l'envoi "classique" du formulaire
+    });
+
+    // Ajoute un message dans la page
+    function insereMessage(pseudo, message) {
+        $('#zone_chat').append('<p><strong>' + 'Tanguy' + '</strong> ' + message + '</p>');
+    }
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+var modalMembers = document.getElementById('myModalMembers');
+
+// Get the button that opens the modal
+var btn = document.getElementById("newchan");
+var btnMembers = document.getElementById("addPeople");
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("close");
+var spanMembers = document.getElementById("closeMembers");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+btnMembers.onclick = function() {
+  modalMembers.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+spanMembers.onclick = function() {
+  modalMembers.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
+  if (event.target == modalMembers) {
+      modalMembers.style.display = "none";
+  }
+}
+</script>
+
+
+<!----------------------->
 	<footer>
 	  <table class="tableFooter" border="0" align="center">
 	    <tr align="center">

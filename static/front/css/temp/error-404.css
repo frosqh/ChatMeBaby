@@ -1,4 +1,4 @@
-bod {
+body {
   background: radial-gradient(#dcd6ff, #0951c4) no-repeat;
   background-size: contain;
   align-content: center;
@@ -60,5 +60,5 @@ a:hover {
       font-family: 'Pacifico';
       font-style: normal;
       font-weight: normal;
-      src: local('Pacifico'), url('http://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
+      src: local('Pacifico'), url('https://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
   }

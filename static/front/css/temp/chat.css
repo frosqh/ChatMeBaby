@@ -64,12 +64,11 @@
    font-weight: bold;
 }
 
-/* The Modal Tittle */
-#myModalTitle {
-  font-family: 'Pacifico', 'Roboto', Arial, sans-serif;
-  font-size: 36px;
-  padding: 0 0 0 0;
-  margin-bottom: 3%;
+#myModalTitle{
+	font-family: 'Pacifico','Roboto',Arial,sans-serif;
+	font-size: 36px;
+	padding: 0;
+	margin-bottom: 3%;
 }
 
 .close:hover,
@@ -80,58 +79,58 @@
 }
 
 .inNewChan {
-    width: 100%;
-    padding: 9px 20px;
-    margin: 8px 0;
-    display: inline-block;
-		/*border: 1px solid #ccc;
-    border-radius: 4px;*/
-		border: none;
-    border-bottom: 2px solid #ccc;
-    box-sizing: border-box;
+	 width: 100%;
+	 padding: 9px 20px;
+	 margin: 8px 0;
+	 display: inline-block;
+	/*border: 1px solid #ccc;
+	*     border-radius: 4px;*/
+	border: none;
+	border-bottom: 2px solid #ccc;
+        box-sizing: border-box;
 }
 
 .inNewChan:focus, .inNewChan:invalid:focus, .inNewChan:valid:focus {
-		width: 100%;
-    border: none;
-		border-bottom: 2px solid #1a75f4;
-    transition: 0.4s;
+	width: 100%;
+	border: none;
+	border-bottom: 2px solid #1a75f4;
+	transition: 0.4s;
 }
 
 .inNewChan:invalid {
-		width: 100%;
-		border: none;
-		border-bottom: 2px solid #ff3838;
-		box-shadow: none;
+	width: 100%;
+	border: none;
+	border-bottom: 2px solid #ff3838;
+	box-shadow: none;
 }
 
 .inNewChan:required:valid {
-		width: 100%;
-		border: none;
-		border-bottom: 2px solid green;
+	width: 100%;
+	border: none;
+	border-bottom: 2px solid green;
 }
 
 /* Buttons to add and remove members */
 .add {
-  background: url(../img/add.png) no-repeat center center;
-  background-size: contain;
-  width: 30px;
-  height: 30px;
-  border : none;
+	background: url(../img/add.png) no-repeat center center;
+	background-size: contain;
+	width: 30px;
+	height: 30px;
+	border : none;
 	color : transparent;
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .rm {
-  background: url(../img/rm.png) no-repeat center center;
-  background-size: contain;
-  width: 30px;
-  height: 30px;
-  border : none;
+    	background: url(../img/rm.png) no-repeat center center;
+   	background-size: contain;
+   	width: 30px;
+	height: 30px;
+	border : none;
 	color : transparent;
-  cursor: pointer;
-  margin-bottom: 22px;
-}
+	cursor: pointer;
+	margin-bottom: 22px;
+ }
 
 
 /* ScrollBar*/
@@ -231,19 +230,20 @@
 
 .content{
   width: 100%;
-  height: calc(100vh-47px);
+  height: calc(100vh - 140px);
   overflow-x: hidden;
   overflow-y: scroll;
   /*position: fixed;*/
-  bottom: 45px;
+  /* margin-bottom: 45px; */
   right:0;
+  padding-left: 10px;
 }
 
 /* Left column */
 .client_channel_list_container {
     float: left;
     width: 12%;
-    height: 93.6vh;
+    height: calc(95vh);
     background-color: #666699;
     color:lightgray;
     overflow: hidden;
@@ -266,7 +266,7 @@
   margin:0;
 }
 
-/*.workingLab_sidebar:hover,.channelTitle:hover,*/.channel:hover:not(active_channel),/*.PrivateMessageTitle:hover,*/.user:hover,.addPeople:hover,/*.babyTitle:hover,*/.baby:hover{
+/*.workingLab_sidebar:hover,.channelTitle:hover,*/.channel:hover:not(.active_channel),/*.PrivateMessageTitle:hover,*/.user:hover,.addPeople:hover,/*.babyTitle:hover,*/.baby:hover{
   background-color: rgb(0,0,0,0.3);
 }
 
@@ -318,7 +318,7 @@
 }
 
 .active_channel{
-	background-color: rgb(0,0,0,0.5);
+	background-color:rgb(0,0,0,0.5);
 }
 
 .PrivateMessageTitle{
@@ -380,11 +380,10 @@
   position: fixed;
   bottom: 0;
   width: 85%;
-
 }
 
 .form div{
-  background-color: transparent;
+  background-color: #f1f1f1;
 }
 
 input[type=text]:focus {
@@ -440,8 +439,6 @@ margin: 0;
 padding-left: 50px;
 }
 
-
-
 /* Footer */
 .footer {
     padding: 20px;
@@ -474,12 +471,4 @@ padding-left: 50px;
 @font-face{
     font-family : "chatMeBaby";
     src : url('../font/Spring In My Step.ttf');
-}
-
-@font-face {
-  font-family: 'Roboto-Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
