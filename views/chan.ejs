@@ -105,7 +105,7 @@
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <form id="myFormMembers" method="post">
+    <form id="myForm" method="post">
     <table border="0" width="100%">
       <tr>
         <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
@@ -174,7 +174,7 @@
           </a>
         </td>
       </tr>
-
+      <input type="text" name="counter" id="inputCounter" display="hidden" value="1"/>
     </table>
   </form>
   </div>
@@ -266,7 +266,7 @@
   </div>
 </div>
 
-<script src="JS/modalNewChan.js" language="Javascript" type="text/javascript"></script>
+<script src="JS/modalNewChan.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="JS/channel.js"></script>
@@ -288,14 +288,27 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
 
     // Quand un nouveau client se connecte, on affiche l'information
     socket.on('nouveau_client', function(user) {
-        $('.privateMessage_sidebar').append('<div class="user" id="'+user.username+'"><div class="disponible"></div><p class="username">'+user.username+'</p></div>');
+      console.log(user.username + " : "+user.connected);
+	if (user.connected){
+		clas="disponible";
+	} else {
+		clas="absent";
+	}
+    console.log(clas);
+        $('.privateMessage_sidebar').append('<div class="user" id="'+user.username+'"><div class="'+clas+'"></div><p class="username">'+user.username+'</p></div>');
     })
 
     // Quand un nouveau client se deconnecte, on affiche l'information
     socket.on('deconnexion_client',function(user){
-      $('#'+user.username).children("div").toggleClass("disponible");
-      $('#'+user.username).children("div").toggleClass("absent");
-    })
+	    
+		    $('#'+user.username).children("div").toggleClass("disponible");
+		    $('#'+user.username).children("div").toggleClass("absent");}
+    )
+
+    socket.on('connecti', function(user){
+	    
+	    $('#'+user.username).children("div").toggleClass("absent");
+	    $('#'+user.username).children("div").toggleClass("disponible");});
 
     // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
     $('#formulaire_chat').submit(function (e) {
@@ -328,7 +341,7 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
           lastMsg = message.user;
         } else {
           $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
-          
+
         }
       }
     })
