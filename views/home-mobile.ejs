@@ -1,91 +1,75 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-	<title>Chat Me Baby - Home</title>
+  <title>Chat Me Baby - MyChatRooms</title>
+ <meta charset="UTF-8">
+ <link rel="stylesheet" type="text/css" href="front/css/chat-mobile.css">
+ <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
+ <link rel="stylesheet" type="text/css" href="front/css/button.css">
+ <link rel="stylesheet" type="text/css" href="front/css/combobox.css">
+ <link rel="stylesheet" type="text/css" href="front/css/index-mobile.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="front/css/chat-mobile.css">
-  <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
-  <link rel="stylesheet" type="text/css" href="front/css/button.css">
-  <link rel="stylesheet" type="text/css" href="front/css/combobox.css">
-	<link rel="stylesheet" type="text/css" href="front/css/index-mobile.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-	<link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="front/css/home-mobile.css">
 
-<link rel="stylesheet" type="text/css" href="front/css/home-mobile.css">
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="JS/js.js"></script>
-<script type="text/javascript" src="JS/index-mobile.js"></script>
-<script type="text/javascript" src="JS/jquery.stellar.min.js"></script>
-<script type="text/javascript" src="JS/waypoints.min.js"></script>
-<script type="text/javascript" src="JS/jquery.easing.1.3.js"></script>
-
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="JS/js.js"></script>
+  <script type="text/javascript" src="JS/index-mobile.js"></script>
+  <script type="text/javascript" src="JS/jquery.stellar.min.js"></script>
+  <script type="text/javascript" src="JS/waypoints.min.js"></script>
+  <script type="text/javascript" src="JS/jquery.easing.1.3.js"></script>
 </head>
+<body id="body">
 
-<body>
-	<div class="header">
-		<a id="menu" ><img id="menuico" src="Logo/Icones/menu2.png" /></a>
-	  <a id="homelink" align="center"><img id='LogoTransparent' src="Logo/LogoWithNameTransWhite.png" alt="LogoTransparent" /></a>
-	  <!-- <div class="connectedUser">
-	    <table id="userText" border="0">
-	      <td>User</td>
-	      <td id="settingico"><a href="#"><img src="../Logo/Icones/settings.png"/></a></td>
-	      <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
-	    </table>
-	  </div> -->
-	</div>
 
-	<div class="topnav">
-	  <a href="#" >Home</a>
-	  <a id="channelbutton" href="#">MyChatRooms</a>
-	  <a href="#">MyChatFriends</a>
-	  <a href="#">Surprise Me!</a>
-	</div>
+  <body>
+  	<div class="header">
+  		<a id="menu" ><img id="menuico" src="../Logo/Icones/menu2.png" /></a>
+  	  <a id="homelink" align="center"><img id='LogoTransparent' src="../Logo/LogoWithNameTransWhite.png" alt="LogoTransparent" /></a>
+  	  <!-- <div class="connectedUser">
+  	    <table id="userText" border="0">
+  	      <td>User</td>
+  	      <td id="settingico"><a href="#"><img src="../Logo/Icones/settings.png"/></a></td>
+  	      <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
+  	    </table>
+  	  </div> -->
+  	</div>
 
-<!----------------------->
-
+  	<div class="topnav">
+  	  <a href="#" >Home</a>
+  	  <a id="channelbutton" href="#">MyChatRooms</a>
+  	  <a href="#">MyChatFriends</a>
+  	  <a href="#">Surprise Me!</a>
+  	</div>
 
 <div class="row">
   <div class="client_channel_list_container">
     <div class="sidebar">
-      <a href="home.html"><img src="Logo/LogoWithNameTrans.png" style="height:40px; width:auto; padding-left: 25px; padding-top:5px;"/></a>
+      <a href="/"><img src="Logo/LogoWithNameTrans.png" style="height:70px; width:auto; padding-left: 25px; padding-top:5px;"/></a>
       <div class="workingLab_sidebar">
         <div class="menu_user">
           <div class="disponible"></div>
-          <p class="username">UserName</p>
+          <p class="username"> <=% user %> </p>
         </div>
       </div>
       <div class="channel_sidebar">
-        <p class="channelTitle">Channels <button id="newchan" class="newchan"></button></p>
-        <p class="channel">General</p>
-        <p class="channel">Random</p>
+        <p class="channelTitle">Channels<button id="newchan" class="newchan"></button></p>
+
+	<%for (i in channels) { %>
+	<p class="channel <% if (i==0){%> active_channel <%}%>"> <%= channels[i] %></p>
+	<% } %>
       </div>
       <div class="addPeople_sidebar">
         <p id="addPeople" class="addPeople">Add people</p>
       </div>
       <div class="privateMessage_sidebar">
         <p class="PrivateMessageTitle">Private Message</p>
-        <div class="user">
-          <div class="disponible"></div>
-          <p class="username">Tanguy</p>
-        </div>
-        <div class="user">
-          <div class="absent"></div>
-          <p class="username">Jeremy</p>
-        </div>
-        <div class="user">
-          <div class="absent"></div>
-          <p class="username">Baptiste</p>
-        </div>
-        <div class="user">
-          <div class="absent"></div>
-          <p class="username">Gautier</p>
-        </div>
       </div>
       <div class="baby_sidebar">
         <p class="babyTitle">Chat new babies</p>
@@ -98,7 +82,7 @@
 
   <div class="rightcolumn">
     <div class="topnavchat">
-      <div>
+      <div class="channelNam">
         <p><b>#channelName</b></p>
       </div>
     </div>
@@ -107,9 +91,9 @@
 
       </section>
     </div>
-    <form class="form" action="" class="formulaire_chat">
+    <form class="form" method="post" id="formulaire_chat">
       <div>
-        <input id="m" autocomplete="off" type="text" class="input_text"/>
+        <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus autocomplete="off" class="input_text"/>
         <input type="submit" id="envoi_message">
         </input>
       </div>
@@ -123,7 +107,7 @@
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <form id="myFormMembers" method="post">
+    <form id="myForm" method="post">
     <table border="0" width="100%">
       <tr>
         <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
@@ -192,7 +176,6 @@
           </a>
         </td>
       </tr>
-
     </table>
   </form>
   </div>
@@ -284,45 +267,89 @@
   </div>
 </div>
 
-
-<script src="../JSAPI/modalNewChan.js" language="Javascript" type="text/javascript"></script>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="JS/modalNewChan.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script src="JS/channel.js"></script>
 <script>
 
-    // Connection to socket.io
+    var user = '<%= user %>'
+    // Connexion � socket.io
     var socket = io.connect();
-
+    var lastMsg=false;
+    $('.channelNam p b').html($('.active_channel').text());
+$('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+    refresh($('.active_channel').text());
     // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
-    var pseudo = prompt('Quel est votre pseudo ?');
-    socket.emit('nouveau_client', pseudo);
-    document.title = pseudo + ' - ' + document.title;
 
-    // Quand on re�oit un message, on l'ins�re dans la page
-    socket.on('message', function(data) {
-        insereMessage(data.pseudo, data.message)
-    })
+    socket.emit('login', {
+      username: user
+    });
+    $('.menu_user .username').text(user);
 
     // Quand un nouveau client se connecte, on affiche l'information
-    socket.on('nouveau_client', function(pseudo) {
-        $('#zone_chat').append('<p><em>' + pseudo + ' a rejoint le Chat !</em></p>');
+    socket.on('nouveau_client', function(user) {
+      console.log(user.username + " : "+user.connected);
+	if (user.connected){
+		clas="disponible";
+	} else {
+		clas="absent";
+	}
+    console.log(clas);
+        $('.privateMessage_sidebar').append('<div class="user" id="'+user.username+'"><div class="'+clas+'"></div><p class="username">'+user.username+'</p></div>');
     })
 
+    // Quand un nouveau client se deconnecte, on affiche l'information
+    socket.on('deconnexion_client',function(user){
+
+		    $('#'+user.username).children("div").toggleClass("disponible");
+		    $('#'+user.username).children("div").toggleClass("absent");}
+    )
+
+    socket.on('connecti', function(user){
+
+	    $('#'+user.username).children("div").toggleClass("absent");
+	    $('#'+user.username).children("div").toggleClass("disponible");});
+
     // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
-    $('#formulaire_chat').submit(function () {
-        var message = $('#m').val();
-        console.log(message);
-        socket.emit('message', message); // Transmet le message aux autres
-        insereMessage(pseudo, message); // Affiche le message aussi sur notre page
-        $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
-        return false; // Permet de bloquer l'envoi "classique" du formulaire
+    $('#formulaire_chat').submit(function (e) {
+        e.preventDefault();
+        date= new Date();
+        if($('#message').val()!=''){
+          socket.emit('message', {
+            content :$('#message').val(),
+            user    :user,
+            hour    :date.getHours(),
+            minute  :date.getMinutes(),
+            channel :$('.active_channel').text()
+          }); // Transmet le message aux autres
+	  $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
+          $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+
+        }
     });
 
-    // Ajoute un message dans la page
-    function insereMessage(pseudo, message) {
-        $('#zone_chat').append('<p><strong>' + 'Tanguy' + '</strong> ' + message + '</p>');
-    }
+    // Quand on recoit un message, on l'insere dans la page
+    socket.on('msg', function(message) {
+      if(message.channel==$('.active_channel').text()){
+        message.content = message.content.replace(RegExp("(:)(((\\w)|-)+)(:)",'g'),function(p1,p2,p3,p4){
+            return '<i class="em em-'+p3+'"></i>'});
+        if(lastMsg != message.user){
+          $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="'+message.image+'" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
+          lastMsg = message.user;
+        } else {
+          $('#zone_chat').append('<div class="message_content"><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div>');
+
+        }
+      }
+    })
+
+        socket.on('test', function(data) {
+          console.log('Incoming message:'+ data);
+        });
+
 </script>
+
 <script>
 // Get the modal
 var modal = document.getElementById('myModal');
@@ -378,9 +405,9 @@ window.onclick = function(event) {
 			<tr>
 	      <td>
 	        <table align="center">
-	          <td class="linkedin" ><img src="Logo/Icones/linkedin-box2.png"/></td>
-	          <td class="facebook"><img src="Logo/Icones/facebook-box2.png"/></td>
-	          <td class="twitter" ><a><img src="Logo/Icones/twitter-box2.png"/></a></td>
+	          <td class="linkedin" ><img src="../Logo/Icones/linkedin-box2.png"/></td>
+	          <td class="facebook"><img src="../Logo/Icones/facebook-box2.png"/></td>
+	          <td class="twitter" ><a><img src="../Logo/Icones/twitter-box2.png"/></a></td>
 	        </table>
 	      </td>
 	    </tr>
