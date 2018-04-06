@@ -152,7 +152,7 @@ module.exports = {
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		});
-	}
+	},
 	Message:function(UserId, ChannelId, Text, Name, avatar){
 	var sql="SELECT * FROM Message";
 	con.query(sql, function(err,result){

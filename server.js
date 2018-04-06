@@ -107,8 +107,14 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('getUser',function(){
 			socket.emit('user',me);
-		})
+	});
+
+	socket.on('newChannel',function(){
+
+	})
 })
+
+
 
 
 function processPost(request, response, callback) {
@@ -422,7 +428,7 @@ app.post('/profile', function(req, res){
 				db.setCity(result[0].UserID, city);
 			}
 			if (desc != null){
-				db.setDescription(result[0].UserID, description);
+				db.setDescription(result[0].UserID, desc);
 			}
 			if (lastname != null){
 				db.setLastName(result[0].UserID, lastname);
@@ -436,10 +442,14 @@ app.post('/profile', function(req, res){
 			if (mail != null){
 				db.setMail(result[0].UserID, mail);
 			}
-			if (db.helper.hashFnv32a(pass)==result[0].Password){
+			if (pass!=null && db.helper.hashFnv32a(pass)==result[0].Password){
 				db.setPassword(newpass);
 			}
-			res.redirect("/");
+			if (pass!=null){
+				res.redirect("/logout");
+			} else {
+				res.redirect("/");
+			}
 		});
 	}
 	});
@@ -468,6 +478,18 @@ app.get('/user/:id', function(req, res){
 		}
 	})
 })
+
+app.get('/api/users', function(req, res){
+	var sql = "SELECT * FROM User";
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.json();
+		} else {
+			res.json(result.slice(0,result.length-1));
+		}
+	});
+}
 
 
 app.use(function(req, res, next){
