@@ -111,7 +111,7 @@ io.sockets.on('connection', function(socket) {
 
 	//chanName est le nom du channel à check
 	socket.on('checkName',function(chanName){
-		var sql = "SELECT ChannelID FROM Channel WHERE ChannelName='"+chanName+"'";
+		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+chanName+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows > 0 ){
@@ -138,13 +138,17 @@ io.sockets.on('connection', function(socket) {
 					for (i in channel.users){
 						u = channel.users[i];
 						var sql = "SELECT UserID FROM User WHERE UserName='"+u+"'";
-						db.con.querry(sql, function(err, result, fields){
+						console.log(sql);
+						db.con.query(sql, function(err, result, fields){
 							if (err) throw err;
+							console.log(result);
 							if (result.info.numRows > 0){
 								setTimeout(function(){db.UserByChannel(result[0].UserID, channelID, channel.name,25);},i*50);
 							}
 						});
 					}
+				} else {
+					console.log("SRSLY ?");
 				}
 		});
 
@@ -323,6 +327,7 @@ app.post('/create-account', function(req, res){
 					if (result.info.numRows == 0){
 						db.User(req.post.username,req.post.email,req.post.password);
 						setTimeout(function(){
+							console.log(req.post);
 							var sql = "SELECT UserID FROM User WHERE UserName ='"+req.post.username+"'";
 							db.con.query(sql, function(err, result, fields){
 								if (err) throw err;
