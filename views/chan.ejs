@@ -174,7 +174,6 @@
           </a>
         </td>
       </tr>
-      <input type="text" name="counter" id="inputCounter" display="hidden" value="1"/>
     </table>
   </form>
   </div>
@@ -298,13 +297,13 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
 
     // Quand un nouveau client se deconnecte, on affiche l'information
     socket.on('deconnexion_client',function(user){
-	    
+
 		    $('#'+user.username).children("div").toggleClass("disponible");
 		    $('#'+user.username).children("div").toggleClass("absent");}
     )
 
     socket.on('connecti', function(user){
-	    
+
 	    $('#'+user.username).children("div").toggleClass("absent");
 	    $('#'+user.username).children("div").toggleClass("disponible");});
 

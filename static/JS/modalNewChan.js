@@ -1,11 +1,8 @@
 var counter = 1;
-var inputCounter = 1;
 
 function addInput(myButton){
   /* Increment the counter */
   counter++;
-  inputCounter++;
-  $('#inputCounter').val()=inputCounter;
   /* Create a new input */
   var newdiv = document.createElement('div');
   newdiv.innerHTML = "<input type='text' id="+"'inp"+counter+"'"+" class='inNewChan' name='member"+counter+"' title='New member..' placeholder='New member..'/>";
@@ -22,8 +19,6 @@ function addInput(myButton){
 }
 
 function rmInput(myButton){
-  inputCounter--;
-  $('#inputCounter').val()=inputCounter;
   var buttonInputs = document.getElementById("buttonInputs");
   var id = myButton.id;
 
@@ -46,17 +41,24 @@ function sendForm() {
   var chanName = document.getElementById("channelname");
   var pub = document.getElementById("public");
   var priv = document.getElementById("private");
+  var addUser = [];
   if (chanName.checkValidity() && (pub.checked || priv.checked)) {
-    document.getElementById("myForm").submit();
+    //document.getElementById("myForm").submit();
+    $('#myModal').style.display="none";
+      for(var k=0;k<counter;k++){
+        if($("#inp" + k).length != 0) {
+          addUser.push($('#inp'+k).val());
+          $('#inp'+k).val('');
+        }
+      }
   }
-}
+};
 
-$('#myForm').submit(function (e) {
+/*$('#myForm').submit(function (e) {
   e.preventDefault();
   $('channel_sidebar').append('<p class="channel">'+$('.channelname').text()+'</p>');
   console.log("Submit ");
-});
-
+});*/
 var Mcounter = 1;
 
 function MaddInput(myButton){
