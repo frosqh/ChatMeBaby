@@ -28,14 +28,15 @@ function checkAllValidate() {
   var new_email = document.getElementById("new-email");
   var confirm_email = document.getElementById("confirm-email");
   var new_password = document.getElementById("new-password");
-
+  var current_email = document.getElementById("current-email");
+  var current_password = document.getElementById("current-password");
   var email_empty = !(new_email.value.localeCompare(""));
   var password_empty = !(new_password.value.localeCompare(""));
 
   if (email_empty || confirm_email.checkValidity()) {
     var confirm_password = document.getElementById("confirm-password");
     if (password_empty || confirm_password.checkValidity()) {
-        alert("OK");
+        //alert("OK");
         if (email_empty) {
           confirm_email.removeAttribute('name');
         }
