@@ -7,6 +7,7 @@ var server = http.createServer(app);
 server.listen(8080);
 var io = require('socket.io')(server);
 var ent = require('ent');
+var fs = require('fs');
 var mobile = require("is-mobile");
 var db = require('./JSAPI/DataBaseHandler.js');
 var cookieParser = require('cookie-parser');
@@ -144,15 +145,18 @@ io.sockets.on('connection', function(socket) {
 	//channel.users : liste des noms des utilisateurs a ajouter
 	socket.on('newChannel',function(channel){
 		db.Channel(channel.name, channel.status);
-		setTimeout(addUsers(channel),500);
+		addUsers(channel);
 
 	});
 
-	socket.on('addUser', addUsers(data));
+	socket.on('addUser', function(data){
+		addUsers(data)});
 
 })
 
-function addUsers(channel){
+function addUsers(channel){setTimeout(function(){
+	console.log(channel.name);
+	console.log(channel.users);
 	var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channel.name+"'";
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
@@ -173,7 +177,7 @@ function addUsers(channel){
 				} else {
 					console.log("SRSLY ?");
 				}
-		});
+		});},300);
 
 
 }

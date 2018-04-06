@@ -133,12 +133,13 @@ function MrmInput(myButton){
 function sendFormMembers() {
   var chanName = document.getElementById("channelnameMembers");
   if (chanName.checkValidity() ) {
+	  var addUser = [];
     //document.getElementById("myForm").submit();
     var modal = document.getElementById('myModalMembers');
     modal.style.display = "none";
-      for(var k=0;k<=counter;k++){
-        if($("#M1inp" + k).length != 0) {
-          addUser.push($('#M1inp'+k).val());
+      for(var k=0;k<=Mcounter;k++){
+        if($("#M"+k+"inp").length != 0) {
+          addUser.push($('#M'+k+'inp').val());
           //console.log($('#inp'+k).val());
           //$('#inp'+k).val('');
         }
@@ -166,6 +167,7 @@ function sendFormMembers() {
         }
       });**/
       //$('.channel_sidebar').append('<p class="channel">'+chanName+'</p>');
+	  }
 
 
 }
@@ -175,7 +177,7 @@ function checkAllValidate() {
 }
 
 function clearAndHide(){
-  for(var k=0;k<=counter;k++){
+  for(var k=0;k<=Mcounter;k++){
     if($("#inp" + k).length != 0) {
       $('#inp'+k).val('');
     }
