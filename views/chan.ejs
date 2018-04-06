@@ -210,10 +210,9 @@
               <td style="padding: 0 30px 5px 20px;">
                 <div class="styled-select purple semi-square">
                   <select id="channelnameMembers">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
+                    <% for (i in channels) { %>
+                    <option value="<%=channels[i]%>"><%channels[i]%></option>
+                    <%}%>
                   </select>
                 </div>
               </td>
