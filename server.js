@@ -373,7 +373,8 @@ app.get('/profile', function(req,res){
 			var cit = result[0].City;
 			var mail = result[0].Mail;
 			var av = result[0].AvatarURI;
-		    des = descr.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'});
+			if (descr != null){
+		    		des = descr.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'}); } else {des=undefined}
 			console.log(des);
 			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av, descToShow : des});
 			return;
@@ -393,9 +394,11 @@ app.post('/profile', function(req, res){
 		var lastname = req.post.lastname;
 		var birthdate = req.post.birthdate;
 		var phonenumber = req.post.phonenumber;
-		var mail = req.post.new-email;
-		var pass = req.post.current-password;
-		var newpass = req.post.new-password;
+		var mail = req.post.new_email;
+		var pass = req.post.current_password;
+		var newpass = req.post.new_password;
+		if (firstname != null){
+			db.setFirstName(
 		console.log(firstname+"/"+lastname);
 		console.log(gender);
 		console.log(city);
@@ -405,8 +408,8 @@ app.post('/profile', function(req, res){
 		console.log(mail);
 		console.log(pass);
 		console.log(newpass);
-	}
-})
+	});
+});
 
 app.get('/user/:id', function(req, res){
 	var sql = "SELECT * FROM User WHERE UserID ="+req.params.id;
