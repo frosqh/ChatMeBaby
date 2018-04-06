@@ -58,9 +58,10 @@ module.exports = {
 			var sql="INSERT INTO User (UserID,UserName,Mail,Password,Connected,Confirmed,AvatarURI) VALUES ("+UserID+",'"+UserName+"','"+Mail+"','"+helper.hashFnv32a(Password,true)+"',"+0+","+0+",'https://www.gravatar.com/avatar/"+hash+".jpg?d=robohash')";
 			con.query(sql, function(err, result) {
 				if (err) throw err;
-				fs.readFile('../html/mail.html', 'utf8', (err, data)=>{
+				fs.readFile('html/mail.html', 'utf8', (err, data)=>{
 				sendMail(Mail,data.replace("%username",UserName).replace("add",generateConfirm(UserID,UserName)));
-				} var sql = "SELECT * FROM Channel WHERE Visibility = 1";
+				});
+				var sql = "SELECT * FROM Channel WHERE Visibility = 1";
 				con.query(sql, function(err, result) {
 					if (err) throw err;
 					

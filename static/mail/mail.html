@@ -1,0 +1,104 @@
+<html>
+
+  <style>
+    table {
+      border: 1px solid black;
+    }
+    #tab1 {
+      background: radial-gradient(#dcd6ff, #0951c4) no-repeat;
+      background-size: contain;
+    }
+    #tab2 {
+      background: #bbb no-repeat;
+    }
+    p {
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffffff;
+    }
+    #p1 {
+      font-size: 30px;
+    }
+    #p2 {
+      font-size: 20px;
+    }
+    #username {
+      font-family: 'Pacifico', 'Roboto', Arial, sans-serif;
+    }
+    #link {
+      color: #fff;
+    }
+    #copyright {
+      font-family: 'Roboto';
+    }
+    .contact{
+      background: #aaa;
+      color: #ffffff;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 14px;
+      border-radius: 4px;
+      padding: 8px;
+      border: 0px;
+      cursor: pointer;
+    }
+    .contact:hover {
+      background: #ccc;
+    }
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+        font-family: 'Pacifico';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Pacifico'), url('http://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
+    }
+  </style>
+
+  <body>
+    <div align=center>
+      <table id="tab1" border="0" width="70%" style="min-width:500px;">
+        <tr>
+          <td align=center>
+            <img width="70%" src="https://imagizer.imageshack.com/v2/928x415q90/924/61uCbm.png"></img>
+          </td>
+        </tr>
+        <tr>
+          <td align=center style="padding: 10px 0 10px 0;">
+            <p id="p1">Hi <a id="username">%Username</a>, thanks for signing up !</p>
+          </td>
+        </tr>
+        <tr>
+          <td align=center style="padding: 5px 0 10px 0;">
+            <p id="p2">You should confirm your address <a href="%add" id="link">here</a>.</p>
+          </td>
+        </tr>
+      </table>
+      <table id="tab2" border="0" width="70%" style="min-width:500px;">
+        <tr>
+          <td width="15%" align=center style="padding: 5px 0 5px 5px;">
+            <button class="contact">Contact Us!</button>
+          </td>
+          <td width="61%" align=center valign=middle>
+            <p id="copyright">
+              Copyright &copy; 2018 - <a style="font-family: 'Pacifico';">Chat Me Baby</a> - Hynes Monchicourt Raimondi Roudaut
+            </p>
+          </td>
+          <td width="8%" align=center style="padding: 0 5px 0 0;">
+            <a href='https://www.facebook.com/Chat-Me-Baby-130671114443167/'><img src=".https://imagizer.imageshack.com/v2/36x36q90/923/XOT7US.png"/></a>
+          </td>
+          <td width="8%" align=center style="padding: 0 5px 0 0;">
+            <a href='https://www.facebook.com/Chat-Me-Baby-130671114443167/'><img src="https://imagizer.imageshack.com/v2/36x36q90/923/U1Aai4.png"/></a>
+          </td>
+          <td width="8%" align=center style="padding: 0 5px 0 0;">
+            <a href='https://www.facebook.com/Chat-Me-Baby-130671114443167/'><img src="https://imagizer.imageshack.com/v2/36x36q90/924/3Ziwny.png"/></a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
