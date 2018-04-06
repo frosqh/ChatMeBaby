@@ -381,6 +381,33 @@ app.get('/profile', function(req,res){
 	})
 });
 
+app.post('/profile', function(req, res){
+	if (!req.session.user || req.session.user=='Anonymous'){
+		return;
+	}
+	processPost(req, res, function(){
+		var firstname = req.post.firstname;
+		var gender = req.post.gender;
+		var city = req.post.city;
+		var desc = req.post.description;
+		var lastname = req.post.lastname;
+		var birthdate = req.post.birthdate;
+		var phonenumber = req.post.phonenumber;
+		var mail = req.post.new-email;
+		var pass = req.post.current-password;
+		var newpass = req.post.new-password;
+		console.log(firstname+"/"+lastname);
+		console.log(gender);
+		console.log(city);
+		console.log(desc);
+		console.log(birthdate);
+		console.log(phonenumber);
+		console.log(mail);
+		console.log(pass);
+		console.log(newpass);
+	}
+})
+
 app.get('/user/:id', function(req, res){
 	var sql = "SELECT * FROM User WHERE UserID ="+req.params.id;
 	db.con.query(sql, function(err, result, fields){
