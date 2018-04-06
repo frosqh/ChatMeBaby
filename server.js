@@ -144,8 +144,16 @@ io.sockets.on('connection', function(socket) {
 	//channel.users : liste des noms des utilisateurs a ajouter
 	socket.on('newChannel',function(channel){
 		db.Channel(channel.name, channel.status);
-		setTimeout(function(){
-			var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channel.name+"'";
+		setTimeout(addUsers(channel),500);
+
+	});
+
+	socket.on('addUser', addUsers(data));
+
+})
+
+function addUsers(channel){
+	var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channel.name+"'";
 			db.con.query(sql, function(err, result, fields){
 				if (err) throw err;
 				if (result.info.numRows > 0){
@@ -167,12 +175,8 @@ io.sockets.on('connection', function(socket) {
 				}
 		});
 
-	},500)
 
-	});
-
-})
-
+}
 
 
 
