@@ -512,7 +512,7 @@ app.post('/profile', function(req, res){
 				} else {
 					res.redirect("/");
 				}
-			});
+			}); 
 		}
 	});
 });
@@ -554,6 +554,14 @@ app.get('/api/users', function(req, res){
 			res.status(200).json(result);
 		}
 	});
+});
+
+app.get('/surprise', function(req, res){
+	res.render('surprise-me.html');
+});
+
+app.get('/friends', function(req, res){
+	res.render('friends.html');
 });
 
 app.get('/api/user/:id', function(req, res){
