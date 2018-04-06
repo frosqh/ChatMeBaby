@@ -557,11 +557,11 @@ app.get('/api/users', function(req, res){
 });
 
 app.get('/surprise', function(req, res){
-	res.render('surprise-me.ejs');
+	res.render('surprise-me.ejs',{user:req.session.user});
 });
 
 app.get('/friends', function(req, res){
-	res.render('friends.ejs');
+	res.render('friends.ejs',{user:req.session.user});
 });
 
 app.get('/api/user/:id', function(req, res){
