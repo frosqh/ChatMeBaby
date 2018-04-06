@@ -35,7 +35,7 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-	if(users[user.username] != undefined && !users[user.username].connected){
+		if(users[user.username] != undefined && !users[user.username].connected){
 			users[user.username].connected = 1;
 			me = user;
 			me.connected = 1;
@@ -75,13 +75,13 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('disconnect', function(user){
 		if(!me){
-				console.log("WUT");
-				return false;
+			console.log("WUT");
+			return false;
 		}
 		console.log(users[user.username]);
 		if (users[me.username] != undefined) {
 			console.log("Not null");
-    		users[me.username].connected=0;
+			users[me.username].connected=0;
 		}
 		me.conected=0;
 		io.sockets.emit('deconnexion_client',me);
@@ -106,19 +106,21 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('getUser',function(){
-			socket.emit('user',me);
+		socket.emit('user',me);
 	});
 
 	//chanName est le nom du channel à check
 	socket.on('checkName',function(chanName){
-
+		var sql = "SELECT ChannelID FROM Channel WHERE ChannelName='"+chanName+"'";
+		db.con.query(sql, function(err, result, fields){
+			if (err) throw err;
+			if (result.info.numRows > 0 ){
+				socket.emit("nameDispo",0);
+			} else {
+				socket.emit("nameDispo",1);
+			}
+		});
 		//On envoit 1 si le nom est disponible
-		if(/* condition nom dispo*/){
-			socket.emit("nameDispo",1);
-		} else {
-			//On envoit 0 si le nom n'est pas disponible
-			socket.emit("nameDispo",0);
-		}
 	});
 
 	//On recoit le nouveau channel
@@ -126,6 +128,27 @@ io.sockets.on('connection', function(socket) {
 	//channel.status : Channel "public" ou "private"
 	//channel.users : liste des noms des utilisateurs a ajouter
 	socket.on('newChannel',function(channel){
+		db.Channel(channel.name, channel.status);
+		setTimeout(function(){
+			var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channel.name+"'";
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				if (result.info.numRows > 0){
+					channelID = result[0].ChannelID;
+					for (i in channel.users){
+						u = channel.users[i];
+						var sql = "SELECT UserID FROM User WHERE UserName='"+u+"'";
+						db.con.querry(sql, function(err, result, fields){
+							if (err) throw err;
+							if (result.info.numRows > 0){
+								setTimeout(function(){db.UserByChannel(result[0].UserID, channelID, channel.name,25);},i*50);
+							}
+						});
+					}
+				}
+		});
+
+	},500)
 
 	});
 
@@ -163,12 +186,12 @@ function processPost(request, response, callback) {
 
 function disconnect(req){
 	var sql = "SELECT UserID FROM User WHERE UserName ='"+req.session.user+"'";
-		db.con.query(sql, function(err, result, fields){
-			if (err) throw err;
-			if (result.info.numRows != 0){
-				db.disconnect(result[0].UserID);
-			}
-		});
+	db.con.query(sql, function(err, result, fields){
+		if (err) throw err;
+		if (result.info.numRows != 0){
+			db.disconnect(result[0].UserID);
+		}
+	});
 	req.session.user=undefined;
 }
 
@@ -397,12 +420,12 @@ app.get('/profile', function(req,res){
 			var mail = result[0].Mail;
 			var av = result[0].AvatarURI;
 			if (descr != null){
-		    		des = descr.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'}); } else {des=undefined}
-			console.log(des);
-			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av, descToShow : des});
-			return;
-		}
-	})
+				des = descr.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'}); } else {des=undefined}
+				console.log(des);
+				res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av, descToShow : des});
+				return;
+			}
+		})
 });
 
 app.post('/profile', function(req, res){
@@ -415,60 +438,60 @@ app.post('/profile', function(req, res){
 		if (result.info.numRows == 0){
 			res.redirect("/");
 		} else {
-		processPost(req, res, function(){
-			var firstname = req.post.firstname;
-			var gender = req.post.gender;
-			var city = req.post.city;
-			var desc = req.post.description;
-			var lastname = req.post.lastname;
-			var birthdate = req.post.birthdate;
-			var phonenumber = req.post.phonenumber;
-			var mail = req.post.new_email;
-			var pass = req.post.current_password;
-			var newpass = req.post.new_password;
-			if (firstname != null){
-				db.setFirstName(result[0].UserID, firstname);
-			}
-			if (gender != null){
-				if (gender == 'male'){
-					gender=0;
+			processPost(req, res, function(){
+				var firstname = req.post.firstname;
+				var gender = req.post.gender;
+				var city = req.post.city;
+				var desc = req.post.description;
+				var lastname = req.post.lastname;
+				var birthdate = req.post.birthdate;
+				var phonenumber = req.post.phonenumber;
+				var mail = req.post.new_email;
+				var pass = req.post.current_password;
+				var newpass = req.post.new_password;
+				if (firstname != null){
+					db.setFirstName(result[0].UserID, firstname);
 				}
-				if (gender == 'female'){
-					gender=1;
+				if (gender != null){
+					if (gender == 'male'){
+						gender=0;
+					}
+					if (gender == 'female'){
+						gender=1;
+					}
+					if (gender == 'notsure'){
+						gender=2;
+					}
+					db.setGender(result[0].UserID, gender);
 				}
-				if (gender == 'notsure'){
-					gender=2;
+				if (city != null){
+					db.setCity(result[0].UserID, city);
 				}
-				db.setGender(result[0].UserID, gender);
-			}
-			if (city != null){
-				db.setCity(result[0].UserID, city);
-			}
-			if (desc != null){
-				db.setDescription(result[0].UserID, desc);
-			}
-			if (lastname != null){
-				db.setLastName(result[0].UserID, lastname);
-			}
-			if (birthdate != null){
-				db.setBirthDate(result[0].UserID, birthdate);
-			}
-			if (phonenumber != null){
-				db.setPhoneNumber(result[0].UserID, phonenumber);
-			}
-			if (mail != null){
-				db.setMail(result[0].UserID, mail);
-			}
-			if (pass!=null && db.helper.hashFnv32a(pass)==result[0].Password){
-				db.setPassword(newpass);
-			}
-			if (pass!=null){
-				res.redirect("/logout");
-			} else {
-				res.redirect("/");
-			}
-		});
-	}
+				if (desc != null){
+					db.setDescription(result[0].UserID, desc);
+				}
+				if (lastname != null){
+					db.setLastName(result[0].UserID, lastname);
+				}
+				if (birthdate != null){
+					db.setBirthDate(result[0].UserID, birthdate);
+				}
+				if (phonenumber != null){
+					db.setPhoneNumber(result[0].UserID, phonenumber);
+				}
+				if (mail != null){
+					db.setMail(result[0].UserID, mail);
+				}
+				if (pass!=null && db.helper.hashFnv32a(pass)==result[0].Password){
+					db.setPassword(newpass);
+				}
+				if (pass!=null){
+					res.redirect("/logout");
+				} else {
+					res.redirect("/");
+				}
+			});
+		}
 	});
 });
 

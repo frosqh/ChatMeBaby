@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS Channel (
   Name VARCHAR(75) NOT NULL,
   CreationDate DATETIME NOT NULL,
   Logo VARCHAR(200) NULL,
+  Visibility INTEGER NOT NULL,
   PRIMARY KEY (
     ChannelID
   )
@@ -129,7 +130,7 @@ ALTER TABLE Notification ADD CONSTRAINT fk_Notif_User FOREIGN KEY IF NOT EXISTS 
 REFERENCES User (UserID);
 
 INSERT IGNORE INTO User (UserID, UserName, Mail, Connected, Password, Confirmed) VALUES (0,"Anonymous","chatmebaby2k18@gmail.com",1,"admin",1);
-INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (0,"General", NOW());
-INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate) VALUES (1,"Random", NOW());
+INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate, Visibility) VALUES (0,"General", NOW(),1);
+INSERT IGNORE INTO Channel (ChannelID, Name, CreationDate,Visibility) VALUES (1,"Random", NOW(),1);
 INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power,Name) VALUES (0,0,0,100,"General");
 INSERT IGNORE INTO UserByChannel (ID,UserID,ChannelID,Power,Name) VALUES (1,0,1,100,"Random");
