@@ -109,7 +109,7 @@
     <table border="0" width="100%">
       <tr>
         <td style="background: #6632ba; padding: 10px 20px 0 0; text-align: center;">
-          <span id="span" class="close">&times;</span>
+          <span id="close" class="close">&times;</span>
           <p id="myModalTitle">Create a new channel</p>
         </td>
       </tr>
@@ -288,13 +288,13 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
 
     // Quand un nouveau client se connecte, on affiche l'information
     socket.on('nouveau_client', function(user) {
-        $('.privateMessage_sidebar').append('<div class="user" id="'+user.id+'"><div class="disponible"></div><p class="username">'+user.username+'</p></div>');
+        $('.privateMessage_sidebar').append('<div class="user" id="'+user.username+'"><div class="disponible"></div><p class="username">'+user.username+'</p></div>');
     })
 
     // Quand un nouveau client se deconnecte, on affiche l'information
     socket.on('deconnexion_client',function(user){
-      $('#'+user.id).children("div").toggleClass("disponible");
-      $('#'+user.id).children("div").toggleClass("absent");
+      $('#'+user.username).children("div").toggleClass("disponible");
+      $('#'+user.username).children("div").toggleClass("absent");
     })
 
     // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
@@ -318,7 +318,10 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
     // Quand on recoit un message, on l'insere dans la page
     socket.on('msg', function(message) {
       if(message.channel==$('.active_channel').text()){
-        message.content = message.content.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){
+        message.content = message.content.replace(RegExp("(:)(((\\w)|-)+)(:)",'g'),function(p1,p2,p3,p4){
+          console.log(p2);
+          console.log(p3);
+          console.log(p4);
             return '<i class="em em-'+p3+'"></i>'});
         if(lastMsg != message.user){
           $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="'+message.image+'" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');

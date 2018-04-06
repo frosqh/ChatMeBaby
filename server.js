@@ -26,25 +26,26 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-var users={};
+var users=[];
 io.sockets.on('connection', function(socket) {
 	var it=false;
 	var me=false;
-	for (var k in users){
+	for (k in users){
 		socket.emit('nouveau_client', users[k]);
 	}
 
 	socket.on('login', function(user){
-		me=user;
-		me.username=ent.encode(me.username);
-		me.id="id"+ent.encode(user.username);
-		if !(me.id in users){
-			users[me.id]=me;
+		if(!user.username in users){
+			users[user.username].connected = 1;
+		} else {
+			me=user;
+			me.username=ent.encode(me.username);
+			me.connected=1;
+			users.push(me);
 			io.sockets.emit('nouveau_client', me);
 		}
-		users[me.id]=me;
-
 	});
+
 	socket.on('message', function(message){
 		message.content=ent.encode(message.content);
 		var sql = "SELECT UserID, AvatarURI FROM User WHERE UserName ='"+message.user+"'";
@@ -64,7 +65,7 @@ io.sockets.on('connection', function(socket) {
 						io.sockets.emit('msg',message);
 					}
 				})
-				
+
 			}
 		});
 	});
@@ -73,9 +74,11 @@ io.sockets.on('connection', function(socket) {
 		if(!me){
 				return false;
 		}
-		delete users[me.id];
+		if (index > -1) {
+    		users[user.username].connected=0;
+		}
 		io.sockets.emit('deconnexion_client',me);
-		
+
 	})
 
 	socket.on('getMessages', function(channel){
@@ -154,17 +157,18 @@ function getAge(birthdate){
 }
 
 app.get('/', function(req, res) {
+	console.log("Erf !");
 	if (req.session.user){
 		userf = req.session.user;
 	} else {
 		userf = "Anonymous";
 		req.session.user=userf;
 	}
-	if (mobile(req)){
-		res.send("Hey !");
-	} else {
+	//if (mobile(req)){
+	//	res.send("Hey !");
+	//} else {
 		res.render('home.ejs', {user: userf});
-	}
+	//}
 });
 
 
@@ -356,7 +360,8 @@ app.get('/profile', function(req,res){
 			var cit = result[0].City;
 			var mail = result[0].Mail;
 			var av = result[0].AvatarURI;
-		    des = desc.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'});
+		    des = descr.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'});
+			console.log(des);
 			res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av, descToShow : des});
 			return;
 		}
