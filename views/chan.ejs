@@ -288,11 +288,13 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
 
     // Quand un nouveau client se connecte, on affiche l'information
     socket.on('nouveau_client', function(user) {
+      console.log(user.username + " : "+user.connected);
 	if (user.connected){
 		clas="disponible";
 	} else {
 		clas="absent";
 	}
+    console.log(clas);
         $('.privateMessage_sidebar').append('<div class="user" id="'+user.username+'"><div class="'+clas+'"></div><p class="username">'+user.username+'</p></div>');
     })
 
