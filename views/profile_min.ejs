@@ -5,41 +5,45 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>ChatMeBaby - Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="../front/css/profile-other.css">
-  <link rel="stylesheet" type="text/css" href="../front/css/button.css">
-  <link rel="stylesheet" type="text/css" href="../front/css/radiobutton.css">
-  <script src="../JSAPI/profile.js"></script>
+  <link rel="stylesheet" type="text/css" href="front/css/profile-other.css">
+  <link rel="stylesheet" type="text/css" href="front/css/button.css">
+  <link rel="stylesheet" type="text/css" href="front/css/radiobutton.css">
+  <script src="JS/profile.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="../front/css/index.css">
+  <link rel="stylesheet" type="text/css" href="front/css/index.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-  <link rel="icon" href="../Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 
 <body style="margin: 0; padding: 0;">
 
   <div class="header">
-    <a href="home.html"><img id='LogoTransparent' src="../Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
-    <div class="connectedUser">
+    <a href="/"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+   <div class="connectedUser">
+      <% if (user!='Anonymous') {%>
       <table id="userText" border="0">
-        <td>User</td>
-        <td id="settingico"><a><img src="../Logo/Icones/settings.png"/></a></td>
-        <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
+        <td><%= user %></td>
+        <td id="settingico"><a href="/profile"><img src="Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a href='/logout'><img src="Logo/Icones/signOut.png"/></a></td>
       </table>
+      <%} else {%>
+      <a href='/login' style='text-decoration: none'> Log in !</a>
+      <% } %>
     </div>
   </div>
 
   <div class="topnav">
-    <a href="home.html">Home</a>
-    <a href="channel.html">MyChatRooms</a>
-    <a href="#">MyChatFriends</a>
-    <a href="#">Surprise Me!</a>
+    <a href="/">Home</a>
+    <a href="channels">MyChatRooms</a>
+    <a href="/friends">MyChatFriends</a>
+    <a href="/surprise">Surprise Me!</a>
     <div class="searchbarbutton">
       <form id="searchForm" method="post">
-        <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+        <input class="searchbar" type="text" placeholder="Search emoji..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
         <input class="searchbutton" type="submit" value=""></input>
       </form>
     </div>
@@ -58,18 +62,18 @@
                   <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td width="160px" align="center">
-                        <img id="myPicture" src="../front/img/profile-picture.png" width="120px" alt="Picture">
+                        <img id="myPicture" src="front/img/profile-picture.png" width="120px" alt="Picture">
                       </td>
                       <td>
-                        <p id="username" class="username">Baptman</p>
-                        <p id="gender-age" class="gender-age">Male - 23</p>
+                        <p id="username" class="username"><%= user%></p>
+                        <p id="gender-age" class="gender-age"><% if (gender==0) {%> Male <% } else { if (gender==1) {%> Female <%} else {%> Not strictly defined <% }} %> - <%= age %></p>
                       </td>
                     </tr>
                   </table>
                 </td>
                 <td width="50%">
                   <blockquote id="description" class="description">
-                    This is a description. Yes it is. Are you surprised? You should not, it was to be expected on a profile page. By the way, I'm Baptman - nice to meet you! Now Chat Me Baby. ;)
+                    <%-descToShow%> 
                   </q>
                 </td>
               </tr>
@@ -98,7 +102,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 0 0 5px 5px;">
-                     <input class="input" type="text" name="firstname" id="firstname" title="Is this your first name ?" placeholder="Unfilled.." disabled/>
+                     <input class="input" type="text" name="firstname" id="firstname" title="Is this your first name ?" placeholder="<%= firstname %>" disabled/>
                    </td></tr>
 
                    <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
@@ -106,11 +110,11 @@
                    </td></tr>
 
                    <tr><td style="padding: 8px 0 5px 5px;">
-                     <input type="radio" name="gender" id="male" disabled/>
+                     <input type="radio" name="gender" id="male" disabled <% if (gender==0) {%> checked <%}%> />
                      <label class="label" for="male">Male</label>
-                     <input type="radio" name="gender" id="female" disabled/>
+                     <input type="radio" name="gender" id="female" disabled <% if (gender==1) {%> checked <%}%>/>
                      <label class="label" for="female">Female</label>
-                     <input type="radio" name="gender" id="notsure" disabled/>
+                     <input type="radio" name="gender" id="notsure" disabled <% if (gender==2) {%> checked <%}%> />
                      <label class="label" for="notsure">Not sure</label>
                      <!--<input type="text" name="gender" id="gender" title="Is this your gender ?" placeholder="Your gender.."/>
                    --></td></tr>
@@ -120,7 +124,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 0 0 5px 5px;">
-                     <input class="input" type="text" name="city" id="city" placeholder="Unfilled.." disabled/>
+                     <input class="input" type="text" name="city" id="city" placeholder="<%= city %>" disabled/>
                    </td></tr>
 
                  </table></td>
@@ -138,7 +142,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 0 0 5px 5px;">
-                     <input class="input" type="text" name="lastname" id="lastname" title="Is this your last name ?" placeholder="Unfilled.." disabled/>
+                     <input class="input" type="text" name="lastname" id="lastname" title="Is this your last name ?" placeholder="<%= lastname %>" disabled/>
                    </td></tr>
 
                    <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
@@ -146,7 +150,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 8px 0 13px 5px;">
-                     <input class="input" type="date" name="birthdate" id="birthdate" placeholder="DD/MM/YYYY" disabled/>
+                     <input class="input" type="date" name="birthdate" id="birthdate" placeholder="<%= birth %>" disabled/>
                    </td></tr>
 
                    <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
@@ -154,7 +158,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 4px 0 11px 5px;">
-                     <input class="input" type="tel" name="phonenumber" id="phonenumber" placeholder="Unfilled.." disabled/>
+                     <input class="input" type="tel" name="phonenumber" id="phonenumber" placeholder="<%= phonenumber %>" disabled/>
                    </td></tr>
                  </table></td>
 
