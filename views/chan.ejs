@@ -272,12 +272,15 @@
 <script src="JS/channel.js"></script>
 <script>
 
-  socket.emit('emojiParsing');
+
 
     var user = '<%= user %>'
     // Connexion � socket.io
     var socket = io.connect();
     var lastMsg=false;
+
+    socket.emit('emojiParsing');
+
     $('.channelNam p b').html($('.active_channel').text());
 $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
     refresh($('.active_channel').text());
