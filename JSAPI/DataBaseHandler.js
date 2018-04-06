@@ -31,7 +31,6 @@ module.exports = {
 			if (err) throw err;
 			con.query("USE ChatMeDB", function(err) {
 				if (err) throw err;
-			//console.log("Succeed!");
 			fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
 				if (err) throw err;
 				v = data.split(";");
@@ -140,7 +139,6 @@ module.exports = {
 	setGender:function(UserID, gender){
 		
 		var sql="UPDATE User SET Gender ="+gender+" WHERE UserID ="+UserID;
-		console.log(sql);
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		});
@@ -179,9 +177,6 @@ module.exports = {
 			
 			messageId = result.info.numRows;
 		}
-		console.log("Channel "+ChannelId);
-		console.log("Pignouf "+UserId);
-		console.log(Text);
 		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate, UserName, Image) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW(),'"+Name+"','"+avatar+"')";
 		con.query(sql, function(err, result){
 			if (err) throw err;
@@ -289,11 +284,7 @@ function UserByChannel(UserID, ChannelID,Name, Power){
 //Création Confirmation
 
 function Confirmation(UserName, UserID){
-	console.log("Entrée dans Confirmation");
-	console.log("UserName" + UserName);
-	console.log(UserID);
 	var sql = 'INSERT INTO Confirmation (ID, UserID) VALUES (\''+UserName+"',"+UserID+")";
-	console.log(sql);
 	con.query(sql, function(err, result){
 		if (err) throw err;
 		return result.info.insertId;
@@ -467,19 +458,11 @@ function sendMail(addr, subject, body) {
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
-		if (error){
-			console.log(error);
-		} else {
-			console.log('Email sent: '+info.response);
-		}
 	});
 }
 
 function generateConfirm(UserId, UserName){
-	console.log(UserName);
-	console.log(UserId);
 	user = helper.hashFnv32a(UserName,true);
-	console.log("Avant le call à Confirmation !");
 	Confirmation(user, UserId);
 	return "193.54.15.211/confirm/"+user;
 }
