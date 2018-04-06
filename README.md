@@ -46,19 +46,18 @@ Le site est développé sur un serveur tournant sur Debian avec comme modules d'
 
 ## Jeudi 05/04/18 :+1:
 - [ ] API pour ajouter par exemple Google Calendar
-- [ ] Smiley et réactions aux messages
+- [X] Smiley et réactions aux messages
 - [X] Quand on écrit un message : heure, pas ecrit deux fois le meme nom
 - [X] Serveur mis en ligne et sécurisé avec protocole https
 - [X] Lisaison entre les pages/DB/chat
 - [X] Chat opérationnel avec choix de salon et possibilité d'en créer un nouveau et d'ajouter des membres
+- [X] Les profiles
 
 ## Non implémenté :raised_hand:
 - [ ] API - JSON
 - [ ] API pour ajouter par exemple Google Calendar
-- [ ] Smiley et réactions aux messages
 - [ ] Utilisation d'équipes
+- [ ] Version Mobile
 - [ ] Les amis
 - [ ] Le Surprise Me!
-- [ ] Version Mobile
-- [ ] Les profiles
 - [ ] Notifications
