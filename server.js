@@ -397,8 +397,8 @@ app.post('/profile', function(req, res){
 		var mail = req.post.new_email;
 		var pass = req.post.current_password;
 		var newpass = req.post.new_password;
-		if (firstname != null){
-			db.setFirstName(
+		if (firstname != null){}
+			
 		console.log(firstname+"/"+lastname);
 		console.log(gender);
 		console.log(city);
