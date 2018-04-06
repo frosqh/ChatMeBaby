@@ -3,49 +3,221 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>ChatMeBaby - <%= user %>'s profile</title>
+  <title>ChatMeBaby - Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="../front/css/profile.css">
+  <link rel="stylesheet" type="text/css" href="../front/css/profile-other.css">
   <link rel="stylesheet" type="text/css" href="../front/css/button.css">
   <link rel="stylesheet" type="text/css" href="../front/css/radiobutton.css">
-  <script src="../JS/profile.js"></script>
+  <script src="../JSAPI/profile.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../front/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link rel="icon" href="../Logo/LogoTrans.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
-<body>
-<div class="header" style="background: linear-gradient(0.25turn,#0951c4, #95b4e5,#0951c4);">
-    <a href="/"><img id='LogoTransparent' src="Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
+
+<body style="margin: 0; padding: 0;">
+
+  <div class="header">
+    <a href="home.html"><img id='LogoTransparent' src="../Logo/LogoWithNameTrans.png" alt="LogoTransparent" /></a>
     <div class="connectedUser">
-      <% if (user!='Anonymous') {%>
       <table id="userText" border="0">
-        <td><%= user %></td>
-        <td id="settingico"><a href="/profile"><img src="../Logo/Icones/settings.png"/></a></td>
-        <td class="settingsPage" id="signoutico"><a href='/logout'><img src="../Logo/Icones/signOut.png"/></a></td>
+        <td>User</td>
+        <td id="settingico"><a><img src="../Logo/Icones/settings.png"/></a></td>
+        <td class="settingsPage" id="signoutico"><a><img src="../Logo/Icones/signOut.png"/></a></td>
       </table>
-      <%} else {%>
-      <a href='/login' style='text-decoration: none'> Log in !</a>
-      <% } %>
     </div>
   </div>
 
-  <table border="0" width="100%" cellpadding="0" cellspacing="0">
-    <tr height="150px">
-      <td width="50%">
-        <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <td width="160px" align="center">
-              <img id="myPicture" src="<%= avatar %>" width="120px" alt="Picture">
-            </td>
-            <td>
-             <p id="username" class="username"><%= user %> </p>
-             <p id="gender-age" class="gender-age"><% if (gender==0) {%> Male <% } else { if (gender==1) {%> Female <%} else {%> Not strictly defined <% }} %> - <%= age %></p>
-           </td>
-         </tr>
-       </table>
-     </td>
-     <td width="50%">
-      <blockquote id="description" class="description"><%=desc%>                  
+  <div class="topnav">
+    <a href="home.html">Home</a>
+    <a href="channel.html">MyChatRooms</a>
+    <a href="#">MyChatFriends</a>
+    <a href="#">Surprise Me!</a>
+    <div class="searchbarbutton">
+      <form id="searchForm" method="post">
+        <input class="searchbar" type="text" placeholder="Search ..." style="border:none; outline:none; border-bottom:1px solid #757575;"/>
+        <input class="searchbutton" type="submit" value=""></input>
+      </form>
+    </div>
+  </div>
+
+ <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:20px;">
+  <tr>
+   <td style="padding: 20px 0 30px 0;">
+
+     <table align="center" border="0" cellpadding="0" cellspacing="0" width="70%" style="border: 1px solid #636363; box-shadow: 0px 7px 15px 8px #4c4c4c;">
+        <tr>
+          <td align="center" style="padding: 0px 0 0px 0; background: linear-gradient(0.25turn, #8100a8, #a26eb2, #8100a8);">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0">
+              <tr height="150px">
+                <td width="50%">
+                  <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="160px" align="center">
+                        <img id="myPicture" src="../front/img/profile-picture.png" width="120px" alt="Picture">
+                      </td>
+                      <td>
+                        <p id="username" class="username">Baptman</p>
+                        <p id="gender-age" class="gender-age">Male - 23</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="50%">
+                  <blockquote id="description" class="description">
+                    This is a description. Yes it is. Are you surprised? You should not, it was to be expected on a profile page. By the way, I'm Baptman - nice to meet you! Now Chat Me Baby. ;)
+                  </q>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Profile form -->
+        <tr>
+          <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+             <!-- Personal information -->
+             <!-- Several things, check it out -->
+             <tr><td><table border="0" width="100%">
+
+               <tr>
+
+                 <td width="48%" style="padding: 0 0 0 0;"><table border="0" width="100%">
+                   <tr><td style="width: 50%; color: #081419; font-family: 'Pacifico', Arial, sans-serif; font-size: 24px; line-height: 20px; padding: 25px 0 5px 0;">
+                     <label for="nom"><b>Personal information</b></label><br>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">First name</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input class="input" type="text" name="firstname" id="firstname" title="Is this your first name ?" placeholder="Unfilled.." disabled/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Gender</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 8px 0 5px 5px;">
+                     <input type="radio" name="gender" id="male" disabled/>
+                     <label class="label" for="male">Male</label>
+                     <input type="radio" name="gender" id="female" disabled/>
+                     <label class="label" for="female">Female</label>
+                     <input type="radio" name="gender" id="notsure" disabled/>
+                     <label class="label" for="notsure">Not sure</label>
+                     <!--<input type="text" name="gender" id="gender" title="Is this your gender ?" placeholder="Your gender.."/>
+                   --></td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">City</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input class="input" type="text" name="city" id="city" placeholder="Unfilled.." disabled/>
+                   </td></tr>
+
+                 </table></td>
+
+                 <td>
+                 </td>
+
+                 <td width="48%" style="padding: 0 0 0 0;"><table border="0" width="100%">
+                   <tr><td style="width: 50%; color: #ffffff; font-family: 'Pacifico', Arial, sans-serif; font-size: 24px; line-height: 20px; padding: 25px 0 5px 0;">
+                     <label for="nom"><b>Personal information</b></label><br>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Last name</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 0 0 5px 5px;">
+                     <input class="input" type="text" name="lastname" id="lastname" title="Is this your last name ?" placeholder="Unfilled.." disabled/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Birth date</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 8px 0 13px 5px;">
+                     <input class="input" type="date" name="birthdate" id="birthdate" placeholder="DD/MM/YYYY" disabled/>
+                   </td></tr>
+
+                   <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
+                     <label for="nom">Phone number</label><br>
+                   </td></tr>
+
+                   <tr><td style="padding: 4px 0 11px 5px;">
+                     <input class="input" type="tel" name="phonenumber" id="phonenumber" placeholder="Unfilled.." disabled/>
+                   </td></tr>
+                 </table></td>
+
+               </tr>
+
+           </table></td></tr>
+
+        <!-- Terms of Service and Privacy Policy -->
+        <tr>
+          <td align="center">
+            <table border="0" width=80%>
+              <tr>
+                <td width=50% align="center" style="padding: 0 0 0 0;">
+                  <a href=# class=button-apply>
+                    <span style="font-size: 30px;">Add as friend !</span>
+                  </a>
+                </td>
+                <td width=50% align="center" style="padding: 0 0 0 0;">
+                  <a href=# class=button-apply>
+                    <span style="font-size: 30px;">Let's chat !</span>
+                  </a>
+                </td>
+              </tr>
+          </td>
+        </tr>
+     </table>
+
+   </td>
+  </tr>
+ </table>
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+<footer>
+  <table class="tableFooter" border="0" align="center">
+    <tr align="right">
+      <td class="backTop" colspan="3">
+        <a href="#">Back to top &#9650;</a>
       </td>
     </tr>
+    <tr>
+      <td class="contact" width="10%"><button class="buttonContact">Contact Us!</button></td>
+      <td class="copyright" width="90%">
+        Copyright © 2018 - <span class="chatmebaby">Chat Me Baby </span>- Hynes Monchicourt Raimondi Roudaut
+      </td>
+      <td>
+        <table>
+          <td class="linkedin" width="3%"><img src="../Logo/Icones/linkedin-box.png"/></td>
+          <td class="facebook" width="3%"><img src="../Logo/Icones/facebook-box.png"/></td>
+          <td class="twitter" width="3%"><a><img src="../Logo/Icones/twitter-box.png"/></a></td>
+        </table>
+      </td>
+
+
+    </tr>
   </table>
+</footer>
 </body>
-</head>
+
 </html>
