@@ -422,7 +422,7 @@ app.post('/profile', function(req, res){
 				db.setCity(result[0].UserID, city);
 			}
 			if (desc != null){
-				db.setDescription(result[0].UserID, description);
+				db.setDescription(result[0].UserID, desc);
 			}
 			if (lastname != null){
 				db.setLastName(result[0].UserID, lastname);
@@ -436,10 +436,14 @@ app.post('/profile', function(req, res){
 			if (mail != null){
 				db.setMail(result[0].UserID, mail);
 			}
-			if (db.helper.hashFnv32a(pass)==result[0].Password){
+			if (pass!=null && db.helper.hashFnv32a(pass)==result[0].Password){
 				db.setPassword(newpass);
 			}
-			res.redirect("/");
+			if (pass!=null){
+				res.redirect("/logout");
+			} else {
+				res.redirect("/");
+			}
 		});
 	}
 	});
