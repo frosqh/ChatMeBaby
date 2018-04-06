@@ -497,17 +497,56 @@ app.get('/user/:id', function(req, res){
 })
 
 app.get('/api/users', function(req, res){
-	var sql = "SELECT * FROM User";
+	var sql = "SELECT UserID, UserName, Mail, FirstName, LastName, BirthDate, AvatarURI, Description, PhoneNumber, City, Gender FROM User";
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
 		if (result.info.numRows == 0){
-			res.json();
+			res.status(200).json();
 		} else {
-			res.json(result.slice(0,result.length-1));
+			res.status(200).json(result);
 		}
 	});
-}
+});
 
+app.get('/api/user/:id', function(req, res){
+	var sql = "SELECT UserID, UserName, Mail, FirstName, LastName, BirthDate, AvatarURI, Description, PhoneNumber, City, Gender FROM User WHERE UserID="+req.params.id;
+	db.con.query(sql, function(err, result, field){
+		if (err)  throw err;
+		if( result.info.numRows == 0){
+			res.status(404).json();
+		} else {
+			res.status(200).json(result);
+		}
+	});
+});
+
+app.post('/api/user/:id', function(req, res){
+	res.status(405).json();
+});
+
+app.get('/api/channels/', function(req, res){
+	var sql = "SELECT * FROM Channel";
+	db.con.query(sql, function(err, result, field){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.status(200).json();
+		} else {
+			res.status(200).json(result);
+		}
+	});
+});
+
+app.get('/api/channel/:id', function(req, res){
+	var sql = "SELECT * FROM Channel WHERE ChannelID="+req.params.id;
+	db.con.query(sql, function(err, result, field){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.status(404).json();
+		} else {
+			res.status(200).json(result);
+		}
+	});
+});
 
 app.use(function(req, res, next){
 	res.status(404).render("404.ejs");
