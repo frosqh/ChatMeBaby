@@ -49,7 +49,8 @@ function sendForm() {
 
 $('#myForm').submit(function (e) {
   e.preventDefault();
-  $('channel_sidebar').append('<p class="channel">'+$('.channelname').text()+'</p>')
+  $('channel_sidebar').append('<p class="channel">'+$('.channelname').text()+'</p>');
+  console.log("Submit");
 }
 
 var Mcounter = 1;

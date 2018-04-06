@@ -23,7 +23,6 @@
 body {
   height: 100%;
   background: linear-gradient(0.25turn, #0951c4, #95b4e5, #0951c4);
-  overflow-x: hidden;
 }
 
 textarea {
@@ -207,4 +206,21 @@ input:required:valid {
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
 		right: 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    * {
+        width: 100%;
+        overflow-x: hidden;
+        height: auto;
+      }
+
+    label{
+      overflow-y: hidden;
+    }
+    .button, .button span{
+      width: 72%;
+    }
+
 }
