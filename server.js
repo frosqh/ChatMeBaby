@@ -35,11 +35,11 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-	if(users[user.username] != undefined){
+	if(users[user.username] != undefined && !users[user.username].connected){
 			users[user.username].connected = 1;
 			me = user;
 			me.connected = 1;
-			socket.broadcast.emit('connecti',me);
+			io.sockets.emit('connecti',me);
 		} else {
 			me = user;
 			me.username=ent.encode(me.username);
@@ -79,9 +79,9 @@ io.sockets.on('connection', function(socket) {
 				return false;
 		}
 		console.log(users[user.username]);
-		if (users[user.username] != undefined) {
+		if (users[me.username] != undefined) {
 			console.log("Not null");
-    		users[user.username].connected=0;
+    		users[me.username].connected=0;
 		}
 		me.conected=0;
 		io.sockets.emit('deconnexion_client',me);
@@ -206,7 +206,7 @@ app.get('/channels', function(req,res) {
 	})
 });
 
-apt.post('/channels', function(req, res) {
+app.post('/channels', function(req, res) {
 	processPost(req, res, function(){
 
 	})
@@ -380,6 +380,33 @@ app.get('/profile', function(req,res){
 		}
 	})
 });
+
+app.post('/profile', function(req, res){
+	if (!req.session.user || req.session.user=='Anonymous'){
+		return;
+	}
+	processPost(req, res, function(){
+		var firstname = req.post.firstname;
+		var gender = req.post.gender;
+		var city = req.post.city;
+		var desc = req.post.description;
+		var lastname = req.post.lastname;
+		var birthdate = req.post.birthdate;
+		var phonenumber = req.post.phonenumber;
+		var mail = req.post.new-email;
+		var pass = req.post.current-password;
+		var newpass = req.post.new-password;
+		console.log(firstname+"/"+lastname);
+		console.log(gender);
+		console.log(city);
+		console.log(desc);
+		console.log(birthdate);
+		console.log(phonenumber);
+		console.log(mail);
+		console.log(pass);
+		console.log(newpass);
+	}
+})
 
 app.get('/user/:id', function(req, res){
 	var sql = "SELECT * FROM User WHERE UserID ="+req.params.id;

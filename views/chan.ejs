@@ -287,11 +287,13 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
 
     // Quand un nouveau client se connecte, on affiche l'information
     socket.on('nouveau_client', function(user) {
+      console.log(user.username + " : "+user.connected);
 	if (user.connected){
 		clas="disponible";
 	} else {
 		clas="absent";
 	}
+    console.log(clas);
         $('.privateMessage_sidebar').append('<div class="user" id="'+user.username+'"><div class="'+clas+'"></div><p class="username">'+user.username+'</p></div>');
     })
 
@@ -329,9 +331,6 @@ $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
     socket.on('msg', function(message) {
       if(message.channel==$('.active_channel').text()){
         message.content = message.content.replace(RegExp("(:)(((\\w)|-)+)(:)",'g'),function(p1,p2,p3,p4){
-          console.log(p2);
-          console.log(p3);
-          console.log(p4);
             return '<i class="em em-'+p3+'"></i>'});
         if(lastMsg != message.user){
           $('#zone_chat').append('<div class="sender-name"><img class="avatar" src="'+message.image+'" width="32" height="32"/><div class="sender">'+message.user+'</div><div class="time">'+message.hour+':'+message.minute+'</div><div class="message_content"><div class="message_body">  <strong>|</strong> ' + message.content + '</div></div></div>');
