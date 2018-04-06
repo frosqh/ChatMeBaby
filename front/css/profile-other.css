@@ -1,0 +1,240 @@
+/* STYLE FOR BUTTON */
+/* STYLE FOR BUTTON */
+/* STYLE FOR BUTTON */
+/* STYLE FOR BUTTON */
+/* STYLE FOR BUTTON */
+/* STYLE FOR BUTTON */
+
+@font-face {
+    font-family: 'Pacifico';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Pacifico'), url('http://themes.googleusercontent.com/font?kit=fKnfV28XkldRW297cFLeqfesZW2xOQ-xsNqO47m55DA') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+  height: 100%;
+  background: linear-gradient(0.25turn, #0951c4, #95b4e5, #0951c4);
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 5px 5px 5px 5px;
+  resize:none;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: italic;
+  color: #444444;
+}
+
+.username {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 36px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.gender-age {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 24px;
+  margin-top: 2px;
+  margin-bottom: 30px;
+}
+
+.description {
+  /*font-family: 'Roboto', Arial, sans-serif;
+  quotes: "“" "”";*/
+  font-style:normal;
+  margin-left:32px;
+  font-family:'Roboto', serif;
+  font-style: oblique;
+  font-size: 18px;
+  color: #262626;
+  padding-left: 26px;
+  padding-top: 8px;
+  background:url('../img/blockquote.png');
+  background-repeat:no-repeat;
+  background-size: 25px 20px;
+  min-height: 30px;
+  text-indent: 20px;
+  text-align: justify;
+}
+
+/* STYLE FOR INPUT */
+/* STYLE FOR INPUT */
+/* STYLE FOR INPUT */
+/* STYLE FOR INPUT */
+/* STYLE FOR INPUT */
+/* STYLE FOR INPUT */
+
+.input, select {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 8px 0;
+    display: inline-block;
+		/*border: 1px solid #ccc;
+    border-radius: 4px;*/
+		border: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+.input, select {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    /*border: 1px solid #ccc;
+    border-radius: 4px;*/
+		border: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus {
+		width: 100%;
+		border-bottom: 2px solid #1a75f4;
+    transition: 0.4s;
+}
+
+input[type=email], select {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 8px 0;
+    display: inline-block;
+		/*border: 1px solid #ccc;
+    border-radius: 4px;*/
+		border: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=email]:focus {
+		border-bottom: 2px solid #1a75f4;
+    transition: 0.4s;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 2px 0;
+    display: inline-block;
+		/*border: 1px solid #ccc;
+    border-radius: 4px;*/
+		border: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=password]:focus {
+		border-bottom: 2px solid #1a75f4;
+    transition: 0.4s;
+}
+
+input[type=date], select {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 2px 0;
+    display: inline-block;
+		/*border: 1px solid #ccc;
+    border-radius: 4px;*/
+		border: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=date]:focus {
+		border-bottom: 2px solid #1a75f4;
+    transition: 0.4s;
+}
+
+input[type=tel], select {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 2px 0;
+    display: inline-block;
+		/*border: 1px solid #ccc;
+    border-radius: 4px;*/
+		border: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=tel]:focus {
+		border-bottom: 2px solid #1a75f4;
+    transition: 0.4s;
+}
+
+input:invalid {
+		width: 100%;
+		border: none;
+		border-bottom: 2px solid #ff3838;
+		box-shadow: none;
+}
+
+input:required:valid {
+		width: 100%;
+		border: none;
+		border-bottom: 2px solid green;
+}
+
+/* STYLE FOR TOGGLE SWITCH */
+/* STYLE FOR TOGGLE SWITCH */
+/* STYLE FOR TOGGLE SWITCH */
+/* STYLE FOR TOGGLE SWITCH */
+/* STYLE FOR TOGGLE SWITCH */
+/* STYLE FOR TOGGLE SWITCH */
+
+.onoffswitch {
+		position: relative; width: 90px;
+		-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+		display: none;
+}
+.onoffswitch-label {
+		display: block; overflow: hidden; cursor: pointer;
+		border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+		display: block; width: 200%; margin-left: -100%;
+		transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+		display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+		font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+		box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+		content: "I agree";
+		padding-left: 10px;
+		background-color: #34C24C; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+		content: "";
+		padding-right: 10px;
+		background-color: #EEEEEE; color: #999999;
+		text-align: right;
+}
+.onoffswitch-switch {
+		display: block; width: 18px; margin: 6px;
+		background: #FFFFFF;
+		position: absolute; top: 0; bottom: 0;
+		right: 56px;
+		border: 2px solid #999999; border-radius: 20px;
+		transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+		margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+		right: 0px;
+}
