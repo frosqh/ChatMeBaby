@@ -35,13 +35,16 @@ io.sockets.on('connection', function(socket) {
 	}
 
 	socket.on('login', function(user){
-	if(user.username in users){
+	if(users[user.username] != undefined){
 			users[user.username].connected = 1;
+			me = user;
+			me.connected = 1;
+			socket.broadcast.emit('connecti',me);
 		} else {
 			me=user;
 			me.username=ent.encode(me.username);
 			me.connected=1;
-			users.push(me);
+			users[user.username] = me;
 			io.sockets.emit('nouveau_client', me);
 		}
 	});
@@ -72,10 +75,14 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('disconnect', function(user){
 		if(!me){
+				consol.log("WUT");
 				return false;
 		}
-		if (user.username in users) {
-    		users[user.username].connected=0;
+		console.log(users[user.username]);
+		if (users[user.username] != undefined) {
+			console.log("Not null");
+    			users[user.username].connected=0;
+			me.connected=0;
 		}
 		io.sockets.emit('deconnexion_client',me);
 
