@@ -107,8 +107,14 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('getUser',function(){
 			socket.emit('user',me);
-		})
+	});
+
+	socket.on('newChannel',function(){
+
+	})
 })
+
+
 
 
 function processPost(request, response, callback) {
@@ -398,7 +404,7 @@ app.post('/profile', function(req, res){
 		var pass = req.post.current_password;
 		var newpass = req.post.new_password;
 		if (firstname != null){}
-			
+
 		console.log(firstname+"/"+lastname);
 		console.log(gender);
 		console.log(city);

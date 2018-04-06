@@ -49,22 +49,24 @@ function sendForm() {
       for(var k=0;k<=counter;k++){
         if($("#inp" + k).length != 0) {
           addUser.push($('#inp'+k).val());
-          console.log($('#inp'+k).val());
-          $('#inp'+k).val('');
+          //console.log($('#inp'+k).val());
+          //$('#inp'+k).val('');
         }
       }
-      $('.channel_sidebar').append('<p class="channel">'+$('#channelname').val()+'</p>');
-      console.log("Channel Name is :"+$('#channelname').val());
-      $('#channelname').val('');
-      for(var k=0;k<=counter;k++){
-        if($("#" + k).length != 0) {
-          if($('#'+k).hasClass("rs")){
-            $('#'+k).click();
-            console.log($('#'+k)+" is clicked");
-          }
-        }
+      chanName = $('#channelname').val();
+      //$('.channel_sidebar').append('<p class="channel">'+chanName+'</p>');
+
+      var stat = "public";
+      if (priv.checked){
+        console.log("private");
+        stat = "private";
       }
-      counter = 1;
+      // Envoie le channel a la BD
+      socket.emit('newChannel', {
+        name    :chanName,
+        status  :stat,
+        users   :addUser
+      });
   }
 };
 
@@ -115,4 +117,26 @@ function MrmInput(myButton){
 
 function sendFormMembers() {
   document.getElementById("myFormMembers").submit();
+}
+
+function checkAllValidate() {
+
+}
+
+function clearAndHide(){
+  for(var k=0;k<=counter;k++){
+    if($("#inp" + k).length != 0) {
+      $('#inp'+k).val('');
+    }
+  }
+  for(var k=0;k<=counter;k++){
+    if($("#" + k).length != 0) {
+      if($('#'+k).hasClass("rs")){
+        $('#'+k).click();
+        console.log($('#'+k)+" is clicked");
+      }
+    }
+  }
+  counter = 1;
+  $('#channelname').val('');
 }
