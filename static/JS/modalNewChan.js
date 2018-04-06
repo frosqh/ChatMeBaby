@@ -1,12 +1,14 @@
 var counter = 1;
+var inputCounter = 1;
 
 function addInput(myButton){
   /* Increment the counter */
   counter++;
-
+  inputCounter++;
+  $('#inputCounter').val()=inputCounter;
   /* Create a new input */
   var newdiv = document.createElement('div');
-  newdiv.innerHTML = "<input type='text' id="+"'inp"+counter+"'"+" class='inNewChan' name='members[]' title='New member..' placeholder='New member..'/>";
+  newdiv.innerHTML = "<input type='text' id="+"'inp"+counter+"'"+" class='inNewChan' name='member"+counter+"' title='New member..' placeholder='New member..'/>";
   document.getElementById("memberInputs").appendChild(newdiv);
 
   /* Create a new button */
@@ -20,6 +22,8 @@ function addInput(myButton){
 }
 
 function rmInput(myButton){
+  inputCounter--;
+  $('#inputCounter').val()=inputCounter;
   var buttonInputs = document.getElementById("buttonInputs");
   var id = myButton.id;
 
@@ -50,7 +54,7 @@ function sendForm() {
 $('#myForm').submit(function (e) {
   e.preventDefault();
   $('channel_sidebar').append('<p class="channel">'+$('.channelname').text()+'</p>');
-  console.log("Submit");
+  console.log("Submit ");
 });
 
 var Mcounter = 1;
