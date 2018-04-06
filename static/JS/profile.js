@@ -1,7 +1,7 @@
 /* Check if the password is confirmed */
 function validatePassword() {
-  var new_password = document.getElementById("new-password");
-  var confirm_password = document.getElementById("confirm-password");
+  var new_password = document.getElementById("new_password");
+  var confirm_password = document.getElementById("confirm_password");
 
   if(new_password.value != confirm_password.value) {
     confirm_password.setCustomValidity("Passwords don't match");
@@ -12,8 +12,8 @@ function validatePassword() {
 
 /* Check if the new email is correct */
 function validateEmail() {
-  var new_email = document.getElementById("new-email");
-  var confirm_email = document.getElementById("confirm-email");
+  var new_email = document.getElementById("new_email");
+  var confirm_email = document.getElementById("confirm_email");
 
   if(new_email.value != confirm_email.value) {
     confirm_email.setCustomValidity("Emails don't match");
@@ -25,28 +25,27 @@ function validateEmail() {
 
 function checkAllValidate() {
   var username = document.getElementById("username");
-  var new_email = document.getElementById("new-email");
-  var confirm_email = document.getElementById("confirm-email");
-  var new_password = document.getElementById("new-password");
-
+  var new_email = document.getElementById("new_email");
+  var confirm_email = document.getElementById("confirm_email");
+  var new_password = document.getElementById("new_password");
+  var current_email = document.getElementById("current_email");
+  var current_password = document.getElementById("current_password");
   var email_empty = !(new_email.value.localeCompare(""));
   var password_empty = !(new_password.value.localeCompare(""));
 
   if (email_empty || confirm_email.checkValidity()) {
-    var confirm_password = document.getElementById("confirm-password");
+    var confirm_password = document.getElementById("confirm_password");
     if (password_empty || confirm_password.checkValidity()) {
-        alert("OK");
+        //alert("OK");
         if (email_empty) {
           confirm_email.removeAttribute('name');
-        }
+       new_email.removeAttribute('name'); }
         if (password_empty) {
           confirm_password.removeAttribute('name');
-        }
-        current_email.removeAttribute('name');
-        new_email.removeAttribute('name');
-        current_password.removeAttribute('name');
-        new_password.removeAttribute('name');
+         new_password.removeAttribute('name');
+}
 
+  
         document.getElementById("myForm").submit();
     } else {
       alert ("Passwords don't match.");

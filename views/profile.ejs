@@ -45,8 +45,7 @@
                     <tr>
                       <td width="160px" align="center">
                         <img id="myPicture" src="<%= avatar %>" width="120px" alt="Picture">
-                      </td>
-                      <td>
+		      </td>
 			      <p id="username" class="username"><%= user %> </p>
 			<p id="gender-age" class="gender-age"><% if (gender==0) {%> Male <% } else { if (gender==1) {%> Female <%} else {%> Not strictly defined <% }} %> - <%= age %></p>
                       </td>
@@ -180,7 +179,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 0 0 5px 5px;">
-                     <input type="email" name="current-email" id="current-email" placeholder=<%= email %> disabled/>
+                     <input type="email" name="current_email" id="current_email" placeholder=<%= email %> disabled/>
                    </td></tr>
 
                    <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
@@ -188,7 +187,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 0 0 5px 5px;">
-                     <input type="email" name="new-email" id="new-email" onchange="validateEmail()" placeholder="New email.."/>
+                     <input type="email" name="new_email" id="new_email" onchange="validateEmail()" placeholder="New email.."/>
                    </td></tr>
 
                    <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
@@ -196,7 +195,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 0 0 5px 5px;">
-                     <input type="email" name="confirm-email" id="confirm-email" onchange="validateEmail()" placeholder="Confirm email.."/>
+                     <input type="email" name="confirm_email" id="confirm_email" onchange="validateEmail()" placeholder="Confirm email.."/>
                    </td></tr>
                  </table></td>
 
@@ -213,7 +212,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 6px 0 11px 5px;">
-                     <input type="password" name="current-password" id="current-password" placeholder="Current password.."/>
+                     <input type="password" name="current_password" id="current_password" placeholder="Current password.."/>
                    </td></tr>
 
                    <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
@@ -221,7 +220,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 6px 0 11px 5px;">
-                     <input type="password" name="new-password" id="new-password" onchange="validatePassword()" placeholder="New password.."/>
+                     <input type="password" name="new_password" id="new_password" onchange="validatePassword()" placeholder="New password.."/>
                    </td></tr>
 
                    <tr><td style="color: #081419; font-family: 'Roboto'; font-size: 18px; line-height: 20px; padding: 10px 0 5px 5px;">
@@ -229,7 +228,7 @@
                    </td></tr>
 
                    <tr><td style="padding: 6px 0 11px 5px;">
-                     <input type="password" name="confirm-password" id="confirm-password" onchange="validatePassword()" placeholder="Confirm password.."/>
+                     <input type="password" name="confirm_password" id="confirm_password" onchange="validatePassword()" placeholder="Confirm password.."/>
                    </td></tr>
                  </table></td>
 

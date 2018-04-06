@@ -44,13 +44,27 @@ function sendForm() {
   var addUser = [];
   if (chanName.checkValidity() && (pub.checked || priv.checked)) {
     //document.getElementById("myForm").submit();
-    $('#myModal').style.display="none";
-      for(var k=0;k<counter;k++){
+    var modal = document.getElementById('myModal');
+    modal.style.display = "none";
+      for(var k=0;k<=counter;k++){
         if($("#inp" + k).length != 0) {
           addUser.push($('#inp'+k).val());
+          console.log($('#inp'+k).val());
           $('#inp'+k).val('');
         }
       }
+      $('.channel_sidebar').append('<p class="channel">'+$('#channelname').val()+'</p>');
+      console.log("Channel Name is :"+$('#channelname').val());
+      $('#channelname').val('');
+      for(var k=0;k<=counter;k++){
+        if($("#" + k).length != 0) {
+          if($('#'+k).hasClass("rs")){
+            $('#'+k).click();
+            console.log($('#'+k)+" is clicked");
+          }
+        }
+      }
+      counter = 1;
   }
 };
 
