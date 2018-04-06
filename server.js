@@ -558,7 +558,7 @@ app.get('/user/:id', function(req, res){
 			var cit = result[0].City;
 			var mail = result[0].Mail;
 			var av = result[0].AvatarURI;
-			res.render('profile_min.ejs', {user: use, desc: des, gender: gend, age:ag, avatar:av});
+			res.render('profile_min.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av, descToShow : des});
 			return;
 		}
 	})
