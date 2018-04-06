@@ -75,7 +75,7 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('disconnect', function(user){
 		if(!me){
-				consol.log("WUT");
+				console.log("WUT");
 				return false;
 		}
 		console.log(users[user.username]);
