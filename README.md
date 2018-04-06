@@ -23,7 +23,7 @@ Le site est développé sur un serveur tournant sur Debian avec comme modules d'
 - MariaDb
 
 
-> Le site est désormé disponible sur [Chat Me Baby](193.54.15.211)
+> Le site est désormé disponible sur [Chat Me Baby](http://193.54.15.211)
 
 ## Mardi 04/03/18 :+1:
 - [X] Login - Done (manque liaison DB + cookie)
