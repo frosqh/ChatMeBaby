@@ -41,7 +41,8 @@ function sendForm() {
   var chanName = document.getElementById("channelname");
   var pub = document.getElementById("public");
   var priv = document.getElementById("private");
-  var addUser = [($('.username').text()).replace(RegExp(" ",g),"")];
+  var addUser = [$('.username').text()];
+  console.log($('.username').text());
   if (chanName.checkValidity() && (pub.checked || priv.checked)) {
     //document.getElementById("myForm").submit();
     var modal = document.getElementById('myModal');
