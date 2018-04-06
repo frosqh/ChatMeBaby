@@ -242,13 +242,34 @@ app.get('/', function(req, res) {
 		req.session.user=userf;
 	}
 	if (mobile(req)){
-		res.render('home-mobile.ejs', {user: userf});
+		if (req.session.user==undefined || req.session.user=='Anonymous'){
+			res.render('login.ejs', {wrong:undefined});
+		} else { 
+			var sql = "SELECT UserID FROM User WHERE UserName = '"+req.session.user+"'";
+			db.con.query(sql, function(err, result, fields){
+				if (err) throw err;
+				if (result.info.numRows > 0){
+					var sql = "SELECT Name FROM UserByChannel WHERE UserID = "+result[0].UserID;
+					db.con.query(sql, function(err, result, fields){
+						if (err) throw err;
+						l="";
+						for (i=0;i<result.info.numRows;i++){
+							l+=result[i].Name+" ";
+						}
+					res.render('home-mobile.ejs', {user: req.session.user, channels:(l.substring(0,l.length-1)).split(' ')});
+			});
+		}	})
+		}
+		
+		
 	} else {
-		res.render('home.ejs', {user: userf});
+		res.render('home.ejs', {user: userf}); 
 	}
 });
 
-
+app.get('/lecharoy', function(req, res) {
+	res.render('charoy.ejs');
+});
 
 app.get('/channels', function(req,res) {
 	if (!req.session.user || req.session.user=="Anonymous"){
@@ -320,7 +341,11 @@ app.get('/create-account', function(req, res){
 		res.redirect("/");
 		return;
 	}
-	res.render('create-account.ejs', {notif: undefined});
+	if (mobile(req)){
+		res.render('create-account-mobile.ejs', {notif: undefined});
+	} else {
+		res.render('create-account.ejs', {notif: undefined});
+	}
 })
 
 app.get('/home', function(req, res){
