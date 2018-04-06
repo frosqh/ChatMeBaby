@@ -44,7 +44,8 @@ function sendForm() {
   var addUser = [];
   if (chanName.checkValidity() && (pub.checked || priv.checked)) {
     //document.getElementById("myForm").submit();
-    $('#myModal').style.display="none";
+    var modal = document.getElementById('myModal');
+    modal.style.display = "none";
       for(var k=0;k<counter;k++){
         if($("#inp" + k).length != 0) {
           addUser.push($('#inp'+k).val());
