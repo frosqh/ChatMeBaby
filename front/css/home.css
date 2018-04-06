@@ -43,6 +43,7 @@ html,body,.home{
 	height:100%;
 	margin:0;
 	padding:0;
+  min-width: 1400px;
 }
 
 .navigation{
@@ -117,8 +118,8 @@ html,body,.home{
 
 #slide1 img:first-child{
 	position:absolute;
-	top: 350%/*700px*/;
-	left: 41%/*350px*/;
+	top: 270%/*700px*/;
+	left: 29%/*350px*/;
 }
 #slide1 img:nth-child(2){
 	position:absolute;
@@ -223,9 +224,10 @@ html,body,.home{
 #slide3{
   background: url(../img/home/slide3/slide-3.png) no-repeat left center fixed;
 	-webkit-background-size: cover;
-	-moz-background-size: cover;
+	-moz-background-size: cover%;
 	-o-background-size: cover;
 	background-size: cover;
+  height: 100%;
   z-index: 4;
 }
 #slide3 img:first-child{
