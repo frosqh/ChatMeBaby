@@ -171,11 +171,11 @@ app.get('/', function(req, res) {
 		userf = "Anonymous";
 		req.session.user=userf;
 	}
-	//if (mobile(req)){
-	//	res.send("Hey !");
-	//} else {
+	if (mobile(req)){
+		res.render('home-mobile.ejs', {user: userf});
+	} else {
 		res.render('home.ejs', {user: userf});
-	//}
+	}
 });
 
 
