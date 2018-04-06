@@ -23,7 +23,7 @@ Le site est développé sur un serveur tournant sur Debian avec comme modules d'
 - MariaDb
 
 
-> Le site est désormé disponible sur [Chat Me Baby](http://chatmebaby.telecomnancy.univ-lorraine.fr), sécurisé avec le protocole HTTPS et un certificat SSL (Let's Encrypt).
+> Le site est désormé disponible sur [Chat Me Baby](193.54.15.211)
 
 ## Mardi 04/03/18 :+1:
 - [X] Login - Done (manque liaison DB + cookie)
@@ -53,11 +53,20 @@ Le site est développé sur un serveur tournant sur Debian avec comme modules d'
 - [X] Chat opérationnel avec choix de salon et possibilité d'en créer un nouveau et d'ajouter des membres
 - [X] Les profiles
 
+## Vendredi 06/04/18 :+1:
+- [ ] API pour ajouter par exemple Google Calendar
+- [X] Smiley et réactions aux messages
+- [X] Quand on écrit un message : heure, pas ecrit deux fois le meme nom
+- [X] Serveur mis en ligne et sécurisé avec protocole https
+- [X] Lisaison entre les pages/DB/chat
+- [X] Chat opérationnel avec choix de salon et possibilité d'en créer un nouveau et d'ajouter des membres
+- [X] Les profiles
+- [X] Version Mobile
+
 ## Non implémenté :raised_hand:
 - [ ] API - JSON
 - [ ] API pour ajouter par exemple Google Calendar
 - [ ] Utilisation d'équipes
-- [ ] Version Mobile
 - [ ] Les amis
 - [ ] Le Surprise Me!
 - [ ] Notifications
