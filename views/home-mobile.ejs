@@ -23,9 +23,12 @@
 
   <body>
   	<div class="header">
-  		<a id="menu" ><img id="menuico" src="../Logo/Icones/menu2.png" /></a>
-  	  <a id="homelink" align="center"><img id='LogoTransparent' src="../Logo/LogoWithNameTransWhite.png" alt="LogoTransparent" /></a>
-  	  <!-- <div class="connectedUser">
+  		<a id="menu" ><img id="menuico" src="Logo/Icones/menu2.png" /></a>
+  	  <a id="homelink" align="center"><img id='LogoTransparent' src="Logo/LogoWithNameTransWhite.png" alt="LogoTransparent" /></a>
+      <% if (user=='Anonymous') {%>
+      <a href='/login' style='text-decoration: none'> Log in !</a>
+      <% } %>
+      <!-- <div class="connectedUser">
   	    <table id="userText" border="0">
   	      <td>User</td>
   	      <td id="settingico"><a href="#"><img src="../Logo/Icones/settings.png"/></a></td>

@@ -31,7 +31,6 @@ module.exports = {
 			if (err) throw err;
 			con.query("USE ChatMeDB", function(err) {
 				if (err) throw err;
-			//console.log("Succeed!");
 			fs.readFile('ChatMeDB.sql', 'utf8', (err, data)=>{
 				if (err) throw err;
 				v = data.split(";");
@@ -63,11 +62,18 @@ module.exports = {
 				var sql = "SELECT * FROM Channel WHERE Visibility = 1";
 				con.query(sql, function(err, result) {
 					if (err) throw err;
+					
 					if (result.info.numRows > 0){
+						
 						for (i in result){
-							setTimeout(function(){
-								UserByChannel(UserID, result[i].ChannelID, result[i].Name,25);
-							},i*100);
+							if (i!='info'){
+							console.log(result[i]);
+							console.log(result[i].Name);
+							doSetTimeout(i, result[i], UserID);
+						//	setTimeout(function(){
+						//		UserByChannel(UserID, result[i].ChannelID, result[i].Name,25);
+						//	},i*100);
+								}
 						}
 					}
 				})
@@ -133,7 +139,6 @@ module.exports = {
 	setGender:function(UserID, gender){
 		
 		var sql="UPDATE User SET Gender ="+gender+" WHERE UserID ="+UserID;
-		console.log(sql);
 		con.query(sql, function(err, result){
 			if (err) throw err;
 		});
@@ -172,9 +177,6 @@ module.exports = {
 			
 			messageId = result.info.numRows;
 		}
-		console.log("Channel "+ChannelId);
-		console.log("Pignouf "+UserId);
-		console.log(Text);
 		var sql="INSERT INTO Message (MessageID, UserID, ChannelID, Txt, SendDate, UserName, Image) VALUES ("+messageId+","+UserId+","+ChannelId+",'"+Text+"',NOW(),'"+Name+"','"+avatar+"')";
 		con.query(sql, function(err, result){
 			if (err) throw err;
@@ -183,6 +185,11 @@ module.exports = {
 	});
 },
 Channel:function(Name,vis){
+	if (vis=='private'){
+		vis=0;
+	} else {
+		vis=1;
+	}
 	var sql="SELECT * FROM Channel";
 	con.query(sql, function(err,result){
 		if (err) throw err;
@@ -191,7 +198,7 @@ Channel:function(Name,vis){
 		} else {
 			ChannelID = result.info.numRows;
 		}
-		var sql="INSERT INTO Channel (ChannelID, Name, Visibility, CreationDate) VALUES ("+ChannelID+",'"+Name+"',"+Visibility+",NOW())";
+		var sql="INSERT INTO Channel (ChannelID, Name, Visibility, CreationDate) VALUES ("+ChannelID+",'"+Name+"',"+vis+",NOW())";
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			Settings(result.info.insertId);
@@ -199,7 +206,8 @@ Channel:function(Name,vis){
 		});
 	});
 },
-UserByChannel:function(UserID, ChannelID,Name, Power){
+	UserByChannel:function(UserID, ChannelID,Name, Power){
+	console.log(Name);
 	var sql="SELECT * FROM UserByChannel";
 	con.query(sql, function(err, result){
 		if (err) throw err;
@@ -209,6 +217,7 @@ UserByChannel:function(UserID, ChannelID,Name, Power){
 			UbCId = result.info.numRows;
 		}
 		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
+		
 		con.query(sql, function(err, result){
 			if (err) throw err;
 			return result.info.insertId;
@@ -216,9 +225,14 @@ UserByChannel:function(UserID, ChannelID,Name, Power){
 	})
 }
 
+
+
 }
 // API User
 
+function doSetTimeout(i, res, id){
+	setTimeout(function() {UserByChannel(id,res.ChannelID, res.Name, 25) },i*50);
+}
 function getUserId(username){ //À modifier, l'async fout le bordel monstre ><
 var sql="SELECT UserID FROM User WHERE Username='"+username+"'";
 con.query(sql, function(err, result, fields){
@@ -239,6 +253,25 @@ function setConnected(UserID, connected){
 }
 
 
+function UserByChannel(UserID, ChannelID,Name, Power){
+	console.log(Name);
+	var sql="SELECT * FROM UserByChannel";
+	con.query(sql, function(err, result){
+		if (err) throw err;
+		if (result == undefined){
+			UbCId = 0;
+		} else {
+			UbCId = result.info.numRows;
+		}
+		var sql="INSERT INTO UserByChannel (ID, UserID, ChannelID, Power, Name) VALUES ("+UbCId+","+UserID+","+ChannelID+","+Power+",'"+Name+"')";
+		
+		con.query(sql, function(err, result){
+			if (err) throw err;
+			return result.info.insertId;
+		})
+	})
+}
+
 
 
 
@@ -251,11 +284,7 @@ function setConnected(UserID, connected){
 //Création Confirmation
 
 function Confirmation(UserName, UserID){
-	console.log("Entrée dans Confirmation");
-	console.log("UserName" + UserName);
-	console.log(UserID);
 	var sql = 'INSERT INTO Confirmation (ID, UserID) VALUES (\''+UserName+"',"+UserID+")";
-	console.log(sql);
 	con.query(sql, function(err, result){
 		if (err) throw err;
 		return result.info.insertId;
@@ -429,19 +458,11 @@ function sendMail(addr, subject, body) {
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
-		if (error){
-			console.log(error);
-		} else {
-			console.log('Email sent: '+info.response);
-		}
 	});
 }
 
 function generateConfirm(UserId, UserName){
-	console.log(UserName);
-	console.log(UserId);
 	user = helper.hashFnv32a(UserName,true);
-	console.log("Avant le call à Confirmation !");
 	Confirmation(user, UserId);
 	return "193.54.15.211/confirm/"+user;
 }

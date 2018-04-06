@@ -58,7 +58,6 @@ io.sockets.on('connection', function(socket) {
 				id = result[0].UserID
 				av = result[0].AvatarURI
 				chan = message.channel.substring(1,message.channel.length);
-				console.log(message.channel);
 				var sql= "SELECT ChannelID FROM Channel WHERE Name ='"+chan+"'";
 				db.con.query(sql, function(err, result, fields){
 					if (err) throw err;
@@ -75,12 +74,9 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('disconnect', function(user){
 		if(!me){
-			console.log("WUT");
 			return false;
 		}
-		console.log(users[user.username]);
 		if (users[me.username] != undefined) {
-			console.log("Not null");
 			users[me.username].connected=0;
 		}
 		me.conected=0;
@@ -90,7 +86,6 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('getMessages', function(channel){
 		channelName = channel.channel.substring(1,channel.channel.length);
-		console.log(channelName);
 		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+channelName+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
@@ -111,7 +106,7 @@ io.sockets.on('connection', function(socket) {
 
 	//chanName est le nom du channel à check
 	socket.on('checkName',function(chanName){
-		var sql = "SELECT ChannelID FROM Channel WHERE ChannelName='"+chanName+"'";
+		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+chanName+"'";
 		db.con.query(sql, function(err, result, fields){
 			if (err) throw err;
 			if (result.info.numRows > 0 ){
@@ -138,13 +133,17 @@ io.sockets.on('connection', function(socket) {
 					for (i in channel.users){
 						u = channel.users[i];
 						var sql = "SELECT UserID FROM User WHERE UserName='"+u+"'";
-						db.con.querry(sql, function(err, result, fields){
+						console.log(sql);
+						db.con.query(sql, function(err, result, fields){
 							if (err) throw err;
+							console.log(result);
 							if (result.info.numRows > 0){
 								setTimeout(function(){db.UserByChannel(result[0].UserID, channelID, channel.name,25);},i*50);
 							}
 						});
 					}
+				} else {
+					console.log("SRSLY ?");
 				}
 		});
 
@@ -166,7 +165,6 @@ function processPost(request, response, callback) {
 			queryData += data;
 			if(queryData.length > 1e6) {
 				queryData = "";
-				console.log("Problem ? :p");
 				response.writeHead(413, {'Content-Type': 'text/plain'}).end();
 				request.connection.destroy();
 			}
@@ -178,7 +176,6 @@ function processPost(request, response, callback) {
 		});
 
 	} else {
-		console.log("Problem ! ><");
 		response.writeHead(405, {'Content-Type': 'text/plain'});
 		response.end();
 	}
@@ -210,7 +207,6 @@ function getAge(birthdate){
 }
 
 app.get('/', function(req, res) {
-	console.log("Erf !");
 	if (req.session.user){
 		userf = req.session.user;
 	} else {
@@ -242,8 +238,6 @@ app.get('/channels', function(req,res) {
 				for (i=0;i<result.info.numRows;i++){
 					l+=result[i].Name+" ";
 				}
-				console.log(req.session.user);
-				console.log(l);
 				res.render('chan.ejs', {user: req.session.user, channels:(l.substring(0,l.length-1)).split(' ')});
 			});
 		} else {
@@ -284,11 +278,9 @@ app.post('/login', function(req, res){
 					req.session.user = user;
 					res.redirect('/');
 				} else {
-					console.log("Wrong password !");
 					res.render('login.ejs',{wrong: "Pass", pass: pass, user: user});
 				}
 			} else {
-				console.log("Wrong username !");
 				res.render('login.ejs', {wrong: "User", pass: "pass", user: user});
 			}
 		});
@@ -323,6 +315,7 @@ app.post('/create-account', function(req, res){
 					if (result.info.numRows == 0){
 						db.User(req.post.username,req.post.email,req.post.password);
 						setTimeout(function(){
+							console.log(req.post);
 							var sql = "SELECT UserID FROM User WHERE UserName ='"+req.post.username+"'";
 							db.con.query(sql, function(err, result, fields){
 								if (err) throw err;
@@ -358,7 +351,6 @@ app.post('/create-account', function(req, res){
 									}
 									db.connect(result[0].UserID);
 								} else {
-									console.log("WTF !");
 								}
 							});
 						},1000);
@@ -384,10 +376,8 @@ app.get('/logout', function(req, res){
 
 app.get('/confirm/:id', function(req,res){
 	var sql = "SELECT * FROM Confirmation WHERE ID='"+req.params.id+"'";
-	//console.log(sql);
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
-		//console.log(result);
 		if (result.info.numRows != 0){
 			db.setConfirmed(result[0].UserID,1);
 			res.redirect("/");
@@ -420,8 +410,7 @@ app.get('/profile', function(req,res){
 			var mail = result[0].Mail;
 			var av = result[0].AvatarURI;
 			if (descr != null){
-				des = descr.replace(RegExp("(:)(\\w+)(:)"),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'}); } else {des=undefined}
-				console.log(des);
+				des = descr.replace(RegExp("(:)(\\w+)(:)",'g'),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'}); } else {des=undefined}
 				res.render('profile.ejs', {email: mail, city: cit, phonenumber: phone, birth: birt, firstname: first, lastname: last, user: use, desc: descr, gender: gend, age:ag, avatar:av, descToShow : des});
 				return;
 			}
@@ -503,6 +492,9 @@ app.get('/user/:id', function(req, res){
 			res.redirect("/");
 		} else {
 			var descr = result[0].Description;
+
+			if (descr != null){des = descr.replace(RegExp("(:)(\\w+)(:)",'g'),function(p1,p2,p3,p4){ return '<i class="em em-'+p3+'"></i>'}); } else {des=undefined}
+
 			var gend = result[0].Gender;
 			var ag = getAge(result[0].BirthDate);
 			var use = result[0].UserName
@@ -513,7 +505,7 @@ app.get('/user/:id', function(req, res){
 			var cit = result[0].City;
 			var mail = result[0].Mail;
 			var av = result[0].AvatarURI;
-			res.render('profile_min.ejs', {user: use, desc: descr, gender: gend, age:ag, avatar:av});
+			res.render('profile_min.ejs', {user: use, desc: des, gender: gend, age:ag, avatar:av});
 			return;
 		}
 	})
