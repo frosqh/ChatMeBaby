@@ -109,9 +109,26 @@ io.sockets.on('connection', function(socket) {
 			socket.emit('user',me);
 	});
 
-	socket.on('newChannel',function(){
+	//chanName est le nom du channel à check
+	socket.on('checkName',function(chanName){
 
-	})
+		//On envoit 1 si le nom est disponible
+		if(/* condition nom dispo*/){
+			socket.emit("nameDispo",1);
+		} else {
+			//On envoit 0 si le nom n'est pas disponible
+			socket.emit("nameDispo",0);
+		}
+	});
+
+	//On recoit le nouveau channel
+	//channel.name : nom du channel
+	//channel.status : Channel "public" ou "private"
+	//channel.users : liste des noms des utilisateurs a ajouter
+	socket.on('newChannel',function(channel){
+
+	});
+
 })
 
 
@@ -480,17 +497,56 @@ app.get('/user/:id', function(req, res){
 })
 
 app.get('/api/users', function(req, res){
-	var sql = "SELECT * FROM User";
+	var sql = "SELECT UserID, UserName, Mail, FirstName, LastName, BirthDate, AvatarURI, Description, PhoneNumber, City, Gender FROM User";
 	db.con.query(sql, function(err, result, fields){
 		if (err) throw err;
 		if (result.info.numRows == 0){
-			res.json();
+			res.status(200).json();
 		} else {
-			res.json(result.slice(0,result.length-1));
+			res.status(200).json(result);
 		}
 	});
-}
+});
 
+app.get('/api/user/:id', function(req, res){
+	var sql = "SELECT UserID, UserName, Mail, FirstName, LastName, BirthDate, AvatarURI, Description, PhoneNumber, City, Gender FROM User WHERE UserID="+req.params.id;
+	db.con.query(sql, function(err, result, field){
+		if (err)  throw err;
+		if( result.info.numRows == 0){
+			res.status(404).json();
+		} else {
+			res.status(200).json(result);
+		}
+	});
+});
+
+app.post('/api/user/:id', function(req, res){
+	res.status(405).json();
+});
+
+app.get('/api/channels/', function(req, res){
+	var sql = "SELECT * FROM Channel";
+	db.con.query(sql, function(err, result, field){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.status(200).json();
+		} else {
+			res.status(200).json(result);
+		}
+	});
+});
+
+app.get('/api/channel/:id', function(req, res){
+	var sql = "SELECT * FROM Channel WHERE ChannelID="+req.params.id;
+	db.con.query(sql, function(err, result, field){
+		if (err) throw err;
+		if (result.info.numRows == 0){
+			res.status(404).json();
+		} else {
+			res.status(200).json(result);
+		}
+	});
+});
 
 app.use(function(req, res, next){
 	res.status(404).render("404.ejs");

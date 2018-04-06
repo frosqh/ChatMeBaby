@@ -53,20 +53,34 @@ function sendForm() {
           //$('#inp'+k).val('');
         }
       }
-      chanName = $('#channelname').val();
-      //$('.channel_sidebar').append('<p class="channel">'+chanName+'</p>');
 
       var stat = "public";
       if (priv.checked){
         console.log("private");
         stat = "private";
       }
-      // Envoie le channel a la BD
-      socket.emit('newChannel', {
-        name    :chanName,
-        status  :stat,
-        users   :addUser
-      });
+
+      chanName = $('#channelname').val();
+      socket.emit('checkName', chanName);
+
+      socket.on('nameDispo',function(isDispo){
+        if(isDispo){
+          // Envoie le channel a la BD
+          socket.emit('newChannel', {
+            name    :chanName,
+            status  :stat,
+            users   :addUser
+          });
+
+          clearAndHide();
+        } else {
+            //Souligner le nom du channel en rouge
+        }
+    	});
+      //$('.channel_sidebar').append('<p class="channel">'+chanName+'</p>');
+
+
+
   }
 };
 
