@@ -13,10 +13,10 @@
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="icon" href="Logo/LogoTrans.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/css/emoji.css" rel="stylesheet">
 </head>
 <body id="body">
 
@@ -87,7 +87,7 @@
 
       </section>
     </div>
-    <form class="form" method="post" id="formulaire_chat">
+    <form class="form" method="post" id="formulaire_chat" data-emojiable="true">
       <div>
         <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus autocomplete="off" class="input_text"/>
         <input type="submit" id="envoi_message">
@@ -259,6 +259,10 @@
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="JS/channel.js"></script>
+<script src="lib/js/config.js"></script>
+  <script src="lib/js/util.js"></script>
+  <script src="lib/js/jquery.emojiarea.js"></script>
+  <script src="lib/js/emoji-picker.js"></script>
 <script>
 
 
@@ -267,13 +271,6 @@
     // Connexion � socket.io
     var socket = io.connect();
     var lastMsg=false;
-
-    socket.emit('emojiParsing');
-    socket.on('emojiresponse',function(emoji){
-      for(var k=0;k<emoji.length;k++){
-        console.log(emogi[i]);
-      }
-    })
 
     $('.channelNam p b').html($('.active_channel').text());
 $('.content').animate({scrollTop : $('.content').prop('scrollHeight')},500);
