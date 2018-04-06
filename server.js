@@ -104,6 +104,26 @@ io.sockets.on('connection', function(socket) {
 		socket.emit('user',me);
 	});
 
+	socket.on('emojiParsing',function(){
+		var emojiContent;
+		fs.readFile('emoji.json', function read(err, data) {
+			if (err) {
+				throw err;
+			}
+			emojiContent = data;
+			var emojiName=[];
+			for(int i=0;i<emojiContent.length;i++){
+				emojiName[i] = JSON.parse(emojiContent[i]).name;
+				console.log(emojiName[i]);
+			}
+			// Invoke the next step here however you like
+			console.log(content);   // Put all of the code here (not the best solution)
+			processFile();          // Or put the next step in a function and invoke it
+		});
+	});
+
+
+
 	//chanName est le nom du channel à check
 	socket.on('checkName',function(chanName){
 		var sql = "SELECT ChannelID FROM Channel WHERE Name='"+chanName+"'";
